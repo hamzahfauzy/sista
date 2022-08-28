@@ -552,3 +552,16 @@ function get_route_path($path, $params)
     $fullpath = $path . ($pretty ? '?' : '&') . http_build_query($params);
     return $fullpath;
 }
+
+function pengaturan($tanggal_lahir)
+{
+    $date = new DateTime($tanggal_lahir);
+    $now = new DateTime();
+    $interval = $now->diff($date);
+
+    $usia = $interval->y;
+
+    if($usia <= 2) return 'anak bayi';
+    if($usia > 2 && $usia <= 5) return 'anak balita';
+    return 'anak > 5 tahun';
+}

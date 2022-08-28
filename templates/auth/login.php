@@ -47,7 +47,7 @@
                                 <input type="text" name="username" id="" class="form-control mb-2" placeholder="Nama Pengguna Disini...">
                                 <label for="">Kata Sandi</label>
                                 <input type="password" name="password" id="" class="form-control mb-2" placeholder="Kata Sandi Disini...">
-                                <button class="btn btn-primary btn-block btn-round">Masuk</button>
+                                <button class="btn btn-success btn-block btn-round">Masuk</button>
                             </div>
                         </form>
                     </div>

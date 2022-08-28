@@ -30,6 +30,42 @@ if(request() == 'POST')
         'route_path' => '*'
     ]);
 
+    $roles = [
+        'camat' => [
+            'crud/index?table=keluarga',
+            'crud/index?table=indikator',
+            'hasil/index',
+        ],
+        'admin puskesmas' => [
+            'crud/index?table=keluarga',
+            'crud/index?table=indikator',
+            'hasil/index',
+        ],
+        'surveyor' => [
+            'crud/index?table=keluarga',
+            'survey/*',
+            'hasil/index',
+        ],
+        'bupati' => [
+            'hasil/index',
+            'hasil/detail',
+        ]
+    ];
+
+    foreach($roles as $role_name => $routes)
+    {
+        $role = $db->insert('roles',[
+            'name' => $role_name
+        ]);
+        foreach($routes as $route)
+        {
+            $db->insert('role_routes',[
+                'role_id' => $role->id,
+                'route_path' => $route
+            ]);
+        }
+    }
+
     set_flash_msg(['success'=>'Instalasi Berhasil']);
     header('location:'.routeTo('auth/login'));
     die();

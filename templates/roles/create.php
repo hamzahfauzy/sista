@@ -24,7 +24,7 @@
                                     <input type="text" name="roles[name]" class="form-control" required>
                                 </div>
                                 <div class="form-group">
-                                    <button class="btn btn-primary">Submit</button>
+                                    <button class="btn btn-success">Submit</button>
                                 </div>
                             </form>
                         </div>

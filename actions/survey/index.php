@@ -1,6 +1,6 @@
 <?php
 
-$table = $_GET['table'];
+$table = 'survey';
 Page::set_title(ucwords($table));
 $conn = conn();
 $db   = new Database($conn);

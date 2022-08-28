@@ -40,7 +40,7 @@
                                     <input type="email" name="app[email]" class="form-control" value="<?=$data->email?>">
                                 </div>
                                 <div class="form-group">
-                                    <button class="btn btn-primary">Submit</button>
+                                    <button class="btn btn-success">Submit</button>
                                 </div>
                             </form>
                         </div>

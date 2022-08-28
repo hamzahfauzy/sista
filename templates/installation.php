@@ -47,7 +47,7 @@
                                 <input type="text" name="users[username]" id="" required class="form-control mb-2" placeholder="Nama Pengguna Disini...">
                                 <label for="">Kata Sandi</label>
                                 <input type="password" name="users[password]" id="" required class="form-control mb-2" placeholder="Kata Sandi Disini...">
-                                <button class="btn btn-primary btn-block btn-round">Lakukan Pemasangan</button>
+                                <button class="btn btn-success btn-block btn-round">Lakukan Pemasangan</button>
                             </div>
                         </form>
                     </div>
