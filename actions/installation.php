@@ -32,23 +32,22 @@ if(request() == 'POST')
 
     $roles = [
         'camat' => [
-            'crud/index?table=keluarga',
+            'default/index',
+            'crud/index?table=penduduk',
             'crud/index?table=indikator',
-            'hasil/index',
         ],
         'admin puskesmas' => [
-            'crud/index?table=keluarga',
+            'default/index',
+            'crud/index?table=penduduk',
             'crud/index?table=indikator',
-            'hasil/index',
         ],
         'surveyor' => [
-            'crud/index?table=keluarga',
+            'default/index',
+            'crud/index?table=penduduk',
             'survey/*',
-            'hasil/index',
         ],
         'bupati' => [
-            'hasil/index',
-            'hasil/detail',
+            'default/index',
         ]
     ];
 

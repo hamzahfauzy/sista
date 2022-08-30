@@ -89,13 +89,13 @@
                                                 if($penduduk->jawaban != 'disable'): 
                                             ?>
                                             <td style="text-align:center;">
-                                                <input type="radio" <?=$penduduk->jawaban == 'N' ? 'checked' : '' ?> value="N" style="transform:scale(1.5)">
+                                                <input type="radio" <?=$penduduk->jawaban == 'N' ? 'checked' : 'disabled' ?> value="N" style="transform:scale(1.5)">
                                             </td>
                                             <td style="text-align:center;">
-                                                <input type="radio" <?=$penduduk->jawaban == 'Y' ? 'checked' : '' ?> value="Y" style="transform:scale(1.5)">
+                                                <input type="radio" <?=$penduduk->jawaban == 'Y' ? 'checked' : 'disabled' ?> value="Y" style="transform:scale(1.5)">
                                             </td>
                                             <td style="text-align:center;">
-                                                <input type="radio" <?=$penduduk->jawaban == 'T' ? 'checked' : '' ?> value="T" style="transform:scale(1.5)">
+                                                <input type="radio" <?=$penduduk->jawaban == 'T' ? 'checked' : 'disabled' ?> value="T" style="transform:scale(1.5)">
                                             </td>
                                             <?php else: ?>
                                             <td style="background:silver;"></td>
