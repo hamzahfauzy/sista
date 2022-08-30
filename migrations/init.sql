@@ -96,7 +96,8 @@ CREATE TABLE survey (
     id INT AUTO_INCREMENT PRIMARY KEY,
     no_kk VARCHAR(100) NOT NULL,
     nilai LONGTEXT DEFAULT NULL,
-    status TEXT NOT NULL,
+    status VARCHAR(100) NOT NULL,
+    kategori TEXT NOT NULL,
     tanggal DATE NOT NULL,
     berkas VARCHAR(100) NOT NULL
 );

@@ -77,7 +77,8 @@ if(request() == 'POST')
             'nilai' => json_encode($rekap_nilai),
             'tanggal' => $_GET['tanggal'],
             'berkas' => $file,
-            'status' => json_encode($status)
+            'kategori' => json_encode($status),
+            'status' => 'draft'
         ]);
     }
 

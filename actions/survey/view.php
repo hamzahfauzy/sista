@@ -7,6 +7,6 @@ $db   = new Database($conn);
 
 $data = $db->single('survey',['id' => $_GET['id']]);
 $data->nilai = json_decode($data->nilai);
-$data->status = json_decode($data->status);
+$data->kategori = json_decode($data->kategori);
 
 return compact('data');

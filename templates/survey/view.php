@@ -49,7 +49,11 @@
                             <div class="form-group">
                                 <label for="">Status</label>
                                 <br>
-                                <span style="background:<?=$data->status->warna?>;padding:10px;"><?=$data->status->nama?></span>
+                                <?php if($data->status == 'draft'): ?>
+                                <i>Draft</i>
+                                <?php else: ?>
+                                <span style="background:<?=$data->kategori->warna?>;padding:10px;color:#FFF;"><?=$data->kategori->nama?></span>
+                                <?php endif ?>
                             </div>
                             <div class="form-group">
                                 <div class="table-responsive">
