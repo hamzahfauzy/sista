@@ -68,7 +68,7 @@
                             <br>
                             <div class="filter">
                                 <form action="">
-                                    <input type="hidden" name="kelurahan_id" value="<?=$detail_kelurahan->id?>">
+                                    <input type="hidden" name="lingkungan_id" value="<?=$detail_lingkungan->id?>">
                                     <div class="d-flex">
                                         <select name="bulan" id="" class="form-control" required>
                                             <?php 

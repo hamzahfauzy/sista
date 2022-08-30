@@ -88,7 +88,7 @@
                             <table class="table table-bordered">
                                 <tr>
                                     <th>#</th>
-                                    <th>Kelurahan</th>
+                                    <th>Desa / Kelurahan</th>
                                     <th>Status</th>
                                 </tr>
                                 <?php foreach($iks as $index => $k): ?>
