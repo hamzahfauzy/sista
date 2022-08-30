@@ -59,10 +59,11 @@
                 <div class="col-12">
                     <div class="card full-height">
                         <div class="card-body">
-                            <div class="card-title">Statistik Indeks Keluarga Sehat (IKS) Kabupaten</div>
+                            <div class="card-title">Statistik Indeks Keluarga Sehat (IKS) Kecamatan <a href="<?=routeTo('default/kecamatan',['bulan' => (int) $iks[0]->periode[1],'tahun' => (int) $iks[0]->periode[0],'kecamatan_id'=>$detail_kelurahan->kecamatan_id])?>" class="text-primary"><?=$detail_kelurahan->kecamatan->nama?></a>, <?=$detail_kelurahan->nama?></div>
                             <br>
                             <div class="filter">
                                 <form action="">
+                                    <input type="hidden" name="kelurahan_id" value="<?=$detail_kelurahan->id?>">
                                     <div class="d-flex">
                                         <select name="bulan" id="" class="form-control" required>
                                             <?php 
@@ -87,14 +88,14 @@
                             <table class="table table-bordered">
                                 <tr>
                                     <th>#</th>
-                                    <th>Kecamatan</th>
+                                    <th>Lingkungan</th>
                                     <th>Status</th>
                                 </tr>
                                 <?php foreach($iks as $index => $k): ?>
                                 <tr>
                                     <td><?=$index+1?></td>
                                     <td>
-                                        <a href="<?=routeTo('default/kecamatan',['bulan'=>(int) $k->periode[1],'tahun'=>$k->periode[0],'kecamatan_id'=>$k->id])?>"><?=$k->nama?></a>
+                                        <a href="<?=routeTo('default/lingkungan',['bulan'=>(int) $k->periode[1],'tahun'=>$k->periode[0],'lingkungan_id'=>$k->id])?>"><?=$k->nama?></a>
                                     </td>
                                     <td>
                                         <?php if(isset($k->kategori)): ?>

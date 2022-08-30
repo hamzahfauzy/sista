@@ -565,3 +565,8 @@ function pengaturan($tanggal_lahir)
     if($usia > 2 && $usia <= 5) return 'anak balita';
     return 'anak > 5 tahun';
 }
+
+function bulanIndo()
+{
+    return ['','Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+}

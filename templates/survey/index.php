@@ -73,7 +73,7 @@
                                             </td>
                                             <?php endforeach ?>
                                             <td>
-                                            <?php if(is_allowed(get_route_path('survey/view',[]),auth()->user->id)): ?>
+                                            <?php if(is_allowed('survey/view',auth()->user->id)): ?>
                                             <a href="<?=routeTo('survey/view',['id' => $data->id])?>" class="btn btn-sm btn-success"><i class="fa fa-eye"></i> Lihat</a>
                                             <?php endif ?>
                                             <?php if($data->status == 'draft'): ?>

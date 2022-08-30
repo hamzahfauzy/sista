@@ -59,10 +59,11 @@
                 <div class="col-12">
                     <div class="card full-height">
                         <div class="card-body">
-                            <div class="card-title">Statistik Indeks Keluarga Sehat (IKS) Kabupaten</div>
+                            <div class="card-title">Statistik Indeks Keluarga Sehat (IKS) Kecamatan <?=$detail_kecamatan->nama?></div>
                             <br>
                             <div class="filter">
                                 <form action="">
+                                    <input type="hidden" name="kecamatan_id" value="<?=$detail_kecamatan->id?>">
                                     <div class="d-flex">
                                         <select name="bulan" id="" class="form-control" required>
                                             <?php 
@@ -87,14 +88,14 @@
                             <table class="table table-bordered">
                                 <tr>
                                     <th>#</th>
-                                    <th>Kecamatan</th>
+                                    <th>Kelurahan</th>
                                     <th>Status</th>
                                 </tr>
                                 <?php foreach($iks as $index => $k): ?>
                                 <tr>
                                     <td><?=$index+1?></td>
                                     <td>
-                                        <a href="<?=routeTo('default/kecamatan',['bulan'=>(int) $k->periode[1],'tahun'=>$k->periode[0],'kecamatan_id'=>$k->id])?>"><?=$k->nama?></a>
+                                        <a href="<?=routeTo('default/kelurahan',['bulan'=>(int) $k->periode[1],'tahun'=>$k->periode[0],'kelurahan_id'=>$k->id])?>"><?=$k->nama?></a>
                                     </td>
                                     <td>
                                         <?php if(isset($k->kategori)): ?>

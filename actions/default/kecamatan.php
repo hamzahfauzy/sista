@@ -24,7 +24,7 @@ $penduduk = count($db->all('penduduk'));
 $periode = isset($_GET['bulan']) && isset($_GET['tahun']) ? $_GET['tahun'] .'-'. ($_GET['bulan'] < 10 ? "0".$_GET['bulan'] : $_GET['bulan']) : date('Y-m');
 
 $iks = array_map(function($k) use ($db, $periode){
-    $p = $db->all('penduduk',['kecamatan_id'=>$k->id]);
+    $p = $db->all('penduduk',['kelurahan_id'=>$k->id]);
     $counter = 0;
     $total_iks = 0;
     foreach($p as $_p)
@@ -56,6 +56,8 @@ $iks = array_map(function($k) use ($db, $periode){
     }
     $k->periode = explode('-',$periode);
     return $k;
-}, $all_kecamatan);
+}, $all_kelurahan);
 
-return compact('kecamatan','kelurahan','lingkungan','penduduk','iks');
+$detail_kecamatan = $db->single('kecamatan',['id' => $_GET['kecamatan_id']]);
+
+return compact('kecamatan','kelurahan','lingkungan','penduduk','iks','detail_kecamatan');

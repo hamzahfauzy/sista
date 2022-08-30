@@ -33,21 +33,36 @@ if(request() == 'POST')
     $roles = [
         'camat' => [
             'default/index',
+            'default/kecamatan',
+            'default/kelurahan',
+            'default/lingkungan',
+            'survey/index',
+            'survey/view',
             'crud/index?table=penduduk',
             'crud/index?table=indikator',
         ],
         'admin puskesmas' => [
             'default/index',
+            'default/kecamatan',
+            'default/kelurahan',
+            'default/lingkungan',
+            'survey/index',
+            'survey/view',
             'crud/index?table=penduduk',
             'crud/index?table=indikator',
         ],
         'surveyor' => [
             'default/index',
+            'default/kecamatan',
+            'default/kelurahan',
+            'default/lingkungan',
             'crud/index?table=penduduk',
             'survey/*',
         ],
         'bupati' => [
-            'default/index',
+            'default/*',
+            'survey/index',
+            'survey/view',
         ]
     ];
 
