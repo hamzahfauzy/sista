@@ -7,9 +7,21 @@ Page::set_title('Dashboard');
 
 $user = auth()->user;
 
+$periode = isset($_GET['bulan']) && isset($_GET['tahun']) ? $_GET['tahun'] .'-'. ($_GET['bulan'] < 10 ? "0".$_GET['bulan'] : $_GET['bulan']) : date('Y-m');
+
 if(!in_array(get_role($user->id)->name,['administrator','bupati']))
 {
-
+    $petugas = $db->single('petugas',['user_id'=>$user->id]);
+    $kecamatan_id = $petugas->kecamatan_id;
+    $periode = explode('-',$periode);
+    $bulan = (int) $periode[1];
+    $tahun = $periode[0];
+    header('location:'.routeTo('index/kecamatan',[
+        'kecamatan_id' => $kecamatan_id,
+        'bulan' => $bulan,
+        'tahun' => $tahun,
+    ]));
+    die();
 }
 
 $all_kecamatan = $db->all('kecamatan');
@@ -20,8 +32,6 @@ $kecamatan  = count($all_kecamatan);
 $kelurahan  = count($all_kelurahan);
 $lingkungan = count($all_lingkungan);
 $penduduk = count($db->all('penduduk'));
-
-$periode = isset($_GET['bulan']) && isset($_GET['tahun']) ? $_GET['tahun'] .'-'. ($_GET['bulan'] < 10 ? "0".$_GET['bulan'] : $_GET['bulan']) : date('Y-m');
 
 $iks = array_map(function($k) use ($db, $periode){
     $p = $db->all('penduduk',['kecamatan_id'=>$k->id]);
