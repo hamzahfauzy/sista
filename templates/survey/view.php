@@ -71,6 +71,7 @@
                                         </tr>
                                         <tr>
                                             <?php foreach($data->nilai[0]->rekap_penduduk as $k): ?>
+                                            <td style="text-align:center">N</td>
                                             <td style="text-align:center">Y</td>
                                             <td style="text-align:center">T</td>
                                             <?php endforeach ?>
@@ -92,12 +93,16 @@
                                                 if($penduduk->jawaban != 'disable'): 
                                             ?>
                                             <td style="text-align:center;">
+                                                <input type="radio" <?=$penduduk->jawaban == 'N' ? 'checked' : 'disabled' ?> value="N" style="transform:scale(1.5)">
+                                            </td>
+                                            <td style="text-align:center;">
                                                 <input type="radio" <?=$penduduk->jawaban == 'Y' ? 'checked' : 'disabled' ?> value="Y" style="transform:scale(1.5)">
                                             </td>
                                             <td style="text-align:center;">
                                                 <input type="radio" <?=$penduduk->jawaban == 'T' ? 'checked' : 'disabled' ?> value="T" style="transform:scale(1.5)">
                                             </td>
                                             <?php else: ?>
+                                            <td style="background:silver;"></td>
                                             <td style="background:silver;"></td>
                                             <td style="background:silver;"></td>
                                             <?php endif; ?>

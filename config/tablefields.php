@@ -27,9 +27,18 @@ return [
             'label' => 'Sebagai',
             'type'  => 'options:Ayah|Ibu|Anak'
         ],
-        'NIK',
-        'nama',
-        'alamat',
+        'NIK' => [
+            'label' => 'NIK',
+            'type'  => 'text'
+        ],
+        'nama' => [
+            'label' => 'Nama',
+            'type'  => 'text'
+        ],
+        'alamat' => [
+            'label' => 'Alamat',
+            'type'  => 'text'
+        ],
         'tanggal_lahir' => [
             'label' => 'Tanggal Lahir',
             'type'  => 'date'
