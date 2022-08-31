@@ -73,6 +73,7 @@ if(request() == 'POST')
         copy($_FILES['berkas']['tmp_name'],$file);
         
         $db->insert('survey',[
+            'user_id' => auth()->user->id,
             'no_kk' => $_GET['no_kk'],
             'nilai' => json_encode($rekap_nilai),
             'tanggal' => $_GET['tanggal'],

@@ -94,6 +94,7 @@ CREATE TABLE indikator (
 
 CREATE TABLE survey (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
     no_kk VARCHAR(100) NOT NULL,
     nilai LONGTEXT DEFAULT NULL,
     status VARCHAR(100) NOT NULL,

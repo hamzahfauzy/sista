@@ -93,7 +93,10 @@ return [
         'no_hp'
     ],
     'survey' => [
-        'no_kk',
+        'no_kk' => [
+            'label' => 'No KK',
+            'type'  => 'text'
+        ],
         'tanggal' => [
             'label' => 'Tanggal',
             'type'  => 'date'

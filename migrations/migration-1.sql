@@ -1,0 +1,1 @@
+ALTER TABLE `survey` ADD `user_id` INT NOT NULL AFTER `id`;
