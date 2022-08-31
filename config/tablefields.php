@@ -19,7 +19,10 @@ return [
         'nama',
     ],
     'penduduk' => [
-        'no_kk',
+        'no_kk' => [
+            'label' => 'No KK',
+            'type'  => 'text'
+        ],
         'sebagai' => [
             'label' => 'Sebagai',
             'type'  => 'options:Ayah|Ibu|Anak'

@@ -22,7 +22,13 @@ if(!in_array(get_role($user->id)->name,['administrator','bupati']))
     if($all_kk)
     {
         $kk = "('".implode("','",$all_kk)."')";
-        $data = $db->all($table,['no_kk' => ['IN',$kk]]);
+        $params = ['no_kk' => ['IN',$kk]];
+
+        if(get_role($user->id)->name == 'surveyor')
+        {
+            $params['user_id'] = $user->id;
+        }
+        $data = $db->all($table,$params);
     }
     else
     {
