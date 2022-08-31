@@ -89,7 +89,6 @@
                                                         </tr>
                                                         <tr>
                                                             <?php foreach($keluarga as $k): ?>
-                                                            <td style="text-align:center">N</td>
                                                             <td style="text-align:center">Y</td>
                                                             <td style="text-align:center">T</td>
                                                             <?php endforeach ?>
@@ -106,9 +105,6 @@
                                                                 if(in_array($p,$peng)): 
                                                             ?>
                                                             <td style="text-align:center;">
-                                                                <input type="radio" name="pengaturan[<?=$i->id?>][<?=$k->id?>]" value="N" style="transform:scale(1.5)">
-                                                            </td>
-                                                            <td style="text-align:center;">
                                                                 <input type="radio" name="pengaturan[<?=$i->id?>][<?=$k->id?>]" value="Y" style="transform:scale(1.5)">
                                                             </td>
                                                             <td style="text-align:center;">
@@ -116,7 +112,6 @@
                                                             </td>
                                                             <?php else: ?>
                                                             <td style="background:silver;"><input type="hidden" name="pengaturan[<?=$i->id?>][<?=$k->id?>]" value="disable"></td>
-                                                            <td style="background:silver;"></td>
                                                             <td style="background:silver;"></td>
                                                             <?php endif; ?>
                                                             <?php endforeach ?>
