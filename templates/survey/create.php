@@ -1,11 +1,12 @@
 <?php load_templates('layouts/top') ?>
 <style>
-/* table {
-    table-layout: fixed;word-wrap: break-word;
-}
-.table>tbody>tr>td {
-    padding:8px !important;
-} */
+.tableFixHead          { overflow: auto; height: 100px; }
+.tableFixHead thead th { position: sticky; top: 0; z-index: 1; }
+
+/* Just common table stuff. Really. */
+table  { border-collapse: collapse; width: 100%; }
+th, td { padding: 8px 16px; }
+th     { background:#eee; }
 </style>
     <div class="content">
         <div class="panel-header <?=config('theme')['panel_color']?>">
@@ -77,23 +78,25 @@
                                             <div class="form-group">
                                                 <div class="table-responsive">
 
-                                                    <table class="table table-bordered">
-                                                        <tr>
-                                                            <td style="text-align:center;width:30%" rowspan="3">INDIKATOR</td>
-                                                            <td style="text-align:center" colspan="<?=count($keluarga)*3?>">VARIABEL PENILAIAN</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <?php foreach($keluarga as $k): ?>
-                                                            <td style="text-align:center" colspan="3"><?=$k->nama?></td>
-                                                            <?php endforeach ?>
-                                                        </tr>
-                                                        <tr>
-                                                            <?php foreach($keluarga as $k): ?>
-                                                            <td style="text-align:center">N</td>
-                                                            <td style="text-align:center">Y</td>
-                                                            <td style="text-align:center">T</td>
-                                                            <?php endforeach ?>
-                                                        </tr>
+                                                    <table class="table table-bordered tableFixHead">
+                                                        <thead>
+                                                            <tr>
+                                                                <td style="text-align:center;width:30%" rowspan="3">INDIKATOR</td>
+                                                                <td style="text-align:center" colspan="<?=count($keluarga)*3?>">VARIABEL PENILAIAN</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <?php foreach($keluarga as $k): ?>
+                                                                <td style="text-align:center" colspan="3"><?=$k->nama?></td>
+                                                                <?php endforeach ?>
+                                                            </tr>
+                                                            <tr>
+                                                                <?php foreach($keluarga as $k): ?>
+                                                                <td style="text-align:center;background:blue;">N</td>
+                                                                <td style="text-align:center;background:green;">Y</td>
+                                                                <td style="text-align:center;background:red;">T</td>
+                                                                <?php endforeach ?>
+                                                            </tr>
+                                                        </thead>
                                                         <?php 
                                                         foreach($indikator as $i): 
                                                             $peng = explode(',',$i->pengaturan); 

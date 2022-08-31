@@ -59,7 +59,18 @@
 	<script src="<?=asset('assets/js/setting-demo.js')?>"></script>
 	<script src="<?=asset('assets/js/demo.js')?>"></script>
 	<script>
+		<?php if(isset($_GET['table']) && $_GET['table'] == 'penduduk'): ?>
+		$('.datatable').dataTable({
+			processing: true,
+			search: {
+				return: true
+			},
+			serverSide: true,
+			ajax: "<?=routeTo('api/penduduk/index')?>"
+		})
+		<?php else: ?>
 		$('.datatable').dataTable();
+		<?php endif ?>
 	</script>
 </body>
 </html>

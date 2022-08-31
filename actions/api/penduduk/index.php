@@ -1,80 +1,58 @@
 <?php
 
-$auth  = auth();
-$conn  = conn();
-$db    = new Database($conn);
+$table   = 'penduduk';
+$auth    = auth();
+$conn    = conn();
+$db      = new Database($conn);
 
-$draw   = $_GET['draw'];
-$start  = $_GET['start'];
-$length = $_GET['length'];
-$search = $_GET['search']['value'];
-$order  = $_GET['order'];
+$draw    = $_GET['draw'];
+$start   = $_GET['start'];
+$length  = $_GET['length'];
+$search  = $_GET['search']['value'];
+$order   = $_GET['order'];
 
-$columns = [
-    'contents',
-    'sent_at',
-    'user_name',
-    'is_loop',
-    'active_status',
-];
+$columns = config('fields')[$table];
+$columns = array_keys($columns);
 
 $order_by = " ORDER BY ".$columns[$order[0]['column']]." ".$order[0]['dir'];
 
-$where = !empty($search) ? "WHERE (contents LIKE '%$search%' OR created_at LIKE '%$search%' OR user_name LIKE '%$search%')" : '';
-if(empty($_GET['type']))
-    if(!empty($search))
-        $where .= " AND (user_name = '$auth->nama' OR user_id = $auth->user_id)";
-    else
-        $where = " WHERE (user_name = '$auth->nama' OR user_id = $auth->user_id)";
-else
+$where = "";
+
+if(!empty($search))
 {
-    if($_GET['type'] == 'employee')
-        if(!empty($search))
-            $where .= " AND user_name IS NOT NULL AND sent_at IS NULL";
-        else
-            $where = " WHERE user_name IS NOT NULL AND sent_at IS NULL";
-    elseif($_GET['type'] == 'broadcast')
-        if(!empty($search))
-            $where .= " AND user_name IS NULL AND sent_at IS NULL";
-        else
-            $where = " WHERE user_name IS NULL AND sent_at IS NULL";
-    else
-        if(!empty($search))
-            $where .= " AND sent_at IS NOT NULL";
-        else
-            $where = " WHERE sent_at IS NOT NULL";
+    $where = "WHERE (NIK LIKE '%$search%' OR no_kk LIKE '%$search%' OR nama LIKE '%$search%' OR alamat LIKE '%$search%')";
 }
 
-
-$db->query = "SELECT COUNT(*) as TOTAL FROM notifications $where $order_by";
+$db->query = "SELECT COUNT(*) as TOTAL FROM $table $where $order_by";
 $total = $db->exec('single');
-$db->query = "SELECT * FROM notifications $where $order_by LIMIT $start,$length";
-$notifications  = $db->exec('all');
+$db->query = "SELECT * FROM $table $where $order_by LIMIT $start,$length";
+$data  = $db->exec('all');
 $results = [];
 
-foreach($notifications as $key => $notification)
+foreach($data as $key => $d)
 {
-    $results[$key][] = $notification->contents;
-    $results[$key][] = $notification->sent_at??$notification->created_a;
-    $results[$key][] = $notification->user_name != null ? $notification->user_name : 'Semua Pengguna';
-    $results[$key][] = $notification->is_loop ? 'Ya' : 'Tidak';
+    $results[$key][] = $key+1;
+    foreach($columns as $col)
+    {
+        if(in_array($col,['kecamatan_id','kelurahan_id','lingkungan_id']))
+        {
+            $tbl = str_replace('_id','',$col);
+            $r   = $db->single($tbl,['id' => $d->{$col}]);
+            $results[$key][] = $r->nama;
+        }
+        else
+        {
+            $results[$key][] = $d->{$col};
+        }
+    }
+
     $action = '';
-    if($auth->role_name == 'Admin')
-    {
-        $results[$key][] = '
-        <select class="form-control" onchange="updateStatus('.$notification->id.',this.value)">
-            <option value="1" '.($notification->active_status?'selected=""':'').'>Ya</option>
-            <option value="0" '.(!$notification->active_status?'selected=""':'').'>Tidak</option>
-        </select>';
-        if($notification->sent_at)
-            $action .= '<a href="index.php?r=notifications/update&id='.$notification->id.'" class="btn btn-warning text-strong"><i class="ti ti-pencil"></i></a>';
-        $action .= '<a href="index.php?action=notifications/delete&id='.$notification->id.'" class="btn btn-danger text-strong"><i class="ti ti-trash"></i></a>';
-    }
-    else
-    {
-        $results[$key][] = $notification->active_status?'Ya':'Tidak';
-        $action = "-";
-    }
+    if(is_allowed(get_route_path('crud/edit',['table'=>$table]),auth()->user->id)):
+        $action .= '<a href="'.routeTo('crud/edit',['table'=>$table,'id'=>$d->id]).'" class="btn btn-sm btn-warning"><i class="fas fa-pencil-alt"></i> Edit</a>';
+    endif;
+    if(is_allowed(get_route_path('crud/delete',['table'=>$table]),auth()->user->id)):
+        $action .= '<a href="'.routeTo('crud/delete',['table'=>$table,'id'=>$d->id]).'" onclick="if(confirm(\'apakah anda yakin akan menghapus data ini ?\')){return true}else{return false}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Hapus</a>';
+    endif;
     $results[$key][] = $action;
 }
 
