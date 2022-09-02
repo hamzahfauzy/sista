@@ -7,19 +7,22 @@ Page::set_title('Dashboard');
 
 $user = auth()->user;
 
-$periode = isset($_GET['bulan']) && isset($_GET['tahun']) ? $_GET['tahun'] .'-'. ($_GET['bulan'] < 10 ? "0".$_GET['bulan'] : $_GET['bulan']) : date('Y-m');
+$periode = isset($_GET['tahun']) ? $_GET['tahun'] : date('Y');
 
 if(!in_array(get_role($user->id)->name,['administrator','bupati']))
 {
     $petugas = $db->single('petugas',['user_id'=>$user->id]);
     $kecamatan_id = $petugas->kecamatan_id;
-    $periode = explode('-',$periode);
-    $bulan = (int) $periode[1];
-    $tahun = $periode[0];
+    if(!empty($petugas->kelurahan_id))
+    {
+        header('location:'.routeTo('index/kelurahan',[
+            'kelurahan_id' => $petugas->kelurahan_id,
+            'tahun' => $periode,
+        ]));
+    }
     header('location:'.routeTo('index/kecamatan',[
         'kecamatan_id' => $kecamatan_id,
-        'bulan' => $bulan,
-        'tahun' => $tahun,
+        'tahun' => $periode,
     ]));
     die();
 }
@@ -63,9 +66,19 @@ $iks = array_map(function($k) use ($db, $periode){
         $skor = $total_iks/$counter;
         $db->query = "SELECT * FROM kategori WHERE nilai_awal <= $skor AND nilai_akhir >= $skor";
         $k->kategori = $db->exec('single');
+        $k->total_skor = $skor;
     }
-    $k->periode = explode('-',$periode);
+    $k->periode = $periode;
     return $k;
 }, $all_kecamatan);
 
-return compact('kecamatan','kelurahan','lingkungan','penduduk','iks');
+$db->query = "SELECT no_kk FROM penduduk GROUP BY no_kk";
+$jumlah_kk = $db->exec('exists');
+
+$iks_kabupaten = (array) $iks;
+$iks_kabupaten = array_sum(array_column($iks_kabupaten,'total_skor'));
+
+$db->query = "SELECT * FROM kategori WHERE nilai_awal <= $iks_kabupaten AND nilai_akhir >= $iks_kabupaten";
+$iks_kabupaten = $db->exec('single');
+
+return compact('kecamatan','kelurahan','lingkungan','penduduk','iks','jumlah_kk','iks_kabupaten');

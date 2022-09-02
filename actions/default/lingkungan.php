@@ -12,19 +12,13 @@ if(!in_array(get_role($user->id)->name,['administrator','bupati']))
 
 }
 
-$all_kecamatan = $db->all('kecamatan');
-$all_kelurahan = $db->all('kelurahan');
-$all_lingkungan = $db->all('lingkungan');
+$penduduk = count($db->all('penduduk',['lingkungan_id'=>$_GET['lingkungan_id']]));
 
-$kecamatan  = count($all_kecamatan);
-$kelurahan  = count($all_kelurahan);
-$lingkungan = count($all_lingkungan);
-$penduduk = count($db->all('penduduk'));
-
-$periode = isset($_GET['bulan']) && isset($_GET['tahun']) ? $_GET['tahun'] .'-'. ($_GET['bulan'] < 10 ? "0".$_GET['bulan'] : $_GET['bulan']) : date('Y-m');
+$periode = isset($_GET['tahun']) ? $_GET['tahun'] : date('Y');
 
 $db->query = "SELECT no_kk FROM penduduk WHERE lingkungan_id = $_GET[lingkungan_id] GROUP BY no_kk";
 $all_kk = $db->exec('all');
+$jumlah_kk = count($all_kk);
 $iks = [];
 foreach($all_kk as $k)
 {
@@ -47,6 +41,7 @@ foreach($all_kk as $k)
         $k->kategori = $db->exec('single');
         $k->periode = explode('-',$periode);
         $k->survey = $survey;
+        $k->total_skor = $skor;
         $iks[] = $k;
     }
 }
@@ -55,4 +50,10 @@ $detail_lingkungan = $db->single('lingkungan',['id' => $_GET['lingkungan_id']]);
 $detail_lingkungan->kelurahan = $db->single('kelurahan',['id' => $detail_lingkungan->kelurahan_id]);
 $detail_lingkungan->kecamatan = $db->single('kecamatan',['id' => $detail_lingkungan->kelurahan->kecamatan_id]);
 
-return compact('kecamatan','kelurahan','lingkungan','penduduk','iks','detail_lingkungan');
+$iks_lingkungan = (array) $iks;
+$iks_lingkungan = array_sum(array_column($iks_lingkungan,'total_skor'));
+
+$db->query = "SELECT * FROM kategori WHERE nilai_awal <= $iks_lingkungan AND nilai_akhir >= $iks_lingkungan";
+$iks_lingkungan = $db->exec('single');
+
+return compact('penduduk','iks','detail_lingkungan','jumlah_kk','iks_lingkungan');

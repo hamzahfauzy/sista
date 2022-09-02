@@ -49,6 +49,23 @@
                                         </div>
                                     </div>
                                 </div>
+                                
+                                <div class="col-6">
+                                    <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+                                        <div class="card-header">Jumlah KK</div>
+                                        <div class="card-body">
+                                            <h1><?=$jumlah_kk?></h1>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+                                        <div class="card-header">IKS Kabupaten Asahan</div>
+                                        <div class="card-body">
+                                            <h1><?=$iks_kabupaten->nama?></h1>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -64,15 +81,6 @@
                             <div class="filter">
                                 <form action="">
                                     <div class="d-flex">
-                                        <select name="bulan" id="" class="form-control" required>
-                                            <?php 
-                                            $b = isset($_GET['bulan']) ? $_GET['bulan'] : date('m'); 
-                                            $t = isset($_GET['tahun']) ? $_GET['tahun'] : date('Y'); 
-                                            foreach(bulanIndo() as $index => $bulan): ?>
-                                            <option value="<?=$index?>" <?=$b==$index ? 'selected=""' : '' ?>><?=$bulan?></option>
-                                            <?php endforeach ?>
-                                        </select>
-                                        &nbsp;
                                         <select name="tahun" id="" class="form-control">
                                             <?php for($i=date('Y');$i>=1990;$i--): ?>
                                             <option <?=$t==$i ? 'selected=""' : '' ?>><?=$i?></option>
@@ -94,7 +102,7 @@
                                 <tr>
                                     <td><?=$index+1?></td>
                                     <td>
-                                        <a href="<?=routeTo('default/kecamatan',['bulan'=>(int) $k->periode[1],'tahun'=>$k->periode[0],'kecamatan_id'=>$k->id])?>"><?=$k->nama?></a>
+                                        <a href="<?=routeTo('default/kecamatan',['tahun'=>$k->periode,'kecamatan_id'=>$k->id])?>"><?=$k->nama?></a>
                                     </td>
                                     <td>
                                         <?php if(isset($k->kategori)): ?>

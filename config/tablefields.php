@@ -95,6 +95,10 @@ return [
             'label' => 'Kecamatan',
             'type'  => 'options-obj:kecamatan,id,nama'
         ],
+        'kelurahan_id' => [
+            'label' => 'Kecamatan',
+            'type'  => 'options-obj:kelurahan,id,nama'
+        ],
         'NIK',
         'nama',
         'alamat',

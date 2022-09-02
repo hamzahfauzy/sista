@@ -15,17 +15,9 @@
                 <div class="col-12">
                     <div class="card full-height">
                         <div class="card-body">
-                            <div class="card-title">Statistik Daerah</div>
+                            <div class="card-title">Statistik Daerah Kecamatan <?=$detail_kecamatan->nama?></div>
                             <div class="row">
-                                <div class="col-3">
-                                    <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
-                                        <div class="card-header">Kecamatan</div>
-                                        <div class="card-body">
-                                            <h1><?=$kecamatan?></h1>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-3">
+                                <div class="col-4">
                                     <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
                                         <div class="card-header">Desa/Kelurahan</div>
                                         <div class="card-body">
@@ -33,7 +25,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-3">
+                                <div class="col-4">
                                     <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
                                         <div class="card-header">Dusun/Lingkungan</div>
                                         <div class="card-body">
@@ -41,11 +33,27 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-3">
+                                <div class="col-4">
                                     <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
                                         <div class="card-header">Penduduk</div>
                                         <div class="card-body">
                                             <h1><?=$penduduk?></h1>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+                                        <div class="card-header">Jumlah KK</div>
+                                        <div class="card-body">
+                                            <h1><?=$jumlah_kk?></h1>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+                                        <div class="card-header">IKS Kecamatan</div>
+                                        <div class="card-body">
+                                            <h1><?=$iks_kecamatan->nama?></h1>
                                         </div>
                                     </div>
                                 </div>
@@ -65,15 +73,7 @@
                                 <form action="">
                                     <input type="hidden" name="kecamatan_id" value="<?=$detail_kecamatan->id?>">
                                     <div class="d-flex">
-                                        <select name="bulan" id="" class="form-control" required>
-                                            <?php 
-                                            $b = isset($_GET['bulan']) ? $_GET['bulan'] : date('m'); 
-                                            $t = isset($_GET['tahun']) ? $_GET['tahun'] : date('Y'); 
-                                            foreach(bulanIndo() as $index => $bulan): ?>
-                                            <option value="<?=$index?>" <?=$b==$index ? 'selected=""' : '' ?>><?=$bulan?></option>
-                                            <?php endforeach ?>
-                                        </select>
-                                        &nbsp;
+                                        <?php $t = isset($_GET['tahun']) ? $_GET['tahun'] : date('Y'); ?>
                                         <select name="tahun" id="" class="form-control">
                                             <?php for($i=date('Y');$i>=1990;$i--): ?>
                                             <option <?=$t==$i ? 'selected=""' : '' ?>><?=$i?></option>
@@ -95,7 +95,7 @@
                                 <tr>
                                     <td><?=$index+1?></td>
                                     <td>
-                                        <a href="<?=routeTo('default/kelurahan',['bulan'=>(int) $k->periode[1],'tahun'=>$k->periode[0],'kelurahan_id'=>$k->id])?>"><?=$k->nama?></a>
+                                        <a href="<?=routeTo('default/kelurahan',['tahun'=>$k->periode,'kelurahan_id'=>$k->id])?>"><?=$k->nama?></a>
                                     </td>
                                     <td>
                                         <?php if(isset($k->kategori)): ?>

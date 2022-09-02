@@ -7,21 +7,13 @@ Page::set_title('Dashboard');
 
 $user = auth()->user;
 
-if(!in_array(get_role($user->id)->name,['administrator','bupati']))
-{
+$all_lingkungan = $db->all('lingkungan',['kelurahan_id'=>$_GET['kelurahan_id']]);
+$all_penduduk   = $db->all('penduduk',['kelurahan_id'=>$_GET['kelurahan_id']]);
 
-}
-
-$all_kecamatan = $db->all('kecamatan');
-$all_kelurahan = $db->all('kelurahan');
-$all_lingkungan = $db->all('lingkungan');
-
-$kecamatan  = count($all_kecamatan);
-$kelurahan  = count($all_kelurahan);
 $lingkungan = count($all_lingkungan);
-$penduduk = count($db->all('penduduk'));
+$penduduk = count($all_penduduk);
 
-$periode = isset($_GET['bulan']) && isset($_GET['tahun']) ? $_GET['tahun'] .'-'. ($_GET['bulan'] < 10 ? "0".$_GET['bulan'] : $_GET['bulan']) : date('Y-m');
+$periode = isset($_GET['tahun']) ? $_GET['tahun'] : date('Y');
 
 $iks = array_map(function($k) use ($db, $periode){
     $p = $db->all('penduduk',['kelurahan_id'=>$k->id]);
@@ -53,12 +45,22 @@ $iks = array_map(function($k) use ($db, $periode){
         $skor = $total_iks/$counter;
         $db->query = "SELECT * FROM kategori WHERE nilai_awal <= $skor AND nilai_akhir >= $skor";
         $k->kategori = $db->exec('single');
+        $k->total_skor = $skor;
     }
-    $k->periode = explode('-',$periode);
+    $k->periode = $periode;
     return $k;
 }, $all_lingkungan);
 
 $detail_kelurahan = $db->single('kelurahan',['id' => $_GET['kelurahan_id']]);
 $detail_kelurahan->kecamatan = $db->single('kecamatan',['id' => $detail_kelurahan->kecamatan_id]);
 
-return compact('kecamatan','kelurahan','lingkungan','penduduk','iks','detail_kelurahan');
+$db->query = "SELECT no_kk FROM penduduk WHERE kelurahan_id = $_GET[kelurahan_id] GROUP BY no_kk";
+$jumlah_kk = $db->exec('exists');
+
+$iks_kelurahan = (array) $iks;
+$iks_kelurahan = array_sum(array_column($iks_kelurahan,'total_skor'));
+
+$db->query = "SELECT * FROM kategori WHERE nilai_awal <= $iks_kelurahan AND nilai_akhir >= $iks_kelurahan";
+$iks_kelurahan = $db->exec('single');
+
+return compact('lingkungan','penduduk','iks','detail_kelurahan','jumlah_kk','iks_kelurahan');

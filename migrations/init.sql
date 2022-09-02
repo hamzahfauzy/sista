@@ -60,9 +60,9 @@ CREATE TABLE lingkungan (
 
 CREATE TABLE penduduk (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    no_kk VARCHAR(100) NOT NULL,
+    no_kk VARCHAR(100) DEFAULT NULL,
     NIK VARCHAR(100) NOT NULL,
-    sebagai VARCHAR(100) NOT NULL,
+    sebagai VARCHAR(100) DEFAULT NULL,
     nama VARCHAR(100) NOT NULL,
     alamat TEXT NOT NULL,
     tanggal_lahir DATE NOT NULL,

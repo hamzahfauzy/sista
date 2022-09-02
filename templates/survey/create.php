@@ -56,10 +56,10 @@ th     { background:#eee; }
                                             <div class="form-group">
                                                 <table class="table table-bordered">
                                                     <tr>
-                                                        <th>#</th>
+                                                        <th>NO</th>
                                                         <th>NIK</th>
-                                                        <th>Nama</th>
-                                                        <th>Sebagai</th>
+                                                        <th>NAMA</th>
+                                                        <th>STATUS</th>
                                                     </tr>
                                                     <?php foreach($keluarga as $index => $k): ?>
                                                     <tr>

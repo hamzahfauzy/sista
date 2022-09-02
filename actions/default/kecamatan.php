@@ -7,21 +7,36 @@ Page::set_title('Dashboard');
 
 $user = auth()->user;
 
+$periode = isset($_GET['tahun']) ? $_GET['tahun'] : date('Y');
+
 if(!in_array(get_role($user->id)->name,['administrator','bupati']))
 {
-
+    $petugas = $db->single('petugas',['user_id'=>$user->id]);
+    $kecamatan_id = $petugas->kecamatan_id;
+    if(!empty($petugas->kelurahan_id))
+    {
+        header('location:'.routeTo('index/kelurahan',[
+            'kelurahan_id' => $petugas->kelurahan_id,
+            'tahun' => $periode,
+        ]));
+        die();
+    }
 }
 
-$all_kecamatan = $db->all('kecamatan');
-$all_kelurahan = $db->all('kelurahan');
-$all_lingkungan = $db->all('lingkungan');
+$all_kelurahan = $db->all('kelurahan',['kecamatan_id' => $_GET['kecamatan_id']]);
 
-$kecamatan  = count($all_kecamatan);
+$kel_ids = [];
+foreach($all_kelurahan as $kel)
+{
+    $kel_ids[] = $kel->id;
+}
+
+$all_lingkungan = $db->all('lingkungan',['kelurahan_id'=>['IN','('.implode(',',$kel_ids).')']]);
+$all_penduduk   = $db->all('penduduk',['kecamatan_id'=>$_GET['kecamatan_id']]);
+
 $kelurahan  = count($all_kelurahan);
 $lingkungan = count($all_lingkungan);
-$penduduk = count($db->all('penduduk'));
-
-$periode = isset($_GET['bulan']) && isset($_GET['tahun']) ? $_GET['tahun'] .'-'. ($_GET['bulan'] < 10 ? "0".$_GET['bulan'] : $_GET['bulan']) : date('Y-m');
+$penduduk   = count($all_penduduk);
 
 $iks = array_map(function($k) use ($db, $periode){
     $p = $db->all('penduduk',['kelurahan_id'=>$k->id]);
@@ -53,11 +68,21 @@ $iks = array_map(function($k) use ($db, $periode){
         $skor = $total_iks/$counter;
         $db->query = "SELECT * FROM kategori WHERE nilai_awal <= $skor AND nilai_akhir >= $skor";
         $k->kategori = $db->exec('single');
+        $k->total_skor = $skor;
     }
-    $k->periode = explode('-',$periode);
+    $k->periode = $periode;
     return $k;
 }, $all_kelurahan);
 
 $detail_kecamatan = $db->single('kecamatan',['id' => $_GET['kecamatan_id']]);
 
-return compact('kecamatan','kelurahan','lingkungan','penduduk','iks','detail_kecamatan');
+$db->query = "SELECT no_kk FROM penduduk WHERE kecamatan_id = $_GET[kecamatan_id] GROUP BY no_kk";
+$jumlah_kk = $db->exec('exists');
+
+$iks_kecamatan = (array) $iks;
+$iks_kecamatan = array_sum(array_column($iks_kecamatan,'total_skor'));
+
+$db->query = "SELECT * FROM kategori WHERE nilai_awal <= $iks_kecamatan AND nilai_akhir >= $iks_kecamatan";
+$iks_kecamatan = $db->exec('single');
+
+return compact('kelurahan','lingkungan','penduduk','iks','detail_kecamatan','iks_kecamatan','jumlah_kk');
