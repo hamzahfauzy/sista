@@ -12,50 +12,82 @@
         </div>
         <div class="page-inner mt--5">
             <div class="row mt--2">
-                <div class="col-12">
-                    <div class="card full-height">
-                        <div class="card-body">
-                            <div class="card-title">Statistik Daerah Kecamatan <a href="<?=routeTo('default/kecamatan',['tahun' => (int) $iks[0]->periode,'kecamatan_id'=>$detail_kelurahan->kecamatan_id])?>" class="text-primary"><?=$detail_kelurahan->kecamatan->nama?></a>, <?=$detail_kelurahan->nama?></div>
-                            <div class="row">
-                                <div class="col-3">
-                                    <div class="card text-white bg-secondary mb-3">
-                                        <div class="card-header">Dusun/Lingkungan</div>
-                                        <div class="card-body">
-                                            <h1><?=$lingkungan?></h1>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="card text-white bg-secondary mb-3">
-                                        <div class="card-header">Penduduk</div>
-                                        <div class="card-body">
-                                            <h1><?=$penduduk?></h1>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="card text-white bg-secondary mb-3">
-                                        <div class="card-header">Jumlah KK</div>
-                                        <div class="card-body">
-                                            <h1><?=$jumlah_kk?></h1>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="card text-white bg-secondary mb-3">
-                                        <div class="card-header">IKS Kelurahan</div>
-                                        <div class="card-body">
-                                            <h1><?=$iks_kelurahan->nama?></h1>
-                                        </div>
-                                    </div>
+                <div class="col-3 mb-2">
+                    <div class="card-body shadow-lg bg-white rounded">
+                        <div class="row">
+                            <div class="col">
+                                <h5 class="text-uppercase text-muted mb-0">Dusun / Lingkungan</h5>
+                                <span class="h2 font-weight-bold mb-0"><?=number_format($lingkungan)?></span>
+                            </div>
+                            <div class="col-auto">
+                                <div class="icon icon-shape bg-danger text-white rounded-circle shadow p-1 px-2">
+                                    <i class="fas fa-chart-bar"></i>
                                 </div>
                             </div>
                         </div>
+                        <p class="mt-3 mb-0 text-muted text-sm">
+                            <span class="text-nowrap">Jumlah Total</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-3 mb-2">
+                    <div class="card-body shadow-lg bg-white rounded">
+                        <div class="row">
+                            <div class="col">
+                                <h5 class="text-uppercase text-muted mb-0">Penduduk</h5>
+                                <span class="h2 font-weight-bold mb-0"><?=number_format($penduduk)?></span>
+                            </div>
+                            <div class="col-auto">
+                                <div class="icon icon-shape bg-danger text-white rounded-circle shadow p-1 px-2">
+                                    <i class="fas fa-chart-bar"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="mt-3 mb-0 text-muted text-sm">
+                            <span class="text-nowrap">Jumlah Total</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="card-body shadow-lg bg-white rounded">
+                        <div class="row">
+                            <div class="col">
+                                <h5 class="text-uppercase text-muted mb-0">Jumlah KK</h5>
+                                <span class="h2 font-weight-bold mb-0"><?=number_format($jumlah_kk)?></span>
+                            </div>
+                            <div class="col-auto">
+                                <div class="icon icon-shape bg-danger text-white rounded-circle shadow p-1 px-2">
+                                    <i class="fas fa-chart-bar"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="mt-3 mb-0 text-muted text-sm">
+                            <span class="text-nowrap">Jumlah Total</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="card-body shadow-lg bg-white rounded">
+                        <div class="row">
+                            <div class="col">
+                                <h5 class="text-uppercase text-muted mb-0">IKS Kelurahan</h5>
+                                <span class="h2 font-weight-bold mb-0"><?=$iks_kelurahan->nama?></span>
+                            </div>
+                            <div class="col-auto">
+                                <div class="icon icon-shape bg-danger text-white rounded-circle shadow p-1 px-2">
+                                    <i class="fas fa-chart-bar"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="mt-3 mb-0 text-muted text-sm">
+                            <span class="text-nowrap">Status</span>
+                        </p>
                     </div>
                 </div>
             </div>
-
-            <div class="row mt--2">
+        </div>
+        <div class="page-inner">
+            <div class="row">
                 <div class="col-12">
                     <div class="card full-height">
                         <div class="card-body">
