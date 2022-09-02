@@ -18,7 +18,7 @@
                             <div class="card-title">Statistik Daerah Kecamatan <?=$detail_kecamatan->nama?></div>
                             <div class="row">
                                 <div class="col-4">
-                                    <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+                                    <div class="card text-white bg-secondary mb-3">
                                         <div class="card-header">Desa/Kelurahan</div>
                                         <div class="card-body">
                                             <h1><?=$kelurahan?></h1>
@@ -26,7 +26,7 @@
                                     </div>
                                 </div>
                                 <div class="col-4">
-                                    <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+                                    <div class="card text-white bg-secondary mb-3">
                                         <div class="card-header">Dusun/Lingkungan</div>
                                         <div class="card-body">
                                             <h1><?=$lingkungan?></h1>
@@ -34,7 +34,7 @@
                                     </div>
                                 </div>
                                 <div class="col-4">
-                                    <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+                                    <div class="card text-white bg-secondary mb-3">
                                         <div class="card-header">Penduduk</div>
                                         <div class="card-body">
                                             <h1><?=$penduduk?></h1>
@@ -42,7 +42,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+                                    <div class="card text-white bg-secondary mb-3">
                                         <div class="card-header">Jumlah KK</div>
                                         <div class="card-body">
                                             <h1><?=$jumlah_kk?></h1>
@@ -50,7 +50,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+                                    <div class="card text-white bg-secondary mb-3">
                                         <div class="card-header">IKS Kecamatan</div>
                                         <div class="card-body">
                                             <h1><?=$iks_kecamatan->nama?></h1>

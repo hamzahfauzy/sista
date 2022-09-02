@@ -18,7 +18,7 @@
                             <div class="card-title">Statistik Daerah Kecamatan <a href="<?=routeTo('default/kecamatan',['tahun' => (int) $iks[0]->periode,'kecamatan_id'=>$detail_kelurahan->kecamatan_id])?>" class="text-primary"><?=$detail_kelurahan->kecamatan->nama?></a>, <?=$detail_kelurahan->nama?></div>
                             <div class="row">
                                 <div class="col-3">
-                                    <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+                                    <div class="card text-white bg-secondary mb-3">
                                         <div class="card-header">Dusun/Lingkungan</div>
                                         <div class="card-body">
                                             <h1><?=$lingkungan?></h1>
@@ -26,7 +26,7 @@
                                     </div>
                                 </div>
                                 <div class="col-3">
-                                    <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+                                    <div class="card text-white bg-secondary mb-3">
                                         <div class="card-header">Penduduk</div>
                                         <div class="card-body">
                                             <h1><?=$penduduk?></h1>
@@ -34,7 +34,7 @@
                                     </div>
                                 </div>
                                 <div class="col-3">
-                                    <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+                                    <div class="card text-white bg-secondary mb-3">
                                         <div class="card-header">Jumlah KK</div>
                                         <div class="card-body">
                                             <h1><?=$jumlah_kk?></h1>
@@ -42,7 +42,7 @@
                                     </div>
                                 </div>
                                 <div class="col-3">
-                                    <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+                                    <div class="card text-white bg-secondary mb-3">
                                         <div class="card-header">IKS Kelurahan</div>
                                         <div class="card-body">
                                             <h1><?=$iks_kelurahan->nama?></h1>
