@@ -78,7 +78,7 @@ $iks = array_map(function($k) use ($db, $periode){
 
 $detail_kecamatan = $db->single('kecamatan',['id' => $kecamatan_id]);
 
-$db->query = "SELECT no_kk FROM penduduk WHERE kecamatan_id = $_GET[kecamatan_id] GROUP BY no_kk";
+$db->query = "SELECT no_kk FROM penduduk WHERE kecamatan_id = $kecamatan_id GROUP BY no_kk";
 $jumlah_kk = $db->exec('exists');
 
 $iks_kecamatan = (array) $iks;
