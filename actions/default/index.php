@@ -15,12 +15,12 @@ if(!in_array(get_role($user->id)->name,['administrator','bupati']))
     $kecamatan_id = $petugas->kecamatan_id;
     if(!empty($petugas->kelurahan_id))
     {
-        header('location:'.routeTo('index/kelurahan',[
+        header('location:'.routeTo('default/kelurahan',[
             'kelurahan_id' => $petugas->kelurahan_id,
             'tahun' => $periode,
         ]));
     }
-    header('location:'.routeTo('index/kecamatan',[
+    header('location:'.routeTo('default/kecamatan',[
         'kecamatan_id' => $kecamatan_id,
         'tahun' => $periode,
     ]));
