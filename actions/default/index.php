@@ -34,7 +34,7 @@ $all_lingkungan = $db->all('lingkungan');
 $kecamatan  = count($all_kecamatan);
 $kelurahan  = count($all_kelurahan);
 $lingkungan = count($all_lingkungan);
-$penduduk = count($db->all('penduduk'));
+$penduduk = $db->exists('penduduk');
 
 $iks = array_map(function($k) use ($db, $periode){
     $p = $db->all('penduduk',['kecamatan_id'=>$k->id]);

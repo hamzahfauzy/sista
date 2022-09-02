@@ -34,11 +34,10 @@ foreach($all_kelurahan as $kel)
 }
 
 $all_lingkungan = $db->all('lingkungan',['kelurahan_id'=>['IN','('.implode(',',$kel_ids).')']]);
-$all_penduduk   = $db->all('penduduk',['kecamatan_id'=>$kecamatan_id]);
 
 $kelurahan  = count($all_kelurahan);
 $lingkungan = count($all_lingkungan);
-$penduduk   = count($all_penduduk);
+$penduduk   = $db->exists('penduduk',['kecamatan_id'=>$kecamatan_id]);
 
 $iks = array_map(function($k) use ($db, $periode){
     $p = $db->all('penduduk',['kelurahan_id'=>$k->id]);

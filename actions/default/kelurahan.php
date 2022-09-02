@@ -16,10 +16,9 @@ if(get_role($user->id)->name == 'admin kelurahan')
 }
 
 $all_lingkungan = $db->all('lingkungan',['kelurahan_id'=>$kelurahan_id]);
-$all_penduduk   = $db->all('penduduk',['kelurahan_id'=>$kelurahan_id]);
 
 $lingkungan = count($all_lingkungan);
-$penduduk = count($all_penduduk);
+$penduduk = $db->exists('penduduk',['kelurahan_id'=>$kelurahan_id]);
 
 $periode = isset($_GET['tahun']) ? $_GET['tahun'] : date('Y');
 
