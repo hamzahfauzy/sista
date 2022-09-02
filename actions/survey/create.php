@@ -88,9 +88,34 @@ if(request() == 'POST')
     header('location:'.routeTo('survey/index'));
 }
 
-$data     = false;
-$keluarga = false;
+$data      = false;
+$keluarga  = false;
 $indikator = false;
+
+$get = array_keys($_GET);
+
+if(isset($_GET['filter']))
+{
+    $id_keluarga = strtotime('now') + mt_rand(100,1000);
+    if(isset($_GET['nik_ayah']) && !empty($_GET['nik_ayah']))
+    {
+        $db->update('penduduk',['no_kk'=>$id_keluarga],['NIK'=>$_GET['nik_ayah'],'sebagai'=>'Ayah']);
+    }
+    if(isset($_GET['nik_ibu']) && !empty($_GET['nik_ibu']))
+    {
+        $db->update('penduduk',['no_kk'=>$id_keluarga],['NIK'=>$_GET['nik_ibu'],'sebagai'=>'Ibu']);
+    }
+    if(isset($_GET['nik_anak']) && !empty($_GET['nik_anak']))
+    {
+        $NIKs = explode(',',$_GET['nik_anak']);
+        foreach($NIKs as $nik)
+            $db->update('penduduk',['no_kk'=>$id_keluarga],['NIK'=>$nik,'sebagai'=>'Anak']);
+    }
+
+    header('location:'.routeTo('survey/create',['no_kk'=>$id_keluarga,'tanggal'=>$_GET['tanggal']]));
+    die();
+
+}
 if(isset($_GET['no_kk']))
 {
     $keluarga = $db->all('penduduk',['no_kk' => $_GET['no_kk']]);

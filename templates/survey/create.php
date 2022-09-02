@@ -31,16 +31,31 @@ th     { background:#eee; }
                             <div class="alert alert-danger"><?=$error_msg?></div>
                             <?php endif ?>
                             <form action="">
+                                <?php if(isset($_GET['no_kk'])): ?>
                                 <div class="form-group">
-                                    <label for="">No KK</label>
-                                    <input type="text" name="no_kk" class="form-control" placeholder="Input No. KK" value="<?=isset($_GET['no_kk'])?$_GET['no_kk']:''?>" required>
+                                    <label for="">ID Keluarga</label>
+                                    <input type="text" name="no_kk" class="form-control" value="<?=isset($_GET['no_kk'])?$_GET['no_kk']:''?>" required>
                                 </div>
+                                <?php else: ?>
+                                <div class="form-group">
+                                    <label for="">NIK Ayah</label>
+                                    <input type="text" name="nik_ayah" class="form-control" placeholder="Input NIK Ayah" value="<?=isset($_GET['nik_ayah'])?$_GET['nik_ayah']:''?>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">NIK Ibu</label>
+                                    <input type="text" name="nik_ibu" class="form-control" placeholder="Input NIK Ibu" value="<?=isset($_GET['nik_ibu'])?$_GET['nik_ibu']:''?>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">NIK Anak (Jika anak lebih dari 1, maka pisahkan dengan koma tanpa spasi)</label>
+                                    <input type="text" name="nik_anak" class="form-control" placeholder="Input NIK Anak" value="<?=isset($_GET['nik_anak'])?$_GET['nik_anak']:''?>">
+                                </div>
+                                <?php endif ?>
                                 <div class="form-group">
                                     <label for="">Tanggal</label>
                                     <input type="date" name="tanggal" class="form-control" placeholder="Input Tanggal" value="<?=isset($_GET['tanggal'])?$_GET['tanggal']:''?>" required>
                                 </div>
                                 <div class="form-group">
-                                    <button class="btn btn-success">Submit</button>
+                                    <button class="btn btn-success" name="filter">Submit</button>
                                 </div>
                             </form>
 

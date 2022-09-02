@@ -110,7 +110,7 @@ return [
     ],
     'survey' => [
         'no_kk' => [
-            'label' => 'No KK',
+            'label' => 'ID Keluarga',
             'type'  => 'text'
         ],
         'tanggal' => [
