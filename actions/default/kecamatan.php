@@ -9,6 +9,8 @@ $user = auth()->user;
 
 $periode = isset($_GET['tahun']) ? $_GET['tahun'] : date('Y');
 
+$kecamatan_id = $kecamatan_id;
+
 if(!in_array(get_role($user->id)->name,['administrator','bupati']))
 {
     $petugas = $db->single('petugas',['user_id'=>$user->id]);
@@ -23,7 +25,7 @@ if(!in_array(get_role($user->id)->name,['administrator','bupati']))
     }
 }
 
-$all_kelurahan = $db->all('kelurahan',['kecamatan_id' => $_GET['kecamatan_id']]);
+$all_kelurahan = $db->all('kelurahan',['kecamatan_id' => $kecamatan_id]);
 
 $kel_ids = [];
 foreach($all_kelurahan as $kel)
@@ -32,7 +34,7 @@ foreach($all_kelurahan as $kel)
 }
 
 $all_lingkungan = $db->all('lingkungan',['kelurahan_id'=>['IN','('.implode(',',$kel_ids).')']]);
-$all_penduduk   = $db->all('penduduk',['kecamatan_id'=>$_GET['kecamatan_id']]);
+$all_penduduk   = $db->all('penduduk',['kecamatan_id'=>$kecamatan_id]);
 
 $kelurahan  = count($all_kelurahan);
 $lingkungan = count($all_lingkungan);
@@ -74,7 +76,7 @@ $iks = array_map(function($k) use ($db, $periode){
     return $k;
 }, $all_kelurahan);
 
-$detail_kecamatan = $db->single('kecamatan',['id' => $_GET['kecamatan_id']]);
+$detail_kecamatan = $db->single('kecamatan',['id' => $kecamatan_id]);
 
 $db->query = "SELECT no_kk FROM penduduk WHERE kecamatan_id = $_GET[kecamatan_id] GROUP BY no_kk";
 $jumlah_kk = $db->exec('exists');

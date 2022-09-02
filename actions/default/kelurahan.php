@@ -7,8 +7,16 @@ Page::set_title('Dashboard');
 
 $user = auth()->user;
 
-$all_lingkungan = $db->all('lingkungan',['kelurahan_id'=>$_GET['kelurahan_id']]);
-$all_penduduk   = $db->all('penduduk',['kelurahan_id'=>$_GET['kelurahan_id']]);
+$kelurahan_id = 0;
+
+if(get_role($user->id)->name == 'admin kelurahan')
+{
+    $petugas = $db->single('petugas',['user_id'=>$user->id]);
+    $kelurahan_id = $petugas->kelurahan_id;
+}
+
+$all_lingkungan = $db->all('lingkungan',['kelurahan_id'=>$kelurahan_id]);
+$all_penduduk   = $db->all('penduduk',['kelurahan_id'=>$kelurahan_id]);
 
 $lingkungan = count($all_lingkungan);
 $penduduk = count($all_penduduk);
@@ -51,7 +59,7 @@ $iks = array_map(function($k) use ($db, $periode){
     return $k;
 }, $all_lingkungan);
 
-$detail_kelurahan = $db->single('kelurahan',['id' => $_GET['kelurahan_id']]);
+$detail_kelurahan = $db->single('kelurahan',['id' => $kelurahan_id]);
 $detail_kelurahan->kecamatan = $db->single('kecamatan',['id' => $detail_kelurahan->kecamatan_id]);
 
 $db->query = "SELECT no_kk FROM penduduk WHERE kelurahan_id = $_GET[kelurahan_id] GROUP BY no_kk";
