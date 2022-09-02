@@ -50,7 +50,7 @@
                                     </div>
                                 </div>
                                 
-                                <div class="col-6">
+                                <div class="col-sm-6">
                                     <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
                                         <div class="card-header">Jumlah KK</div>
                                         <div class="card-body">
@@ -58,7 +58,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-sm-6">
                                     <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
                                         <div class="card-header">IKS Kabupaten Asahan</div>
                                         <div class="card-body">
