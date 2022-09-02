@@ -7,7 +7,7 @@ Page::set_title('Dashboard');
 
 $user = auth()->user;
 
-$kelurahan_id = 0;
+$kelurahan_id = $_GET['kelurahan_id'];
 
 if(get_role($user->id)->name == 'admin kelurahan')
 {

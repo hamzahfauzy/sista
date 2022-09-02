@@ -9,7 +9,7 @@ $user = auth()->user;
 
 $periode = isset($_GET['tahun']) ? $_GET['tahun'] : date('Y');
 
-$kecamatan_id = $kecamatan_id;
+$kecamatan_id = $_GET['kecamatan_id'];
 
 if(!in_array(get_role($user->id)->name,['administrator','bupati']))
 {
