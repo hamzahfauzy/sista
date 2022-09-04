@@ -71,6 +71,46 @@
 		<?php else: ?>
 		$('.datatable').dataTable();
 		<?php endif ?>
+
+		$('.datatable-anak').dataTable({
+			processing: true,
+			search: {
+				return: true
+			},
+			serverSide: true,
+			ajax: "<?=routeTo('api/penduduk/pilih-anak')?>"
+		})
+
+		$('.datatable-penduduk').dataTable({
+			processing: true,
+			search: {
+				return: true
+			},
+			serverSide: true,
+			ajax: "<?=routeTo('api/penduduk/pilih-penduduk')?>"
+		})
+
+		function targetPenduduk(name)
+		{
+			window.target_input = name
+		}
+
+		function pilihPenduduk(NIK)
+		{
+			document.querySelector('input[name=nik_'+window.target_input+']').value = NIK
+			window.target_input = ''
+			$('#exampleModal').modal('hide')
+		}
+
+		function pilihAnak()
+		{
+			var checkedVals = $('.nik_anak:checkbox:checked').map(function() {
+				return this.value;
+			}).get();
+
+			document.querySelector('input[name=nik_anak]').value = checkedVals.join(",")
+			$('#exampleModal1').modal('hide')
+		}
 	</script>
 </body>
 </html>

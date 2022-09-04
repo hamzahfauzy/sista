@@ -36,28 +36,36 @@ $kelurahan  = count($all_kelurahan);
 $lingkungan = count($all_lingkungan);
 $penduduk = $db->exists('penduduk');
 
-$iks = array_map(function($k) use ($db, $periode){
-    $p = $db->all('penduduk',['kecamatan_id'=>$k->id]);
+$iks = array_map(function($k) use ($db, $periode, $penduduk){
     $counter = 0;
     $total_iks = 0;
-    foreach($p as $_p)
+    $max_records = 1000;
+    $max_query = ceil($penduduk / $max_records);
+    for($i=1;$i<=$max_query;$i++)
     {
-        $survey = $db->single('survey',['tanggal' => ['LIKE','%'.$periode.'%'],'no_kk'=>$_p->no_kk]);
-        if($survey && $survey->status == 'publish')
+        $limit = $i * $max_records;
+        $db->query = "SELECT * FROM penduduk WHERE kecamatan_id = $k->id LIMIT $limit,$max_records";
+        $p = $db->exec('all');
+        if($p)
+        foreach($p as $_p)
         {
-            $counter++;
-            $survey->nilai = json_decode($survey->nilai);
-            $survey->kategori = json_decode($survey->kategori);
-            $total = 0;
-            $skoring = 0;
-            foreach($survey->nilai as $nilai): 
-                if($nilai->skor===true||$nilai->skor===false)
-                {
-                    $total += $nilai->skor;
-                    $skoring++;
-                }
-            endforeach;
-            $total_iks += ($total/$skoring);
+            $survey = $db->single('survey',['tanggal' => ['LIKE','%'.$periode.'%'],'no_kk'=>$_p->no_kk]);
+            if($survey && $survey->status == 'publish')
+            {
+                $counter++;
+                $survey->nilai = json_decode($survey->nilai);
+                $survey->kategori = json_decode($survey->kategori);
+                $total = 0;
+                $skoring = 0;
+                foreach($survey->nilai as $nilai): 
+                    if($nilai->skor===true||$nilai->skor===false)
+                    {
+                        $total += $nilai->skor;
+                        $skoring++;
+                    }
+                endforeach;
+                $total_iks += ($total/$skoring);
+            }
         }
     }
 

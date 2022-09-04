@@ -14,14 +14,6 @@ if(file_exists('../actions/'.$table.'/override-create-fields.php'))
 
 if(request() == 'POST')
 {
-
-    // if(file_exists('../actions/'.$table.'/before-insert.php'))
-    //     require '../actions/'.$table.'/before-insert.php';
-
-    // $insert = $db->insert($table,$_POST[$table]);
-
-    // if(file_exists('../actions/'.$table.'/after-insert.php'))
-    //     require '../actions/'.$table.'/after-insert.php';
     $rekap_nilai = [];
     $skor_in_count = 0;
     $total_skor = 0;
@@ -92,24 +84,22 @@ $data      = false;
 $keluarga  = false;
 $indikator = false;
 
-$get = array_keys($_GET);
-
 if(isset($_GET['filter']))
 {
     $id_keluarga = strtotime('now') + mt_rand(100,1000);
     if(isset($_GET['nik_ayah']) && !empty($_GET['nik_ayah']))
     {
-        $db->update('penduduk',['no_kk'=>$id_keluarga],['NIK'=>$_GET['nik_ayah'],'sebagai'=>'Ayah']);
+        $db->update('penduduk',['no_kk'=>$id_keluarga,'sebagai'=>'Ayah'],['NIK'=>$_GET['nik_ayah']]);
     }
     if(isset($_GET['nik_ibu']) && !empty($_GET['nik_ibu']))
     {
-        $db->update('penduduk',['no_kk'=>$id_keluarga],['NIK'=>$_GET['nik_ibu'],'sebagai'=>'Ibu']);
+        $db->update('penduduk',['no_kk'=>$id_keluarga,'sebagai'=>'Ibu'],['NIK'=>$_GET['nik_ibu']]);
     }
     if(isset($_GET['nik_anak']) && !empty($_GET['nik_anak']))
     {
         $NIKs = explode(',',$_GET['nik_anak']);
         foreach($NIKs as $nik)
-            $db->update('penduduk',['no_kk'=>$id_keluarga],['NIK'=>$nik,'sebagai'=>'Anak']);
+            $db->update('penduduk',['no_kk'=>$id_keluarga,'sebagai'=>'Anak'],['NIK'=>$nik]);
     }
 
     header('location:'.routeTo('survey/create',['no_kk'=>$id_keluarga,'tanggal'=>$_GET['tanggal']]));

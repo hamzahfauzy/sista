@@ -8,6 +8,8 @@ table  { border-collapse: collapse; width: 100%; }
 th, td { padding: 8px 16px; }
 th     { background:#eee; }
 </style>
+    <?php require '_modal-penduduk.php' ?>
+    <?php require '_modal-anak.php' ?>
     <div class="content">
         <div class="panel-header <?=config('theme')['panel_color']?>">
             <div class="page-inner py-5">
@@ -39,15 +41,27 @@ th     { background:#eee; }
                                 <?php else: ?>
                                 <div class="form-group">
                                     <label for="">NIK Ayah</label>
-                                    <input type="text" name="nik_ayah" class="form-control" placeholder="Input NIK Ayah" value="<?=isset($_GET['nik_ayah'])?$_GET['nik_ayah']:''?>">
+                                    <div class="d-flex">
+                                        <input type="text" name="nik_ayah" class="form-control" placeholder="Input NIK Ayah" value="<?=isset($_GET['nik_ayah'])?$_GET['nik_ayah']:''?>">
+                                        &nbsp;
+                                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" onclick="targetPenduduk('ayah')">Cari</button>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="">NIK Ibu</label>
-                                    <input type="text" name="nik_ibu" class="form-control" placeholder="Input NIK Ibu" value="<?=isset($_GET['nik_ibu'])?$_GET['nik_ibu']:''?>">
+                                    <div class="d-flex">
+                                        <input type="text" name="nik_ibu" class="form-control" placeholder="Input NIK Ibu" value="<?=isset($_GET['nik_ibu'])?$_GET['nik_ibu']:''?>">
+                                        &nbsp;
+                                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" onclick="targetPenduduk('ibu')">Cari</button>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="">NIK Anak (Jika anak lebih dari 1, maka pisahkan dengan koma tanpa spasi)</label>
-                                    <input type="text" name="nik_anak" class="form-control" placeholder="Input NIK Anak" value="<?=isset($_GET['nik_anak'])?$_GET['nik_anak']:''?>">
+                                    <div class="d-flex">
+                                        <input type="text" name="nik_anak" class="form-control" placeholder="Input NIK Anak" value="<?=isset($_GET['nik_anak'])?$_GET['nik_anak']:''?>">
+                                        &nbsp;
+                                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal1">Cari</button>
+                                    </div>
                                 </div>
                                 <?php endif ?>
                                 <div class="form-group">
