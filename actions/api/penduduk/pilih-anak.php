@@ -19,7 +19,7 @@ $where = "WHERE NIK <> ''";
 
 if(!empty($search))
 {
-    $where = "AND (NIK LIKE '%$search%' OR no_kk LIKE '%$search%' OR nama LIKE '%$search%' OR alamat LIKE '%$search%')";
+    $where .= " AND (NIK LIKE '%$search%' OR no_kk LIKE '%$search%' OR nama LIKE '%$search%' OR alamat LIKE '%$search%')";
 }
 
 $db->query = "SELECT COUNT(*) as TOTAL FROM $table $where $order_by";
