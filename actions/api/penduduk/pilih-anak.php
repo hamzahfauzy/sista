@@ -31,7 +31,7 @@ $results = [];
 foreach($data as $key => $d)
 {
     $action = '';
-    $action .= '<input type="checkbox" name="nik_anak[]" onclick="appendAnak(\''.$d->NIK.'\')" class="nik_anak" value="'.$d->NIK.'">';
+    $action .= '<input type="checkbox" name="nik_anak[]" id="NIK-'.$d->NIK.'" onclick="appendAnak(\''.$d->NIK.'\')" class="nik_anak" value="'.$d->NIK.'">';
     $results[$key][] = $action;
     foreach($columns as $col)
     {

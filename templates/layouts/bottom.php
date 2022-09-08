@@ -59,6 +59,7 @@
 	<script src="<?=asset('assets/js/setting-demo.js')?>"></script>
 	<script src="<?=asset('assets/js/demo.js')?>"></script>
 	<script>
+		window.anak = []
 		<?php if(isset($_GET['table']) && $_GET['table'] == 'penduduk'): ?>
 		$('.datatable').dataTable({
 			processing: true,
@@ -78,7 +79,14 @@
 				return: true
 			},
 			serverSide: true,
-			ajax: "<?=routeTo('api/penduduk/pilih-anak')?>"
+			ajax: "<?=routeTo('api/penduduk/pilih-anak')?>",
+			drawCallback: function( settings ) {
+				var anak = window.anak
+				anak.forEach(an => {
+					if(document.querySelector("#NIK-"+an))
+						document.querySelector("#NIK-"+an).checked = true
+				})
+			}
 		})
 
 		$('.datatable-penduduk').dataTable({
@@ -102,22 +110,21 @@
 			$('#exampleModal').modal('hide')
 		}
 
-		var anak = []
 		function appendAnak(NIK)
 		{
-			if(anak.includes(NIK))
+			if(window.anak.includes(NIK))
 			{
-				anak.splice(anak.indexOf(NIK), 1);
+				window.anak.splice(window.anak.indexOf(NIK), 1);
 			}
 			else
 			{
-				anak.push(NIK)
+				window.anak.push(NIK)
 			}
 		}
 
 		function pilihAnak()
 		{
-			document.querySelector('input[name=nik_anak]').value = anak.join(",")
+			document.querySelector('input[name=nik_anak]').value = window.anak.join(",")
 			$('#exampleModal1').modal('hide')
 		}
 	</script>
