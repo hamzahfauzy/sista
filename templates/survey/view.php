@@ -110,13 +110,13 @@ th     { background:#eee; }
                                             <td style="background:silver;"></td>
                                             <?php endif; ?>
                                             <?php endforeach ?>
-                                            <td><?=$nilai->skor==1?1:(!$nilai->skor?0:$nilai->skor)?></td>
+                                            <td><?=$nilai->skor?></td>
                                         </tr>
                                         <?php endforeach ?>
                                         <tr>
                                             <td>Total</td>
                                             <td style="text-align:center" colspan="<?=count($data->nilai[0]->rekap_penduduk)*3?>"></td>
-                                            <td ><?=number_format($total/$skoring,2)?></td>
+                                            <td ><?=in_array(0, [$total,$skoring]) ? 0 : number_format($total/$skoring,2)?></td>
                                         </tr>
                                     </table>
                                 </div>

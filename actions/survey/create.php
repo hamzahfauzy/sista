@@ -55,7 +55,7 @@ if(request() == 'POST')
     // echo json_encode($rekap_nilai);
     // die();
 
-    $skor = $total_skor / $skor_in_count;
+    $skor = in_array(0,[$total_skor,$skor_in_count]) ? 0 : $total_skor / $skor_in_count;
     $db->query = "SELECT * FROM kategori WHERE nilai_awal <= $skor AND nilai_akhir >= $skor";
     $status = $db->exec('single');
 
