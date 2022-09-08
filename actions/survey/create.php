@@ -34,11 +34,13 @@ if(request() == 'POST')
 
         $jawaban = $indikator->jawaban;
         $jumlah_jawaban = array_count_values($jawaban_penduduk);
-        $skor = $indikator->logika == 'and' && isset($jumlah_jawaban[$jawaban]) ? count($nilai) == $jumlah_jawaban[$jawaban] : in_array($jawaban,$jawaban_penduduk);
-        $skor = isset($jumlah_jawaban['N']) && $jumlah_jawaban['N'] == count($nilai) ? 'N' : $skor;
+        $skor = isset($jumlah_jawaban['N']) && $jumlah_jawaban['N'] == count($nilai) ? 'N' : 0;
 
         if($skor != 'N')
         {
+            $c_nilai = count($nilai) - (isset($jumlah_jawaban['N']) ? $jumlah_jawaban['N'] : 0);
+            $skor = $indikator->logika == 'and' && isset($jumlah_jawaban[$jawaban]) ? $c_nilai == $jumlah_jawaban[$jawaban] : in_array($jawaban,$jawaban_penduduk);
+
             $skor_in_count++;
             $total_skor+=$skor;
         }

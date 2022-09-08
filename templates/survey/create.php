@@ -1,13 +1,4 @@
 <?php load_templates('layouts/top') ?>
-<style>
-.tableFixHead          { overflow: auto; height: 100px; }
-.tableFixHead thead th { position: sticky; top: 0; z-index: 1; }
-
-/* Just common table stuff. Really. */
-table  { border-collapse: collapse; width: 100%; }
-th, td { padding: 8px 16px; }
-th     { background:#eee; }
-</style>
     <?php require '_modal-penduduk.php' ?>
     <?php require '_modal-anak.php' ?>
     <div class="content">
