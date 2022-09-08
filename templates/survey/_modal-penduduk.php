@@ -10,7 +10,7 @@
         </div>
         <div class="modal-body">
             <div class="table-responsive">
-                <table class="table datatable-penduduk">
+                <table class="table datatable-penduduk" style="width:100%">
                     <thead>
                         <tr>
                             <th width="20px">#</th>

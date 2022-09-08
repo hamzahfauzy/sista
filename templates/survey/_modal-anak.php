@@ -10,7 +10,7 @@
         </div>
         <div class="modal-body">
             <div class="table-responsive table-hover table-sales">
-                <table class="table datatable-anak">
+                <table class="table datatable-anak" style="width:100%">
                     <thead>
                         <tr>
                             <th width="20px">#</th>
