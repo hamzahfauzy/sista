@@ -102,13 +102,22 @@
 			$('#exampleModal').modal('hide')
 		}
 
+		var anak = []
+		function appendAnak(NIK)
+		{
+			if(anak.includes(NIK))
+			{
+				anak.splice(anak.indexOf(NIK), 1);
+			}
+			else
+			{
+				anak.push(NIK)
+			}
+		}
+
 		function pilihAnak()
 		{
-			var checkedVals = $('.nik_anak:checkbox:checked').map(function() {
-				return this.value;
-			}).get();
-
-			document.querySelector('input[name=nik_anak]').value = checkedVals.join(",")
+			document.querySelector('input[name=nik_anak]').value = anak.join(",")
 			$('#exampleModal1').modal('hide')
 		}
 	</script>
