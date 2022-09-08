@@ -80,14 +80,9 @@ th     { background:#eee; }
                                             </tr>
                                         </thead>
                                         <?php 
-                                        $total = 0;
-                                        $skoring = 0;
+                                        $all_skor = [];
                                         foreach($data->nilai as $nilai): 
-                                            if($nilai->skor===true||$nilai->skor===false)
-                                            {
-                                                $total += $nilai->skor;
-                                                $skoring++;
-                                            }
+                                            $all_skor[] = $nilai->skor;
                                         ?>
                                         <tr>
                                             <td><?=$nilai->indikator->nama?></td>
@@ -112,11 +107,17 @@ th     { background:#eee; }
                                             <?php endforeach ?>
                                             <td><?=$nilai->skor?></td>
                                         </tr>
-                                        <?php endforeach ?>
+                                        <?php 
+                                        endforeach;
+                                        $nilai = array_count_values($all_skor);
+                                        $question = array_sum($nilai) - ($nilai['N']??0);
+                                        if(isset($nilai['N'])) unset($nilai['N']);
+                                        $nilai = ($nilai[1] - $nilai[0]) / $question;
+                                        ?>
                                         <tr>
-                                            <td>Total</td>
+                                            <td>Total <?php ?></td>
                                             <td style="text-align:center" colspan="<?=count($data->nilai[0]->rekap_penduduk)*3?>"></td>
-                                            <td ><?=in_array(0, [$total,$skoring]) ? 0 : number_format($total/$skoring,2)?></td>
+                                            <td ><?=number_format($nilai,2)?></td>
                                         </tr>
                                     </table>
                                 </div>

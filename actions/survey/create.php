@@ -32,17 +32,22 @@ if(request() == 'POST')
             $jawaban_penduduk[] = $jawaban;
         }
 
-        $jawaban = $indikator->jawaban;
+        $jawaban        = $indikator->jawaban;
         $jumlah_jawaban = array_count_values($jawaban_penduduk);
-        $skor = isset($jumlah_jawaban['N']) && $jumlah_jawaban['N'] == count($nilai) ? 'N' : 0;
-
-        if($skor != 'N')
+        $question       = array_sum($jumlah_jawaban);
+        $non_question   = ($jumlah_jawaban['N']??0) + ($jumlah_jawaban['disable']??0);
+        $question       = $question - $non_question;
+        if($question > 0)
         {
-            $c_nilai = count($nilai) - (isset($jumlah_jawaban['N']) ? $jumlah_jawaban['N'] : 0);
-            $skor = $indikator->logika == 'and' && isset($jumlah_jawaban[$jawaban]) ? $c_nilai == $jumlah_jawaban[$jawaban] : in_array($jawaban,$jawaban_penduduk);
+            $skor = $indikator->logika == 'and' && isset($jumlah_jawaban[$jawaban]) ? $question == $jumlah_jawaban[$jawaban] : $jumlah_jawaban[$jawaban] > 0;
+            $skor = (int) $skor;
 
             $skor_in_count++;
             $total_skor+=$skor;
+        }
+        else
+        {
+            $skor = 'N';
         }
 
         $rekap_nilai[] = [
@@ -51,9 +56,6 @@ if(request() == 'POST')
             'skor' => $skor
         ];
     }
-
-    // echo json_encode($rekap_nilai);
-    // die();
 
     $skor = in_array(0,[$total_skor,$skor_in_count]) ? 0 : $total_skor / $skor_in_count;
     $db->query = "SELECT * FROM kategori WHERE nilai_awal <= $skor AND nilai_akhir >= $skor";

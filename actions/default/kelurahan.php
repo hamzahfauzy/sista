@@ -34,16 +34,15 @@ $iks = array_map(function($k) use ($db, $periode){
             $counter++;
             $survey->nilai = json_decode($survey->nilai);
             $survey->kategori = json_decode($survey->kategori);
-            $total = 0;
-            $skoring = 0;
+            
+            $all_skor = [];
             foreach($survey->nilai as $nilai): 
-                if($nilai->skor===true||$nilai->skor===false)
-                {
-                    $total += $nilai->skor;
-                    $skoring++;
-                }
+                $all_skor[] = $nilai->skor;
             endforeach;
-            $total_iks += ($total/$skoring);
+            $nilai = array_count_values($all_skor);
+            $question = array_sum($nilai) - ($nilai['N']??0);
+            if(isset($nilai['N'])) unset($nilai['N']);
+            $total_iks += (($nilai[1] - $nilai[0]) / $question);
         }
     }
 

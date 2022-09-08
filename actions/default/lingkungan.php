@@ -27,16 +27,15 @@ foreach($all_kk as $k)
     {
         $survey->nilai = json_decode($survey->nilai);
         $survey->kategori = json_decode($survey->kategori);
-        $total = 0;
-        $skoring = 0;
+        $all_skor = [];
         foreach($survey->nilai as $nilai): 
-            if($nilai->skor===true||$nilai->skor===false)
-            {
-                $total += $nilai->skor;
-                $skoring++;
-            }
+            $all_skor[] = $nilai->skor;
         endforeach;
-        $skor = ($total/$skoring);
+        $nilai = array_count_values($all_skor);
+        $question = array_sum($nilai) - ($nilai['N']??0);
+        if(isset($nilai['N'])) unset($nilai['N']);
+        $skor = (($nilai[1] - $nilai[0]) / $question);
+
         $db->query = "SELECT * FROM kategori WHERE nilai_awal <= $skor AND nilai_akhir >= $skor";
         $k->kategori = $db->exec('single');
         $k->periode = explode('-',$periode);
