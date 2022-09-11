@@ -80,6 +80,9 @@
                                             <?php if(is_allowed(get_route_path('survey/publish',[]),auth()->user->id)): ?>
                                                 <a href="<?=routeTo('survey/publish',['id'=>$data->id])?>" onclick="if(confirm('apakah anda yakin akan mempublish data ini ?')){return true}else{return false}" class="btn btn-sm btn-warning"><i class="fas fa-check"></i> Publish</a>
                                             <?php endif ?>
+                                            <?php if(is_allowed(get_route_path('survey/edit',[]),auth()->user->id)): ?>
+                                                <a href="<?=routeTo('survey/edit',['id'=>$data->id])?>" class="btn btn-sm btn-primary"><i class="fas fa-pencil-alt"></i> Edit</a>
+                                            <?php endif ?>
                                             <?php if(is_allowed(get_route_path('survey/delete',[]),auth()->user->id)): ?>
                                                 <a href="<?=routeTo('survey/delete',['id'=>$data->id])?>" onclick="if(confirm('apakah anda yakin akan menghapus data ini ?')){return true}else{return false}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Hapus</a>
                                             <?php endif ?>

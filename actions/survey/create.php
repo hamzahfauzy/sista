@@ -68,7 +68,7 @@ if(request() == 'POST')
         $file = 'uploads/'.$name;
         copy($_FILES['berkas']['tmp_name'],$file);
         
-        $db->insert('survey',[
+        $insert = $db->insert('survey',[
             'user_id' => auth()->user->id,
             'no_kk' => $_GET['no_kk'],
             'nilai' => json_encode($rekap_nilai),
@@ -81,7 +81,7 @@ if(request() == 'POST')
 
 
     set_flash_msg(['success'=>'Survey berhasil disimpan']);
-    header('location:'.routeTo('survey/index'));
+    header('location:'.routeTo('survey/view',['id'=>$insert->id]));
 }
 
 $data      = false;

@@ -33,7 +33,7 @@ foreach($data->nilai as $nilai)
     $question       = $question - $non_question;
     if($question > 0)
     {
-        $skor = $indikator->logika == 'and' && isset($jumlah_jawaban[$jawaban]) ? $question == $jumlah_jawaban[$jawaban] : $jumlah_jawaban[$jawaban] > 0;
+        $skor = $indikator->logika == 'and' && isset($jumlah_jawaban[$jawaban]) ? $question == $jumlah_jawaban[$jawaban] : (isset($jumlah_jawaban[$jawaban]) ? 1 : 0);
         $skor = (int) $skor;
 
         $skor_in_count++;

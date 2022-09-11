@@ -156,12 +156,13 @@
                                     <td>
                                         <a href="<?=routeTo('default/kecamatan',['tahun'=>$k->periode,'kecamatan_id'=>$k->id])?>"><?=$k->nama?></a>
                                     </td>
+                                    <?php if(isset($k->kategori)): ?>
+                                    <td style="background:<?=$k->kategori->warna?>;color:#FFF;">
+                                        <?=$k->kategori->nama?>
+                                    <?php else: ?>
                                     <td>
-                                        <?php if(isset($k->kategori)): ?>
-                                        <span style="background:<?=$k->kategori->warna?>;padding:10px;color:#FFF;"><?=$k->kategori->nama?></span>
-                                        <?php else: ?>
                                         <i>Tidak ada survey</i>
-                                        <?php endif ?>
+                                    <?php endif ?>
                                     </td>
                                 </tr>
                                 <?php endforeach ?>

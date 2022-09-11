@@ -36,35 +36,29 @@ $kelurahan  = count($all_kelurahan);
 $lingkungan = count($all_lingkungan);
 $penduduk = $db->exists('penduduk');
 
-$iks = array_map(function($k) use ($db, $periode, $penduduk){
+$iks = array_map(function($k) use ($db, $periode){
     $counter = 0;
     $total_iks = 0;
-    $max_records = 1000;
-    $max_query = ceil($penduduk / $max_records);
-    for($i=1;$i<=$max_query;$i++)
+    $db->query = "SELECT no_kk FROM penduduk WHERE kecamatan_id = $k->id GROUP BY no_kk";
+    $p = $db->exec('all');
+    if($p)
+    foreach($p as $_p)
     {
-        $limit = $i * $max_records;
-        $db->query = "SELECT * FROM penduduk WHERE kecamatan_id = $k->id LIMIT $limit,$max_records";
-        $p = $db->exec('all');
-        if($p)
-        foreach($p as $_p)
+        $survey = $db->single('survey',['tanggal' => ['LIKE','%'.$periode.'%'],'no_kk'=>$_p->no_kk]);
+        if($survey && $survey->status == 'publish')
         {
-            $survey = $db->single('survey',['tanggal' => ['LIKE','%'.$periode.'%'],'no_kk'=>$_p->no_kk]);
-            if($survey && $survey->status == 'publish')
-            {
-                $counter++;
-                $survey->nilai = json_decode($survey->nilai);
-                $survey->kategori = json_decode($survey->kategori);
-                
-                $all_skor = [];
-                foreach($survey->nilai as $nilai): 
-                    $all_skor[] = $nilai->skor;
-                endforeach;
-                $nilai = array_count_values($all_skor);
-                $question = array_sum($nilai) - ($nilai['N']??0);
-                if(isset($nilai['N'])) unset($nilai['N']);
-                $total_iks += (($nilai[1] - $nilai[0]) / $question);
-            }
+            $counter++;
+            $survey->nilai = json_decode($survey->nilai);
+            $survey->kategori = json_decode($survey->kategori);
+            
+            $all_skor = [];
+            foreach($survey->nilai as $nilai): 
+                $all_skor[] = $nilai->skor;
+            endforeach;
+            $nilai = array_count_values($all_skor);
+            $question = array_sum($nilai) - ($nilai['N']??0);
+            if(isset($nilai['N'])) unset($nilai['N']);
+            $total_iks += ($nilai[1] / $question);
         }
     }
 
@@ -75,6 +69,10 @@ $iks = array_map(function($k) use ($db, $periode, $penduduk){
         $k->kategori = $db->exec('single');
         $k->total_skor = $skor;
     }
+    else
+    {
+        $k->total_skor = 0;
+    }
     $k->periode = $periode;
     return $k;
 }, $all_kecamatan);
@@ -84,6 +82,7 @@ $jumlah_kk = $db->exec('exists');
 
 $iks_kabupaten = (array) $iks;
 $iks_kabupaten = array_sum(array_column($iks_kabupaten,'total_skor'));
+$iks_kabupaten = number_format($iks_kabupaten / $jumlah_kk,3);
 
 $db->query = "SELECT * FROM kategori WHERE nilai_awal <= $iks_kabupaten AND nilai_akhir >= $iks_kabupaten";
 $iks_kabupaten = $db->exec('single');

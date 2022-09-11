@@ -1,7 +1,7 @@
 <?php load_templates('layouts/top') ?>
 <style>
-.tableFixHead          { overflow: auto; height: 100px; }
-.tableFixHead thead th { position: sticky; top: 0; z-index: 1; }
+.tableFixHead          { overflow: auto; height: 500px; }
+.tableFixHead thead { position: sticky; top: 0; z-index: 1; }
 
 /* Just common table stuff. Really. */
 table  { border-collapse: collapse; width: 100%; }
@@ -13,7 +13,7 @@ th     { background:#eee; }
             <div class="page-inner py-5">
                 <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
                     <div>
-                        <h2 class="text-white pb-2 fw-bold">Detail Surve</h2>
+                        <h2 class="text-white pb-2 fw-bold">Detail Survey</h2>
                         <h5 class="text-white op-7 mb-2">Memanajemen data Survey</h5>
                     </div>
                 </div>
@@ -50,76 +50,79 @@ th     { background:#eee; }
                             <div class="form-group">
                                 <label for="">Status</label>
                                 <br>
-                                <?php if($data->status == 'draft'): ?>
-                                <i>Draft</i>
-                                <?php else: ?>
-                                <span style="background:<?=$data->kategori->warna?>;padding:10px;color:#FFF;"><?=$data->kategori->nama?></span>
-                                <?php endif ?>
+                                <i><?= ucwords($data->status) ?></i>
                             </div>
                             <div class="form-group">
                                 <div class="table-responsive">
-
-                                    <table class="table table-bordered tableFixHead">
-                                        <thead>
-                                            <tr>
-                                                <td style="text-align:center;width:30%" rowspan="3">INDIKATOR</td>
-                                                <td style="text-align:center" colspan="<?=count($data->nilai[0]->rekap_penduduk)*3?>">VARIABEL PENILAIAN</td>
-                                                <td rowspan="3">Skor</td>
-                                            </tr>
-                                            <tr>
-                                                <?php foreach($data->nilai[0]->rekap_penduduk as $k): ?>
-                                                <td style="text-align:center" colspan="3"><?=$k->penduduk->nama?></td>
-                                                <?php endforeach ?>
-                                            </tr>
-                                            <tr>
-                                                <?php foreach($data->nilai[0]->rekap_penduduk as $k): ?>
-                                                <td style="text-align:center;background:blue;">N</td>
-                                                <td style="text-align:center;background:green;">Y</td>
-                                                <td style="text-align:center;background:red;">T</td>
-                                                <?php endforeach ?>
-                                            </tr>
-                                        </thead>
-                                        <?php 
-                                        $all_skor = [];
-                                        foreach($data->nilai as $nilai): 
-                                            $all_skor[] = $nilai->skor;
-                                        ?>
-                                        <tr>
-                                            <td><?=$nilai->indikator->nama?></td>
+                                    <div class="tableFixHead">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th style="text-align:center;width:30%" rowspan="3">INDIKATOR</th>
+                                                    <th style="text-align:center" colspan="<?=count($data->nilai[0]->rekap_penduduk)*3?>">VARIABEL PENILAIAN</th>
+                                                    <th rowspan="3">Skor</th>
+                                                </tr>
+                                                <tr>
+                                                    <?php foreach($data->nilai[0]->rekap_penduduk as $k): ?>
+                                                    <th style="text-align:center" colspan="3"><?=$k->penduduk->nama?></th>
+                                                    <?php endforeach ?>
+                                                </tr>
+                                                <tr>
+                                                    <?php foreach($data->nilai[0]->rekap_penduduk as $k): ?>
+                                                    <th style="text-align:center;color:#FFF;background:blue;">N</th>
+                                                    <th style="text-align:center;color:#FFF;background:green;">Y</th>
+                                                    <th style="text-align:center;color:#FFF;background:red;">T</th>
+                                                    <?php endforeach ?>
+                                                </tr>
+                                            </thead>
                                             <?php 
-                                            foreach($nilai->rekap_penduduk as $penduduk): 
-                                                if($penduduk->jawaban != 'disable'): 
+                                            $all_skor = [];
+                                            foreach($data->nilai as $nilai): 
+                                                $all_skor[] = $nilai->skor;
                                             ?>
-                                            <td style="text-align:center;">
-                                                <input type="radio" <?=$penduduk->jawaban == 'N' ? 'checked' : 'disabled' ?> value="N" style="transform:scale(1.5)">
-                                            </td>
-                                            <td style="text-align:center;">
-                                                <input type="radio" <?=$penduduk->jawaban == 'Y' ? 'checked' : 'disabled' ?> value="Y" style="transform:scale(1.5)">
-                                            </td>
-                                            <td style="text-align:center;">
-                                                <input type="radio" <?=$penduduk->jawaban == 'T' ? 'checked' : 'disabled' ?> value="T" style="transform:scale(1.5)">
-                                            </td>
-                                            <?php else: ?>
-                                            <td style="background:silver;"></td>
-                                            <td style="background:silver;"></td>
-                                            <td style="background:silver;"></td>
-                                            <?php endif; ?>
-                                            <?php endforeach ?>
-                                            <td><?=$nilai->skor?></td>
-                                        </tr>
-                                        <?php 
-                                        endforeach;
-                                        $nilai = array_count_values($all_skor);
-                                        $question = array_sum($nilai) - ($nilai['N']??0);
-                                        if(isset($nilai['N'])) unset($nilai['N']);
-                                        $nilai = ($nilai[1] - $nilai[0]) / $question;
-                                        ?>
-                                        <tr>
-                                            <td>Total <?php ?></td>
-                                            <td style="text-align:center" colspan="<?=count($data->nilai[0]->rekap_penduduk)*3?>"></td>
-                                            <td ><?=number_format($nilai,2)?></td>
-                                        </tr>
-                                    </table>
+                                            <tr>
+                                                <td><?=$nilai->indikator->nama?></td>
+                                                <?php 
+                                                foreach($nilai->rekap_penduduk as $penduduk): 
+                                                    if($penduduk->jawaban != 'disable'): 
+                                                ?>
+                                                <td style="text-align:center;">
+                                                    <input type="radio" <?=$penduduk->jawaban == 'N' ? 'checked' : 'disabled' ?> value="N" style="transform:scale(1.5)">
+                                                </td>
+                                                <td style="text-align:center;">
+                                                    <input type="radio" <?=$penduduk->jawaban == 'Y' ? 'checked' : 'disabled' ?> value="Y" style="transform:scale(1.5)">
+                                                </td>
+                                                <td style="text-align:center;">
+                                                    <input type="radio" <?=$penduduk->jawaban == 'T' ? 'checked' : 'disabled' ?> value="T" style="transform:scale(1.5)">
+                                                </td>
+                                                <?php else: ?>
+                                                <td style="background:silver;"></td>
+                                                <td style="background:silver;"></td>
+                                                <td style="background:silver;"></td>
+                                                <?php endif; ?>
+                                                <?php endforeach ?>
+                                                <td><?=$nilai->skor?></td>
+                                            </tr>
+                                            <?php 
+                                            endforeach;
+                                            $nilai = array_count_values($all_skor);
+                                            $question = array_sum($nilai) - ($nilai['N']??0);
+                                            if(isset($nilai['N'])) unset($nilai['N']);
+                                            // $label = $nilai[1] ." / ". $question;
+                                            $nilai = $nilai[1] / $question;
+                                            ?>
+                                            <tr>
+                                                <td>Total Nilai IKS</td>
+                                                <td style="text-align:center" colspan="<?=count($data->nilai[0]->rekap_penduduk)*3?>"></td>
+                                                <td ><?=number_format($nilai,3)?></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Keterangan IKS</td>
+                                                <td style="text-align:center" colspan="<?=count($data->nilai[0]->rekap_penduduk)*3?>"><?=$data->kategori->nama?></td>
+                                                <td style="background:<?=$data->kategori->warna?>"></td>
+                                            </tr>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -128,4 +131,9 @@ th     { background:#eee; }
             </div>
         </div>
     </div>
+<script>
+setTimeout(() => {
+    document.querySelector('.wrapper').classList.add('sidebar_minimize')
+}, 1000);
+</script>
 <?php load_templates('layouts/bottom') ?>
