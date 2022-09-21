@@ -1,5 +1,8 @@
 <?php
 
+$conn = conn();
+$db   = new Database($conn);
+
 Page::set_title('Dashboard');
 
 $user = auth()->user;
