@@ -66,33 +66,33 @@ th     { background:#eee; }
                                                 </tr>
                                             </thead>
                                             <?php 
-                                            $all_skor = [];
-                                            foreach($data->nilai as $nilai): 
-                                                $all_skor[] = $nilai->skor;
+                                            foreach($indikator as $i): 
+                                                $peng = explode(',',$i->pengaturan); 
                                             ?>
                                             <tr>
-                                                <td><?=$nilai->indikator->nama?></td>
+                                                <td><?=$i->nama?></td>
                                                 <?php 
-                                                foreach($nilai->rekap_penduduk as $penduduk): 
-                                                    if($penduduk->jawaban != 'disable'): 
+                                                foreach($keluarga as $k): 
+                                                    $p = $k->sebagai == 'Ayah' ? 'ayah' : ($k->sebagai == 'Ibu' ? 'ibu' : pengaturan($k->tanggal_lahir));
+                                                    if(in_array($p,$peng)): 
                                                 ?>
                                                 <td style="text-align:center;">
-                                                    <input type="radio" name="pengaturan[<?=$nilai->indikator->id?>][<?=$penduduk->penduduk->id?>]" value="N" <?=$penduduk->jawaban == 'N' ? 'checked' : '' ?> value="N" style="transform:scale(1.5)">
+                                                    <input type="radio" name="pengaturan[<?=$i->id?>][<?=$k->id?>]" <?=getStatusJawaban($data->nilai,$i,$k) == 'N' ? 'checked' : '' ?> value="N" style="transform:scale(1.5)">
                                                 </td>
                                                 <td style="text-align:center;">
-                                                    <input type="radio" name="pengaturan[<?=$nilai->indikator->id?>][<?=$penduduk->penduduk->id?>]" value="Y" <?=$penduduk->jawaban == 'Y' ? 'checked' : '' ?> value="Y" style="transform:scale(1.5)">
+                                                    <input type="radio" name="pengaturan[<?=$i->id?>][<?=$k->id?>]" <?=getStatusJawaban($data->nilai,$i,$k) == 'Y' ? 'checked' : '' ?> value="Y" style="transform:scale(1.5)">
                                                 </td>
                                                 <td style="text-align:center;">
-                                                    <input type="radio" name="pengaturan[<?=$nilai->indikator->id?>][<?=$penduduk->penduduk->id?>]" value="T" <?=$penduduk->jawaban == 'T' ? 'checked' : '' ?> value="T" style="transform:scale(1.5)">
+                                                    <input type="radio" name="pengaturan[<?=$i->id?>][<?=$k->id?>]" <?=getStatusJawaban($data->nilai,$i,$k) == 'T' ? 'checked' : '' ?> value="T" style="transform:scale(1.5)">
                                                 </td>
                                                 <?php else: ?>
-                                                <td style="background:silver;"><input type="hidden" name="pengaturan[<?=$nilai->indikator->id?>][<?=$penduduk->penduduk->id?>]" value="disable"></td>
+                                                <td style="background:silver;"><input type="hidden" name="pengaturan[<?=$i->id?>][<?=$k->id?>]" value="disable"></td>
                                                 <td style="background:silver;"></td>
                                                 <td style="background:silver;"></td>
                                                 <?php endif; ?>
                                                 <?php endforeach ?>
                                             </tr>
-                                            <?php endforeach; ?>
+                                            <?php endforeach ?>
                                         </table>
                                     </div>
                                 </div>

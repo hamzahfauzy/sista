@@ -570,3 +570,22 @@ function bulanIndo()
 {
     return ['','Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
 }
+
+function getStatusJawaban($nilai, $i, $k)
+{
+    foreach($nilai as $nilai)
+    {
+        if($nilai->indikator->id == $i->id)
+        {
+            foreach($nilai->rekap_penduduk as $penduduk)
+            {
+                if($penduduk->id == $k->id)
+                {
+                    return $penduduk->jawaban;
+                }
+            }
+        }
+    }
+
+    return '';
+}

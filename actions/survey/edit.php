@@ -74,8 +74,11 @@ if(request() == 'POST')
     header('location:'.routeTo('survey/view',['id' => $_GET['id']]));
 }
 
+$indikator = $db->all('indikator',[],['no_urut'=>'asc']);
+
 return [
     'data' => $data,
+    'indikator' => $indikator,
     'error_msg' => $error_msg,
     'old' => $old,
 ];
