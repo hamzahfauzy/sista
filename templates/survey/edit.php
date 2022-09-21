@@ -72,12 +72,14 @@ th     { background:#eee; }
                                             <tr>
                                                 <td><?=$i->nama?></td>
                                                 <?php 
-                                                foreach($keluarga as $k): 
+                                                foreach($data->nilai[0]->rekap_penduduk as $k):
                                                     $p = $k->sebagai == 'Ayah' ? 'ayah' : ($k->sebagai == 'Ibu' ? 'ibu' : pengaturan($k->tanggal_lahir));
                                                     if(in_array($p,$peng)): 
                                                 ?>
                                                 <td style="text-align:center;">
+                                                    <?php if($i->id <= 12): ?>
                                                     <input type="radio" name="pengaturan[<?=$i->id?>][<?=$k->id?>]" <?=getStatusJawaban($data->nilai,$i,$k) == 'N' ? 'checked' : '' ?> value="N" style="transform:scale(1.5)">
+                                                    <?php endif ?>
                                                 </td>
                                                 <td style="text-align:center;">
                                                     <input type="radio" name="pengaturan[<?=$i->id?>][<?=$k->id?>]" <?=getStatusJawaban($data->nilai,$i,$k) == 'Y' ? 'checked' : '' ?> value="Y" style="transform:scale(1.5)">

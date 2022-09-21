@@ -14,7 +14,7 @@ $skor_in_count = 0;
 $total_skor = 0;
 foreach($data->nilai as $nilai)
 {
-    $indikator = $nilai->indikator;
+    $indikator = $db->single('indikator',['id' => $nilai->indikator->id]);
     $rekap_penduduk = [];
     $jawaban_penduduk = [];
     foreach($nilai->rekap_penduduk as $penduduk)

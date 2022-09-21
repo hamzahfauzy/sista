@@ -17,7 +17,7 @@
             fetch('<?=routeTo('api/default/index')?>')
             .then(res => res.text())
             .then(res => {
-                document.querySelector(".inner-dashbord").innerHTML = res
+                document.querySelector(".inner-dashboard").innerHTML = res
             })
         }, 1000);
     </script>
