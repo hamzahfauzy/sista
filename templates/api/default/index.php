@@ -1,6 +1,6 @@
         <div class="page-inner mt--5">
             <div class="row mt--2">
-                <div class="col-3 mb-2">
+                <div class="col-12 col-md-3 mb-2">
                     <div class="card-body shadow-lg bg-white rounded">
                         <div class="row">
                             <div class="col">
@@ -18,7 +18,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="col-3 mb-2">
+                <div class="col-12 col-md-3 mb-2">
                     <div class="card-body shadow-lg bg-white rounded">
                         <div class="row">
                             <div class="col">
@@ -36,7 +36,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="col-3 mb-2">
+                <div class="col-12 col-md-3 mb-2">
                     <div class="card-body shadow-lg bg-white rounded">
                         <div class="row">
                             <div class="col">
@@ -54,7 +54,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="col-3 mb-2">
+                <div class="col-12 col-md-3 mb-2">
                     <div class="card-body shadow-lg bg-white rounded">
                         <div class="row">
                             <div class="col">
@@ -72,7 +72,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-12 col-md-6">
                     <div class="card-body shadow-lg bg-white rounded">
                         <div class="row">
                             <div class="col">
@@ -90,7 +90,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-12 col-md-6">
                     <div class="card-body shadow-lg bg-white rounded">
                         <div class="row">
                             <div class="col">
