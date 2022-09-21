@@ -72,7 +72,8 @@ th     { background:#eee; }
                                             <tr>
                                                 <td><?=$i->nama?></td>
                                                 <?php 
-                                                foreach($data->nilai[0]->rekap_penduduk as $k):
+                                                foreach($data->nilai[0]->rekap_penduduk as $rk):
+                                                    $k = $rk->penduduk;
                                                     $p = $k->sebagai == 'Ayah' ? 'ayah' : ($k->sebagai == 'Ibu' ? 'ibu' : pengaturan($k->tanggal_lahir));
                                                     if(in_array($p,$peng)): 
                                                 ?>
