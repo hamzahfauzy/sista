@@ -138,7 +138,7 @@ th     { background:#eee; }
                                                                     if(in_array($p,$peng)): 
                                                                 ?>
                                                                 <td style="text-align:center;">
-                                                                    <?php if($i->id <= 13): ?>
+                                                                    <?php if($i->id <= 14): ?>
                                                                     <input type="radio" name="pengaturan[<?=$i->id?>][<?=$k->id?>]" value="N" style="transform:scale(1.5)">
                                                                     <?php endif ?>
                                                                 </td>

@@ -10,7 +10,7 @@
                 </div>
             </div>
         </div>
-        <div class="inner-dashboard">Sedang memuat data...</div>
+        <div class="inner-dashboard"><span class="p-4">Sedang memuat data...</span></div>
     </div>
     <script>
         setTimeout(() => {
