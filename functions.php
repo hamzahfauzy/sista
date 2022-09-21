@@ -577,11 +577,11 @@ function getStatusJawaban($nilai, $i, $k)
     {
         if($nilai->indikator->id == $i->id)
         {
-            foreach($nilai->rekap_penduduk as $penduduk)
+            foreach($nilai->rekap_penduduk as $rk)
             {
-                if($penduduk->id == $k->id)
+                if($rk->penduduk->id == $k->id)
                 {
-                    return $penduduk->jawaban;
+                    return $rk->penduduk->jawaban;
                 }
             }
         }
