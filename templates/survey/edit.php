@@ -79,7 +79,7 @@ th     { background:#eee; }
                                                         $statusJawaban = getStatusJawaban($data->nilai,$i,$k);
                                                 ?>
                                                 <td style="text-align:center;">
-                                                    <?php if($i->id <= 12): ?>
+                                                    <?php if($i->id <= 13): ?>
                                                     <input type="radio" name="pengaturan[<?=$i->id?>][<?=$k->id?>]" <?=$statusJawaban == 'N' ? 'checked' : '' ?> value="N" style="transform:scale(1.5)">
                                                     <?php endif ?>
                                                 </td>
