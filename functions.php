@@ -581,7 +581,7 @@ function getStatusJawaban($n, $i, $k)
             {
                 if($rk->penduduk->id == $k->id)
                 {
-                    return $rk->penduduk->jawaban;
+                    return $rk->jawaban;
                 }
             }
         }
