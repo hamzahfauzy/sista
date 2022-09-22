@@ -43,54 +43,6 @@
                                             </th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <?php foreach($datas as $index => $data): ?>
-                                        <tr>
-                                            <td>
-                                                <?=$index+1?>
-                                            </td>
-                                            <?php 
-                                            foreach($fields as $key => $field): 
-                                                $label = $field;
-                                                if(is_array($field))
-                                                {
-                                                    $label = $field['label'];
-                                                    $data_value = Form::getData($field['type'],$data->{$key},true);
-                                                    if($field['type'] == 'number' && floor( $data_value ) == $data_value)
-                                                    {
-                                                        $data_value = number_format($data_value);
-                                                    }
-                                                    $field = $key;
-                                                }
-                                                else
-                                                {
-                                                    $data_value = $data->{$field};
-                                                }
-                                                $label = _ucwords($label);
-                                            ?>
-                                            <td>
-                                            <?=$label == 'Warna' ? "<div style='background:".$data_value.";padding:10px'></div>" : $data_value?>
-                                            </td>
-                                            <?php endforeach ?>
-                                            <td>
-                                            <?php if(is_allowed('survey/view',auth()->user->id)): ?>
-                                            <a href="<?=routeTo('survey/view',['id' => $data->id])?>" class="btn btn-sm btn-success"><i class="fa fa-eye"></i> Lihat</a>
-                                            <?php endif ?>
-                                            <?php if($data->status == 'draft'): ?>
-                                            <?php if(is_allowed(get_route_path('survey/publish',[]),auth()->user->id)): ?>
-                                                <a href="<?=routeTo('survey/publish',['id'=>$data->id])?>" onclick="if(confirm('apakah anda yakin akan mempublish data ini ?')){return true}else{return false}" class="btn btn-sm btn-warning"><i class="fas fa-check"></i> Publish</a>
-                                            <?php endif ?>
-                                            <?php if(is_allowed(get_route_path('survey/edit',[]),auth()->user->id)): ?>
-                                                <a href="<?=routeTo('survey/edit',['id'=>$data->id])?>" class="btn btn-sm btn-primary"><i class="fas fa-pencil-alt"></i> Edit</a>
-                                            <?php endif ?>
-                                            <?php if(is_allowed(get_route_path('survey/delete',[]),auth()->user->id)): ?>
-                                                <a href="<?=routeTo('survey/delete',['id'=>$data->id])?>" onclick="if(confirm('apakah anda yakin akan menghapus data ini ?')){return true}else{return false}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Hapus</a>
-                                            <?php endif ?>
-                                            <?php endif ?>
-                                            </td>
-                                        </tr>
-                                        <?php endforeach ?>
-                                    </tbody>
                                 </table>
                             </div>
                         </div>

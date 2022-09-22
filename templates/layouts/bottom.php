@@ -69,6 +69,43 @@
 			serverSide: true,
 			ajax: "<?=routeTo('api/penduduk/index')?>"
 		})
+		<?php elseif(startWith(get_route(),'survey/')): ?>
+		var surveydatatable = $('.datatable').DataTable({
+			processing: true,
+			search: {
+				return: true
+			},
+			serverSide: true,
+			ajax: "<?=routeTo('api/survey/index')?>"
+		})
+
+		function publishData(id)
+		{
+			if(confirm('apakah anda yakin akan mempublish data ini ?'))
+			{
+				fetch("<?=routeTo('api/survey/publish')?>?id="+id).then(res => res.json()).then(res => {
+					surveydatatable.ajax.reload( null, false );
+				})
+			}
+			else
+			{
+				return false
+			}
+		}
+
+		function deleteData(id)
+		{
+			if(confirm('apakah anda yakin akan menghapus data ini ?'))
+			{
+				fetch("<?=routeTo('api/survey/delete')?>?id="+id).then(res => res.json()).then(res => {
+					surveydatatable.ajax.reload( null, false );
+				})
+			}
+			else
+			{
+				return false
+			}
+		}
 		<?php else: ?>
 		$('.datatable').dataTable();
 		<?php endif ?>

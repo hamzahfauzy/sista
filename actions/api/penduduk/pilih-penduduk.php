@@ -30,7 +30,7 @@ $results = [];
 
 foreach($data as $key => $d)
 {
-    $results[$key][] = $key+1;
+    $results[$key][] = $key+$start+1;
     foreach($columns as $col)
     {
         if(in_array($col,['kecamatan_id','kelurahan_id','lingkungan_id']))
