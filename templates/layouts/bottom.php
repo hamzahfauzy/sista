@@ -58,10 +58,13 @@
 	<!-- Atlantis DEMO methods, don't include it in your project! -->
 	<script src="<?=asset('assets/js/setting-demo.js')?>"></script>
 	<script src="<?=asset('assets/js/demo.js')?>"></script>
+	<script src="https://raw.githubusercontent.com/DataTables/Plugins/master/pagination/full_numbers_no_ellipses.js"></script>
 	<script>
 		window.anak = []
 		<?php if(isset($_GET['table']) && $_GET['table'] == 'penduduk'): ?>
 		$('.datatable').dataTable({
+			stateSave:true,
+			pagingType: 'full_numbers_no_ellipses',
 			processing: true,
 			search: {
 				return: true
@@ -72,6 +75,7 @@
 		<?php elseif(startWith(get_route(),'survey/')): ?>
 		var surveydatatable = $('.datatable').DataTable({
 			stateSave:true,
+			pagingType: 'full_numbers_no_ellipses',
 			processing: true,
 			search: {
 				return: true
