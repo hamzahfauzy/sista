@@ -71,6 +71,7 @@
 		})
 		<?php elseif(startWith(get_route(),'survey/')): ?>
 		var surveydatatable = $('.datatable').DataTable({
+			stateSave:true,
 			processing: true,
 			search: {
 				return: true
