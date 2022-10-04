@@ -115,7 +115,7 @@ table th {
                         <div class="card-body">
                             <div class="filter">
                                 <form action="">
-                                    <input type="hidden" name="kelurahan_id" value="<?=$detail_kelurahan->id?>">
+                                    <input type="hidden" name="lingkungan_id" value="<?=$detail_lingkungan->id?>">
                                     <div class="d-flex">
                                         <?php $t = isset($_GET['tahun']) ? $_GET['tahun'] : date('Y');  ?>
                                         <select name="tahun" id="" class="form-control">
