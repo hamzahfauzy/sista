@@ -12,13 +12,20 @@
         </div>
         <div class="inner-dashboard"><span class="p-4">Sedang memuat data...</span></div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
+        const controller = new AbortController();
+        // Make a request for a user with a given ID
         setTimeout(() => {
-            fetch('<?=routeTo('api/default/index')?>')
-            .then(res => res.text())
-            .then(res => {
-                document.querySelector(".inner-dashboard").innerHTML = res
+            axios.get('<?=routeTo('api/default/index')?>',{
+               signal: controller.signal
+            }).then(res => {
+                document.querySelector(".inner-dashboard").innerHTML = res.data
             })
         }, 1000);
+
+        window.onbeforeunload  = e => {
+            controller.abort()
+        }
     </script>
 <?php load_templates('layouts/bottom') ?>

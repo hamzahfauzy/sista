@@ -1,4 +1,5 @@
 <?php
+ignore_user_abort(true);
 session_start();
 date_default_timezone_set('Asia/Jakarta');
 if(file_exists('../vendor/autoload.php'))
