@@ -109,6 +109,9 @@ $iks = array_map(function($k) use ($db, $periode, $penduduk){
     }
     $k->iks_per_indikator = $iks_per_indikator;
     $k->periode = $periode;
+    $k->jumlah_kk = count($p);
+    $k->kk_nilai = $counter;
+    $k->kk_belum_nilai = $k->jumlah_kk - $k->kk_nilai;
     return $k;
 }, $all_kelurahan);
 

@@ -36,6 +36,9 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Kecamatan</th>
+                                    <th>Total KK</th>
+                                    <th>KK Sudah Dinilai</th>
+                                    <th>KK Belum Dinilai</th>
                                     <th>Status</th>
                                 </tr>
                                 <?php foreach($iks as $index => $k): ?>
@@ -44,6 +47,9 @@
                                     <td>
                                         <a href="<?=routeTo('rekapitulasi/kecamatan',['tahun'=>$k->periode,'kecamatan_id'=>$k->id])?>"><?=$k->nama?></a>
                                     </td>
+                                    <td><?=$k->jumlah_kk?></td>
+                                    <td><?=$k->kk_nilai?></td>
+                                    <td><?=$k->kk_belum_nilai?></td>
                                     <?php if(isset($k->kategori)): ?>
                                     <td style="background:<?=$k->kategori->warna?>;color:#FFF;">
                                         <?=$k->kategori->nama?>
