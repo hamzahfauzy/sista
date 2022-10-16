@@ -65,7 +65,7 @@ if(request() == 'POST')
     {
         $ext  = pathinfo($_FILES['berkas']['name'], PATHINFO_EXTENSION);
         $exts = ['jpg','jpeg','pdf','png'];
-        if(in_array($ext,$exts))
+        if(!in_array($ext,$exts))
         {
             set_flash_msg(['error'=>'Format file tidak sesuai (harus memiliki ekstensi seperti '.implode(',',$exts).')']);
             header('location:'.routeTo('survey/create',$_GET));
