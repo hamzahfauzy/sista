@@ -15,14 +15,18 @@ if(!in_array(get_role($user->id)->name,['administrator','bupati']))
     $kecamatan_id = $petugas->kecamatan_id;
     if(!empty($petugas->kelurahan_id))
     {
-        header('location:'.routeTo('default/kelurahan',[
-            'kelurahan_id' => $petugas->kelurahan_id,
-            'tahun' => $periode,
-        ]));
+        header('location:'.routeTo('default/kelurahan'));
+        die();
     }
-    header('location:'.routeTo('default/kecamatan',[
-        'kecamatan_id' => $kecamatan_id,
-        'tahun' => $periode,
-    ]));
+    header('location:'.routeTo('default/kecamatan'));
     die();
 }
+
+$kecamatan = $db->exists('kecamatan');
+$kelurahan = $db->exists('kelurahan');
+$lingkungan = $db->exists('lingkungan');
+$penduduk = $db->exists('penduduk');
+$db->query = "SELECT no_kk FROM penduduk WHERE no_kk IS NOT NULL or no_kk != '' GROUP BY no_kk";
+$jumlah_kk = $db->exec('exists');
+
+return compact('kecamatan','kelurahan','lingkungan','penduduk','jumlah_kk');

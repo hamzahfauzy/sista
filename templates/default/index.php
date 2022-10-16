@@ -10,22 +10,119 @@
                 </div>
             </div>
         </div>
-        <div class="inner-dashboard"><span class="p-4">Sedang memuat data...</span></div>
+        <div class="page-inner mt--5">
+            <div class="row mt--2">
+                <div class="col-12 col-md-4 mb-2">
+                    <div class="card-body shadow-lg bg-white rounded">
+                        <div class="row">
+                            <div class="col">
+                                <h5 class="text-uppercase text-muted mb-0">Kecamatan</h5>
+                                <span class="h2 font-weight-bold mb-0"><?=number_format($kecamatan)?></span>
+                            </div>
+                            <div class="col-auto">
+                                <div class="icon icon-shape bg-danger text-white rounded-circle shadow p-1 px-2">
+                                    <?php if(is_allowed(get_route_path('crud/index',['table'=>'kecamatan']),auth()->user->id)): ?>
+                                    <a href="<?=routeTo('crud/index',['table'=>'kecamatan'])?>"><i class="fas fa-chart-bar"></i></a>
+                                    <?php else: ?>
+                                    <i class="fas fa-chart-bar"></i>
+                                    <?php endif ?>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="mt-3 mb-0 text-muted text-sm">
+                            <span class="text-nowrap">Jumlah Total</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4 mb-2">
+                    <div class="card-body shadow-lg bg-white rounded">
+                        <div class="row">
+                            <div class="col">
+                                <h5 class="text-uppercase text-muted mb-0">Desa / Kelurahan</h5>
+                                <span class="h2 font-weight-bold mb-0"><?=number_format($kelurahan)?></span>
+                            </div>
+                            <div class="col-auto">
+                                <div class="icon icon-shape bg-danger text-white rounded-circle shadow p-1 px-2">
+                                    <?php if(is_allowed(get_route_path('crud/index',['table'=>'kelurahan']),auth()->user->id)): ?>
+                                    <a href="<?=routeTo('crud/index',['table'=>'kelurahan'])?>"><i class="fas fa-chart-bar"></i></a>
+                                    <?php else: ?>
+                                    <i class="fas fa-chart-bar"></i>
+                                    <?php endif ?>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="mt-3 mb-0 text-muted text-sm">
+                            <span class="text-nowrap">Jumlah Total</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4 mb-2">
+                    <div class="card-body shadow-lg bg-white rounded">
+                        <div class="row">
+                            <div class="col">
+                                <h5 class="text-uppercase text-muted mb-0">Dusun / Lingkungan</h5>
+                                <span class="h2 font-weight-bold mb-0"><?=number_format($lingkungan)?></span>
+                            </div>
+                            <div class="col-auto">
+                                <div class="icon icon-shape bg-danger text-white rounded-circle shadow p-1 px-2">
+                                    <?php if(is_allowed(get_route_path('crud/index',['table'=>'lingkungan']),auth()->user->id)): ?>
+                                    <a href="<?=routeTo('crud/index',['table'=>'lingkungan'])?>"><i class="fas fa-chart-bar"></i></a>
+                                    <?php else: ?>
+                                    <i class="fas fa-chart-bar"></i>
+                                    <?php endif ?>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="mt-3 mb-0 text-muted text-sm">
+                            <span class="text-nowrap">Jumlah Total</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="card-body shadow-lg bg-white rounded">
+                        <div class="row">
+                            <div class="col">
+                                <h5 class="text-uppercase text-muted mb-0">Penduduk</h5>
+                                <span class="h2 font-weight-bold mb-0"><?=number_format($penduduk)?></span>
+                            </div>
+                            <div class="col-auto">
+                                <div class="icon icon-shape bg-danger text-white rounded-circle shadow p-1 px-2">
+                                    <?php if(is_allowed(get_route_path('crud/index',['table'=>'penduduk']),auth()->user->id)): ?>
+                                    <a href="<?=routeTo('crud/index',['table'=>'penduduk'])?>"><i class="fas fa-chart-bar"></i></a>
+                                    <?php else: ?>
+                                    <i class="fas fa-chart-bar"></i>
+                                    <?php endif ?>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="mt-3 mb-0 text-muted text-sm">
+                            <span class="text-nowrap">Jumlah Total</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="card-body shadow-lg bg-white rounded">
+                        <div class="row">
+                            <div class="col">
+                                <h5 class="text-uppercase text-muted mb-0">Jumlah KK</h5>
+                                <span class="h2 font-weight-bold mb-0"><?=number_format($jumlah_kk)?></span>
+                            </div>
+                            <div class="col-auto">
+                                <div class="icon icon-shape bg-danger text-white rounded-circle shadow p-1 px-2">
+                                    <?php if(is_allowed(get_route_path('survey/index',[]),auth()->user->id)): ?>
+                                    <a href="<?=routeTo('survey/index',[])?>"><i class="fas fa-chart-bar"></i></a>
+                                    <?php else: ?>
+                                    <i class="fas fa-chart-bar"></i>
+                                    <?php endif ?>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="mt-3 mb-0 text-muted text-sm">
+                            <span class="text-nowrap">Jumlah Total</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script>
-        const controller = new AbortController();
-        // Make a request for a user with a given ID
-        setTimeout(() => {
-            axios.get('<?=routeTo('api/default/index')?>',{
-               signal: controller.signal
-            }).then(res => {
-                document.querySelector(".inner-dashboard").innerHTML = res.data
-            })
-        }, 1000);
-
-        window.onbeforeunload  = e => {
-            controller.abort()
-        }
-    </script>
 <?php load_templates('layouts/bottom') ?>

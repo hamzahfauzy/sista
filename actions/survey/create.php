@@ -64,6 +64,13 @@ if(request() == 'POST')
     if(isset($_FILES['berkas']) && !empty($_FILES['berkas']['name']))
     {
         $ext  = pathinfo($_FILES['berkas']['name'], PATHINFO_EXTENSION);
+        $exts = ['jpg','jpeg','pdf','png'];
+        if(in_array($ext,$exts))
+        {
+            set_flash_msg(['error'=>'Format file tidak sesuai (harus memiliki ekstensi seperti '.implode(',',$exts).')']);
+            header('location:'.routeTo('survey/create',$_GET));
+            die();
+        }
         $name = strtotime('now').'.'.$ext;
         $file = 'uploads/'.$name;
         copy($_FILES['berkas']['tmp_name'],$file);
@@ -91,17 +98,39 @@ $indikator = false;
 if(isset($_GET['filter']))
 {
     $id_keluarga = strtotime('now') + mt_rand(100,1000);
+    $periode = date('Y-m', strtotime($_GET['tanggal']));
     if(isset($_GET['nik_ayah']) && !empty($_GET['nik_ayah']))
     {
+        $checker = $db->exists('survey',['nilai'=>['LIKE','%'.$_GET['nik_ayah'].'%'],'tanggal'=>['LIKE','%'.$periode.'%']]);
+        if($checker)
+        {
+            set_flash_msg(['error'=>'NIK Ayah sudah di nilai']);
+            header('location:'.routeTo('survey/create'));
+            die();
+        }
         $db->update('penduduk',['no_kk'=>$id_keluarga,'sebagai'=>'Ayah'],['NIK'=>$_GET['nik_ayah']]);
     }
     if(isset($_GET['nik_ibu']) && !empty($_GET['nik_ibu']))
     {
+        $checker = $db->exists('survey',['nilai'=>['LIKE','%'.$_GET['nik_ibu'].'%','tanggal'=>['LIKE','%'.$periode.'%']]]);
+        if($checker)
+        {
+            set_flash_msg(['error'=>'NIK Ibu sudah di nilai']);
+            header('location:'.routeTo('survey/create'));
+            die();
+        }
         $db->update('penduduk',['no_kk'=>$id_keluarga,'sebagai'=>'Ibu'],['NIK'=>$_GET['nik_ibu']]);
     }
     if(isset($_GET['nik_anak']) && !empty($_GET['nik_anak']))
     {
         $NIKs = explode(',',$_GET['nik_anak']);
+        $checker = $db->exists('survey',['nilai'=>['REGEXP ',"'".implode('|',$NIKs)."'",'tanggal'=>['LIKE','%'.$periode.'%']]]);
+        if($checker)
+        {
+            set_flash_msg(['error'=>'NIK Anak sudah di nilai']);
+            header('location:'.routeTo('survey/create'));
+            die();
+        }
         foreach($NIKs as $nik)
             $db->update('penduduk',['no_kk'=>$id_keluarga,'sebagai'=>'Anak'],['NIK'=>$nik]);
     }

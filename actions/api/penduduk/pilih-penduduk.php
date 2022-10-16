@@ -22,6 +22,26 @@ if(!empty($search))
     $where .= " AND (NIK LIKE '%$search%' OR no_kk LIKE '%$search%' OR nama LIKE '%$search%' OR alamat LIKE '%$search%')";
 }
 
+$user = auth()->user;
+
+if(!in_array(get_role($user->id)->name,['administrator','bupati']))
+{
+
+    $petugas = $db->single('petugas',['user_id'=>$user->id]);
+    $kecamatan_id = $petugas->kecamatan_id;
+    if(!empty($kecamatan_id))
+    {
+        $str = "kecamatan_id=$petugas->kecamatan_id";
+        $where .= $where ? " AND ".$str : "WHERE ".$str;
+    }
+
+    else
+    {
+        $str = "kecamatan_id=0";
+        $where .= $where ? " AND ".$str : "WHERE ".$str;
+    }
+}
+
 $db->query = "SELECT COUNT(*) as TOTAL FROM $table $where $order_by";
 $total = $db->exec('single');
 $db->query = "SELECT * FROM $table $where $order_by LIMIT $start,$length";

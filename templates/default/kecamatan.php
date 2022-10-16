@@ -1,43 +1,3 @@
-<?php if(isset($_GET['print'])): ?>
-<style>
-table {
-  font-family: Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-table td, table th {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
-
-table tr:nth-child(even){background-color: #f2f2f2;}
-
-table tr:hover {background-color: #ddd;}
-
-table th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #04AA6D;
-  color: white;
-}
-.card-title {
-    text-align:center;
-    font-weight:bold;
-    font-size:20px;
-    margin-top:10px;
-    margin-bottom:10px;
-    display:block;
-}
-.card-title a {
-    text-decoration:none;
-    color:#000;
-}
-</style>
-<script>window.print()</script>
-<?php endif ?>
-<?php if(!isset($_GET['print'])): ?>
 <?php load_templates('layouts/top') ?>
     <div class="content">
         <div class="panel-header <?=config('theme')['panel_color']?>">
@@ -52,7 +12,7 @@ table th {
         </div>
         <div class="page-inner mt--5">
             <div class="row mt--2">
-                <div class="col-12 col-md-4 mb-2">
+                <div class="col-12 col-md-6 mb-2">
                     <div class="card-body shadow-lg bg-white rounded">
                         <div class="row">
                             <div class="col">
@@ -61,7 +21,11 @@ table th {
                             </div>
                             <div class="col-auto">
                                 <div class="icon icon-shape bg-danger text-white rounded-circle shadow p-1 px-2">
+                                    <?php if(is_allowed(get_route_path('crud/index',['table'=>'kelurahan']),auth()->user->id)): ?>
+                                    <a href="<?=routeTo('crud/index',['table'=>'kelurahan'])?>"><i class="fas fa-chart-bar"></i></a>
+                                    <?php else: ?>
                                     <i class="fas fa-chart-bar"></i>
+                                    <?php endif ?>
                                 </div>
                             </div>
                         </div>
@@ -70,7 +34,7 @@ table th {
                         </p>
                     </div>
                 </div>
-                <div class="col-12 col-md-4 mb-2">
+                <div class="col-12 col-md-6 mb-2">
                     <div class="card-body shadow-lg bg-white rounded">
                         <div class="row">
                             <div class="col">
@@ -79,7 +43,11 @@ table th {
                             </div>
                             <div class="col-auto">
                                 <div class="icon icon-shape bg-danger text-white rounded-circle shadow p-1 px-2">
+                                    <?php if(is_allowed(get_route_path('crud/index',['table'=>'lingkungan']),auth()->user->id)): ?>
+                                    <a href="<?=routeTo('crud/index',['table'=>'lingkungan'])?>"><i class="fas fa-chart-bar"></i></a>
+                                    <?php else: ?>
                                     <i class="fas fa-chart-bar"></i>
+                                    <?php endif ?>
                                 </div>
                             </div>
                         </div>
@@ -88,7 +56,7 @@ table th {
                         </p>
                     </div>
                 </div>
-                <div class="col-12 col-md-4 mb-2">
+                <div class="col-12 col-sm-6">
                     <div class="card-body shadow-lg bg-white rounded">
                         <div class="row">
                             <div class="col">
@@ -97,7 +65,11 @@ table th {
                             </div>
                             <div class="col-auto">
                                 <div class="icon icon-shape bg-danger text-white rounded-circle shadow p-1 px-2">
+                                    <?php if(is_allowed(get_route_path('crud/index',['table'=>'penduduk']),auth()->user->id)): ?>
+                                    <a href="<?=routeTo('crud/index',['table'=>'penduduk'])?>"><i class="fas fa-chart-bar"></i></a>
+                                    <?php else: ?>
                                     <i class="fas fa-chart-bar"></i>
+                                    <?php endif ?>
                                 </div>
                             </div>
                         </div>
@@ -115,7 +87,11 @@ table th {
                             </div>
                             <div class="col-auto">
                                 <div class="icon icon-shape bg-danger text-white rounded-circle shadow p-1 px-2">
+                                    <?php if(is_allowed(get_route_path('survey/index',[]),auth()->user->id)): ?>
+                                    <a href="<?=routeTo('survey/index',[])?>"><i class="fas fa-chart-bar"></i></a>
+                                    <?php else: ?>
                                     <i class="fas fa-chart-bar"></i>
+                                    <?php endif ?>
                                 </div>
                             </div>
                         </div>
@@ -124,132 +100,7 @@ table th {
                         </p>
                     </div>
                 </div>
-                <div class="col-12 col-md-6">
-                    <div class="card-body shadow-lg bg-white rounded">
-                        <div class="row">
-                            <div class="col">
-                                <h5 class="text-uppercase text-muted mb-0">IKS Kecamatan</h5>
-                                <span class="h2 font-weight-bold mb-0"><?=$iks_kecamatan->nama?></span>
-                            </div>
-                            <div class="col-auto">
-                                <div class="icon icon-shape bg-danger text-white rounded-circle shadow p-1 px-2">
-                                    <i class="fas fa-chart-bar"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <p class="mt-3 mb-0 text-muted text-sm">
-                            <span class="text-nowrap">Status</span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="page-inner">
-            <div class="row">
-                <div class="col-12">
-                    <div class="card full-height">
-                        <div class="card-body">
-                            <div class="filter">
-                                <form action="">
-                                    <input type="hidden" name="kecamatan_id" value="<?=$detail_kecamatan->id?>">
-                                    <div class="d-flex">
-                                        <?php $t = isset($_GET['tahun']) ? $_GET['tahun'] : date('Y'); ?>
-                                        <select name="tahun" id="" class="form-control">
-                                            <?php for($i=date('Y');$i>=1990;$i--): ?>
-                                            <option <?=$t==$i ? 'selected=""' : '' ?>><?=$i?></option>
-                                            <?php endfor ?>
-                                        </select>
-                                        &nbsp;
-                                        <button class="btn btn-success" name="view">Tampilkan</button>
-                                        &nbsp;
-                                        <button class="btn btn-success" name="print">Cetak</button>
-                                    </div>
-                                </form>
-                                <p></p>
-                            </div>
-<?php endif ?>
-                            <div class="card-title">Statistik Indeks Keluarga Sehat (IKS) Kecamatan <?=$detail_kecamatan->nama?></div>
-                            <br>
-                            <table class="table table-bordered">
-                                <tr>
-                                    <th>#</th>
-                                    <th>Desa / Kelurahan</th>
-                                    <th>Status</th>
-                                </tr>
-                                <?php foreach($iks as $index => $k): ?>
-                                <tr>
-                                    <td><?=$index+1?></td>
-                                    <td>
-                                        <a href="<?=routeTo('default/kelurahan',['tahun'=>$k->periode,'kelurahan_id'=>$k->id])?>"><?=$k->nama?></a>
-                                    </td>
-                                    <?php if(isset($k->kategori)): ?>
-                                    <td style="background:<?=$k->kategori->warna?>;color:#FFF;">
-                                        <?=$k->kategori->nama?>
-                                    <?php else: ?>
-                                    <td>
-                                        <i>Tidak ada survey</i>
-                                    <?php endif ?>
-                                    </td>
-                                </tr>
-                                <?php endforeach ?>
-                            </table>
-
-                            <div class="card-title">
-                            Rekapitulasi Data Profil Kesehatan Keluarga 
-                            Kecamatan <?=$detail_kecamatan->nama?></div>
-                            <br>
-
-                            <div class="table-responsive">
-                                <table class="table table-bordered tableFixHead">
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>INDIKATOR</th>
-                                            <?php foreach($iks as $k): ?>
-                                            <th>
-                                                <a href="<?=routeTo('default/kelurahan',['tahun'=>$k->periode,'kelurahan_id'=>$k->id])?>"><?=$k->nama?></a>
-                                            </th>
-                                            <?php endforeach ?>
-                                            <th>% Cakupan Kecamatan</th>
-                                        </tr>
-                                    </thead>
-                                    <?php foreach($indikator as $index => $i): ?>
-                                    <tr>
-                                        <td><?=$index+1?></td>
-                                        <td><?=$i->nama?></td>
-                                        <?php 
-                                        $total = 0;
-                                        foreach($iks as $k): 
-                                            $total += $k->iks_per_indikator?$k->iks_per_indikator[$index]['presentase']:0;
-                                        ?>
-                                        <td><?=$k->iks_per_indikator?$k->iks_per_indikator[$index]['presentase']:'-'?></td>
-                                        <?php 
-                                        endforeach;
-                                        $presentase = number_format( $total/count($iks), 3 );
-                                        $db->query = "SELECT * FROM kategori WHERE nilai_awal <= $presentase AND nilai_akhir >= $presentase";
-                                        $warna = $db->exec('single')->warna;
-                                        $presentase = $presentase*100 . '%';
-                                        ?>
-                                        <td style="color:#FFF;background:<?=$warna?>"><?=$presentase?></td>
-                                    </tr>
-                                    <?php endforeach ?>
-                                    <tr>
-                                        <td colspan="2">Indeks Keluarga Sehat IKS</td>
-                                        <?php foreach($iks as $k): ?>
-                                        <td style="color:#FFF;background:<?=$k->kategori->warna?>"><?=number_format($k->total_skor,3)?></td>
-                                        <?php endforeach ?>
-                                        <td style="color:#FFF;background:<?=$iks_kecamatan->warna?>"><?=$skor_iks_kecamatan?></td>
-                                    </tr>
-                                </table>
-                            </div>
-<?php if(!isset($_GET['print'])): ?>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
 <?php load_templates('layouts/bottom') ?>
-
-<?php endif ?>

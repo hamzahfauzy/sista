@@ -11,6 +11,7 @@ return [
         'indikator'  => 'crud/index?table=indikator',
     ],
     'survey' => 'survey/index',
+    'rekapitulasi' => 'rekapitulasi/index',
     'pengguna'    => [
         'petugas' => 'crud/index?table=petugas',
         'semua pengguna'     => 'users/index',

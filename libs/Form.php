@@ -109,6 +109,7 @@ class Form
 
     static function getData($type, $index)
     {
+        if(!$index) return '';
         if(substr($type,0,7) == 'options')
         {
             $types = explode(':',$type);
