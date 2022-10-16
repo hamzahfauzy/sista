@@ -28,6 +28,7 @@ foreach($all_kk as $k)
             $all_skor[] = $nilai->skor;
         endforeach;
         $nilai = array_count_values($all_skor);
+        if(empty($nilai)) continue;
         $question = array_sum($nilai) - ($nilai['N']??0);
         if(isset($nilai['N'])) unset($nilai['N']);
         $skor = ($nilai[1] / $question);

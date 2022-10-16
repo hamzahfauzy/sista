@@ -41,15 +41,12 @@ $iks = array_map(function($k) use ($db, $periode){
     $total_iks = 0;
     $db->query = "SELECT no_kk FROM penduduk WHERE kecamatan_id = $k->id GROUP BY no_kk";
     $p = $db->exec('all');
-    $all_kk = 0;
     if($p)
     foreach($p as $_p)
     {
         $survey = $db->single('survey',['tanggal' => ['LIKE','%'.$periode.'%'],'no_kk'=>$_p->no_kk]);
         if($survey && $survey->status == 'publish')
         {
-            $all_kk++;
-            $counter++;
             $survey->nilai = json_decode($survey->nilai);
             $survey->kategori = json_decode($survey->kategori);
             
@@ -58,9 +55,11 @@ $iks = array_map(function($k) use ($db, $periode){
                 $all_skor[] = $nilai->skor;
             endforeach;
             $nilai = array_count_values($all_skor);
+            if(empty($nilai)) continue;
             $question = array_sum($nilai) - ($nilai['N']??0);
             if(isset($nilai['N'])) unset($nilai['N']);
             $total_iks += ($nilai[1] / $question);
+            $counter++;
         }
     }
 

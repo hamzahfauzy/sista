@@ -34,7 +34,6 @@ $iks = array_map(function($k) use ($db, $periode, $penduduk){
         $survey = $db->single('survey',['tanggal' => ['LIKE','%'.$periode.'%'],'no_kk'=>$_p->no_kk]);
         if($survey && $survey->status == 'publish')
         {
-            $counter++;
             $survey->nilai = json_decode($survey->nilai);
             $survey->kategori = json_decode($survey->kategori);
             
@@ -44,9 +43,11 @@ $iks = array_map(function($k) use ($db, $periode, $penduduk){
                 $all_skor[] = $nilai->skor;
             endforeach;
             $nilai = array_count_values($all_skor);
+            if(empty($nilai)) continue;
             $question = array_sum($nilai) - ($nilai['N']??0);
             if(isset($nilai['N'])) unset($nilai['N']);
             $total_iks += ($nilai[1] / $question);
+            $counter++;
         }
     }
 
