@@ -55,10 +55,11 @@ $iks = array_map(function($k) use ($db, $periode){
                 $all_skor[] = $nilai->skor;
             endforeach;
             $nilai = array_count_values($all_skor);
-            if(empty($nilai)) continue;
             $question = array_sum($nilai) - ($nilai['N']??0);
             if(isset($nilai['N'])) unset($nilai['N']);
-            $total_iks += ($nilai[1] / $question);
+            $_total_nilai = ($nilai[1] / $question);
+            if(is_nan($_total_nilai)) continue;
+            $total_iks += $_total_nilai;
             $counter++;
         }
     }
