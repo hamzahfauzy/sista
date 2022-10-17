@@ -43,6 +43,12 @@ if(isset($auth->user) && !isset($auth->user->id) && $route != 'auth/logout')
     die();
 }
 
+if(isset($auth->user) && $route == 'auth/login')
+{
+    header("location:".routeTo('default/index'));
+    die();
+}
+
 // check if route is allowed
 if(isset($auth->user) && isset($auth->user->id) && !is_allowed($route, $auth->user->id) && $route != 'auth/logout')
 {
