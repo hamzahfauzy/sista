@@ -8,6 +8,8 @@ require '../libs/Database.php';
 require '../libs/Page.php';
 require '../libs/Validation.php';
 
+require '../vendor/autoload.php';
+
 $config = require '../config/main.php';
 
 function app($key = false)
