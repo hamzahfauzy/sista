@@ -25,7 +25,7 @@ if(!in_array(get_role($user->id)->name,['administrator','bupati']))
     }
 }
 
-$cachefile = 'cached/rekapitulasi/kecamatan-'.$kecamatan_id.'-'.$periode.'.html';
+$cachefile = 'cached/rekapitulasi/kecamatan-'.$kecamatan_id.'-'.$periode.(isset($_GET['print']) ? '-cetak' : '').'.html';
 if (file_exists($cachefile) && !isset($_GET['nocache'])) {
     readfile($cachefile);
     exit;

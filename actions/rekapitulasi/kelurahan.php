@@ -17,7 +17,7 @@ if(get_role($user->id)->name == 'admin kelurahan')
 
 $periode = isset($_GET['tahun']) ? $_GET['tahun'] : date('Y');
 
-$cachefile = 'cached/rekapitulasi/kelurahan-'.$kelurahan_id.'-'.$periode.'.html';
+$cachefile = 'cached/rekapitulasi/kelurahan-'.$kelurahan_id.'-'.$periode.(isset($_GET['print']) ? '-cetak' : '').'.html';
 if (file_exists($cachefile) && !isset($_GET['nocache'])) {
     readfile($cachefile);
     exit;

@@ -11,7 +11,7 @@ $penduduk = count($db->all('penduduk',['lingkungan_id'=>$_GET['lingkungan_id']])
 
 $periode = isset($_GET['tahun']) ? $_GET['tahun'] : date('Y');
 
-$cachefile = 'cached/rekapitulasi/lingkungan-'.$_GET['lingkungan_id'].'-'.$periode.'.html';
+$cachefile = 'cached/rekapitulasi/lingkungan-'.$_GET['lingkungan_id'].'-'.$periode.(isset($_GET['print']) ? '-cetak' : '').'.html';
 if (file_exists($cachefile) && !isset($_GET['nocache'])) {
     readfile($cachefile);
     exit;
