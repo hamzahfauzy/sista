@@ -1,5 +1,11 @@
 <?php
 
+$cachefile = 'cached/rekapitulasi/index.html';
+if (file_exists($cachefile) && !isset($_GET['nocache'])) {
+    readfile($cachefile);
+    exit;
+}
+
 Page::set_title('Rekapitulasi');
 
 $conn = conn();
@@ -92,4 +98,11 @@ $iks_kabupaten = number_format($iks_kabupaten / $jumlah_kk,3);
 $db->query = "SELECT * FROM kategori WHERE nilai_awal <= $iks_kabupaten AND nilai_akhir >= $iks_kabupaten";
 $iks_kabupaten = $db->exec('single');
 
-return compact('kecamatan','kelurahan','lingkungan','penduduk','iks','jumlah_kk','iks_kabupaten');
+// return compact('kecamatan','kelurahan','lingkungan','penduduk','iks','jumlah_kk','iks_kabupaten');
+ob_start();
+require '../templates/rekapitulasi/index.php';
+$cached = fopen($cachefile, 'w');
+fwrite($cached, ob_get_contents());
+fclose($cached);
+ob_end_flush(); // Send the output to the browser
+die();

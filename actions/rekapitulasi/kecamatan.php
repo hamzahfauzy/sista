@@ -1,9 +1,9 @@
 <?php
 
+Page::set_title('Rekapitulasi Kecamatan');
+
 $conn = conn();
 $db   = new Database($conn);
-
-Page::set_title('Rekapitulasi Kecamatan');
 
 $user = auth()->user;
 
@@ -23,6 +23,12 @@ if(!in_array(get_role($user->id)->name,['administrator','bupati']))
         ]));
         die();
     }
+}
+
+$cachefile = 'cached/rekapitulasi/kecamatan-'.$kecamatan_id.'.html';
+if (file_exists($cachefile) && !isset($_GET['nocache'])) {
+    readfile($cachefile);
+    exit;
 }
 
 $all_kelurahan = $db->all('kelurahan',['kecamatan_id' => $kecamatan_id]);
@@ -134,4 +140,12 @@ $iks_kecamatan = $db->exec('single');
 
 $indikator = $db->all('indikator');
 
-return compact('kelurahan','lingkungan','penduduk','iks','detail_kecamatan','iks_kecamatan','jumlah_kk','indikator','skor_iks_kecamatan','db');
+// return compact('kelurahan','lingkungan','penduduk','iks','detail_kecamatan','iks_kecamatan','jumlah_kk','indikator','skor_iks_kecamatan','db');
+
+ob_start();
+require '../templates/rekapitulasi/kecamatan.php';
+$cached = fopen($cachefile, 'w');
+fwrite($cached, ob_get_contents());
+fclose($cached);
+ob_end_flush(); // Send the output to the browser
+die();

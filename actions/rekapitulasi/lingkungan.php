@@ -1,9 +1,15 @@
 <?php
 
-$conn = conn();
-$db   = new Database($conn);
+$cachefile = 'cached/rekapitulasi/lingkungan-'.$_GET['lingkungan_id'].'.html';
+if (file_exists($cachefile) && !isset($_GET['nocache'])) {
+    readfile($cachefile);
+    exit;
+}
 
 Page::set_title('Rekapitulasi Lingkungan');
+
+$conn = conn();
+$db   = new Database($conn);
 
 $user = auth()->user;
 
@@ -58,4 +64,12 @@ $iks_lingkungan = $db->exec('single');
 
 $indikator = $db->all('indikator');
 
-return compact('penduduk','iks','detail_lingkungan','jumlah_kk','iks_lingkungan','indikator','all_survey','db','skor_iks_lingkungan');
+// return compact('penduduk','iks','detail_lingkungan','jumlah_kk','iks_lingkungan','indikator','all_survey','db','skor_iks_lingkungan');
+
+ob_start();
+require '../templates/rekapitulasi/lingkungan.php';
+$cached = fopen($cachefile, 'w');
+fwrite($cached, ob_get_contents());
+fclose($cached);
+ob_end_flush(); // Send the output to the browser
+die();

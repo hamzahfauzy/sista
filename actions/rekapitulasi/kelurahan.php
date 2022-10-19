@@ -1,9 +1,9 @@
 <?php
 
+Page::set_title('Rekapitulasi Kelurahan');
+
 $conn = conn();
 $db   = new Database($conn);
-
-Page::set_title('Rekapitulasi Kelurahan');
 
 $user = auth()->user;
 
@@ -13,6 +13,12 @@ if(get_role($user->id)->name == 'admin kelurahan')
 {
     $petugas = $db->single('petugas',['user_id'=>$user->id]);
     $kelurahan_id = $petugas->kelurahan_id;
+}
+
+$cachefile = 'cached/rekapitulasi/kelurahan-'.$kelurahan_id.'.html';
+if (file_exists($cachefile) && !isset($_GET['nocache'])) {
+    readfile($cachefile);
+    exit;
 }
 
 $all_lingkungan = $db->all('lingkungan',['kelurahan_id'=>$kelurahan_id]);
@@ -118,4 +124,11 @@ $iks_kelurahan = $db->exec('single');
 
 $indikator = $db->all('indikator');
 
-return compact('lingkungan','penduduk','iks','detail_kelurahan','jumlah_kk','iks_kelurahan','skor_iks_kelurahan','indikator','db');
+// return compact('lingkungan','penduduk','iks','detail_kelurahan','jumlah_kk','iks_kelurahan','skor_iks_kelurahan','indikator','db');
+ob_start();
+require '../templates/rekapitulasi/kelurahan.php';
+$cached = fopen($cachefile, 'w');
+fwrite($cached, ob_get_contents());
+fclose($cached);
+ob_end_flush(); // Send the output to the browser
+die();
