@@ -15,7 +15,9 @@ if(get_role($user->id)->name == 'admin kelurahan')
     $kelurahan_id = $petugas->kelurahan_id;
 }
 
-$cachefile = 'cached/rekapitulasi/kelurahan-'.$kelurahan_id.'.html';
+$periode = isset($_GET['tahun']) ? $_GET['tahun'] : date('Y');
+
+$cachefile = 'cached/rekapitulasi/kelurahan-'.$kelurahan_id.'-'.$periode.'.html';
 if (file_exists($cachefile) && !isset($_GET['nocache'])) {
     readfile($cachefile);
     exit;
@@ -26,7 +28,6 @@ $all_lingkungan = $db->all('lingkungan',['kelurahan_id'=>$kelurahan_id]);
 $lingkungan = count($all_lingkungan);
 $penduduk = $db->exists('penduduk',['kelurahan_id'=>$kelurahan_id]);
 
-$periode = isset($_GET['tahun']) ? $_GET['tahun'] : date('Y');
 
 $iks = array_map(function($k) use ($db, $periode, $penduduk){
     $counter = 0;

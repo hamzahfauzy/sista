@@ -1,11 +1,5 @@
 <?php
 
-$cachefile = 'cached/rekapitulasi/index.html';
-if (file_exists($cachefile) && !isset($_GET['nocache'])) {
-    readfile($cachefile);
-    exit;
-}
-
 Page::set_title('Rekapitulasi');
 
 $conn = conn();
@@ -14,6 +8,12 @@ $db   = new Database($conn);
 $user = auth()->user;
 
 $periode = isset($_GET['tahun']) ? $_GET['tahun'] : date('Y');
+
+$cachefile = 'cached/rekapitulasi/index-'.$periode.'.html';
+if (file_exists($cachefile) && !isset($_GET['nocache'])) {
+    readfile($cachefile);
+    exit;
+}
 
 if(!in_array(get_role($user->id)->name,['administrator','bupati']))
 {

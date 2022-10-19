@@ -1,11 +1,5 @@
 <?php
 
-$cachefile = 'cached/rekapitulasi/lingkungan-'.$_GET['lingkungan_id'].'.html';
-if (file_exists($cachefile) && !isset($_GET['nocache'])) {
-    readfile($cachefile);
-    exit;
-}
-
 Page::set_title('Rekapitulasi Lingkungan');
 
 $conn = conn();
@@ -16,6 +10,12 @@ $user = auth()->user;
 $penduduk = count($db->all('penduduk',['lingkungan_id'=>$_GET['lingkungan_id']]));
 
 $periode = isset($_GET['tahun']) ? $_GET['tahun'] : date('Y');
+
+$cachefile = 'cached/rekapitulasi/lingkungan-'.$_GET['lingkungan_id'].'-'.$periode.'.html';
+if (file_exists($cachefile) && !isset($_GET['nocache'])) {
+    readfile($cachefile);
+    exit;
+}
 
 $db->query = "SELECT no_kk FROM penduduk WHERE lingkungan_id = $_GET[lingkungan_id] GROUP BY no_kk";
 $all_kk = $db->exec('all');
