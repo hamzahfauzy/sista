@@ -8,11 +8,19 @@ $success_msg = get_flash_msg('success');
 
 if(request() == 'POST')
 {
-    $db->update('application',$_POST['app'],[
-        'id' => $data->id
-    ]);
-
-    set_flash_msg(['success'=>'Detail Aplikasi berhasil diupdate']);
+    if(isset($_POST['submit_app']))
+    {
+        $db->update('application',$_POST['app'],[
+            'id' => $data->id
+        ]);
+    
+        set_flash_msg(['success'=>'Detail Aplikasi berhasil diupdate']);
+    }
+    else if(isset($_POST['submit_cache']))
+    {
+        array_map( 'unlink', array_filter((array) glob("cached/rekapitulasi/*") ) );
+        set_flash_msg(['success'=>'Rekapitulasi berhasil di refresh']);
+    }
     header('location:'.routeTo('application/index'));
     die();
 }

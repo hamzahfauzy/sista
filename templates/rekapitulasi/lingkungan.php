@@ -168,7 +168,7 @@ table th {
                                             $skor += $survey->total_skor; 
                                         }
                                         ?>
-                                        <td><?=number_format(($skor/(count($all_survey)-1))*100,3)?></td>
+                                        <td><?=number_format(($skor/(count($all_survey)-1))*100,2)?>%</td>
                                         <?php endif ?>
                                         <?php endif ?>
                                         <td colspan="3"></td>
