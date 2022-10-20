@@ -134,7 +134,7 @@ table th {
                                         foreach($iks as $k): 
                                             $total += $k->iks_per_indikator?$k->iks_per_indikator[$index]['presentase']:0;
                                         ?>
-                                        <td><?=$k->iks_per_indikator?$k->iks_per_indikator[$index]['presentase']:'-'?></td>
+                                        <td><?=$k->iks_per_indikator?number_format($k->iks_per_indikator[$index]['presentase']*100,2):'-'?></td>
                                         <?php 
                                         endforeach;
                                         $presentase = number_format( $total/count($iks), 3 );
