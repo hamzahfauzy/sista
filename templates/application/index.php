@@ -49,14 +49,14 @@
             </div>
         </div>
 
-        <div class="page-inner mt-5">
+        <div class="page-inner mt--5">
             <div class="row row-card-no-pd">
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-body">
                             <form action="" method="post" onsubmit="if(confirm('Apakah anda yakin akan merefresh semua rekapitulasi ?')){return true}else{return false}">
                                 <div class="form-group">
-                                    <button class="btn btn-success" name="submit_cache">Refresh Rekapitulasi</button>
+                                    <button class="btn btn-danger" name="submit_cache">Refresh Rekapitulasi</button>
                                 </div>
                             </form>
                         </div>
