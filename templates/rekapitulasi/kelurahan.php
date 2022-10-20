@@ -148,9 +148,9 @@ table th {
                                     <tr>
                                         <td colspan="2">Indeks Keluarga Sehat IKS</td>
                                         <?php foreach($iks as $k): ?>
-                                        <td style="color:#FFF;background:<?=$k->kategori->warna?>"><?=number_format($k->total_skor,3)?></td>
+                                        <td style="color:#FFF;background:<?=$k->kategori->warna?>"><?=number_format($k->total_skor*100,2)?>%</td>
                                         <?php endforeach ?>
-                                        <td style="color:#FFF;background:<?=$iks_kelurahan->warna?>"><?=$skor_iks_kelurahan?></td>
+                                        <td style="color:#FFF;background:<?=$iks_kelurahan->warna?>"><?=number_format($skor_iks_kelurahan*100,2)?>%</td>
                                     </tr>
                                 </table>
                             </div>

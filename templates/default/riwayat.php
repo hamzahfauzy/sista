@@ -27,11 +27,13 @@
 <body>
     <div class="container">
         <center>
-            <img src="<?=asset('assets/img/main-logo.png')?>" alt="" width="200px">
-            <h2>DATA RIWAYAT INDEK KELUARGA SEHAT (<?=$penduduk->nama?>)</h2>
+            <img src="<?=asset('assets/img/main-logo.png')?>" alt="" width="150px">
+            <h2>DATA RIWAYAT INDEKS KELUARGA SEHAT (<?=$penduduk->nama?>)</h2>
+            <a href="<?=routeTo('')?>">Kembali ke halaman awal</a>
+            <p></p>
         </center>
 
-        <table class="table table-bordered">
+        <table class="table table-bordered table-striped">
             <tr>
                 <th>ID</th>
                 <th>Tanggal Survey</th>

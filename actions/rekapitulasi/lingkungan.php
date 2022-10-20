@@ -36,9 +36,8 @@ foreach($all_kk as $k)
         $nilai = array_count_values($all_skor);
         $question = array_sum($nilai) - ($nilai['N']??0);
         if(isset($nilai['N'])) unset($nilai['N']);
-        $_total_nilai = ($nilai[1] / $question);
-        if(is_nan($_total_nilai)) continue;
-        $total_iks += $_total_nilai;
+        $skor = ($nilai[1] / $question);
+        if(is_nan($skor)) continue;
         $survey->total_skor = $skor;
         $all_survey[] = $survey;
 
