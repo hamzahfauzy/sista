@@ -8,6 +8,8 @@ if(startWith($route,'default/riwayat')) return true;
 
 if(startWith($route,'default/download')) return true;
 
+if(startWith($route,'default/rekapitulasi')) return true;
+
 if(startWith($route,'app/db-')) return true;
 
 if(startWith($route,'api'))

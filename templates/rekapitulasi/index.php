@@ -55,7 +55,7 @@ table th {
                 <div class="col-12">
                     <div class="card full-height">
                         <div class="card-body">
-                            <div class="card-title">Statistik Indeks Keluarga Sehat (IKS) Kabupaten</div>
+                            <div class="card-title">Rekapitulasi Indeks Keluarga Sehat (IKS) Kabupaten</div>
 
                             <div class="filter">
                                 <form action="">
