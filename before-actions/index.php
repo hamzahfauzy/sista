@@ -12,10 +12,14 @@ if(startWith($route,'app/db-')) return true;
 
 if(startWith($route,'api'))
 {
+
     header("Access-Control-Allow-Origin: *");
     header("Access-Control-Allow-Headers: *");
     header("Access-Control-Allow-Methods: *");
-    header("Content-Type: application/json");
+    if(!startWith($route,'api/rekapitulasi'))
+    {
+        header("Content-Type: application/json");
+    }
     return true;
 }
 

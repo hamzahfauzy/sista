@@ -27,7 +27,7 @@
 <body>
     <div class="container">
         <center>
-            <img src="<?=asset('assets/img/main-logo.png')?>" alt="" width="150px">
+            <img src="<?=asset('assets/img/main-logo.png')?>" alt="" width="100px">
             <h2>DATA RIWAYAT INDEKS KELUARGA SEHAT (<?=$penduduk->nama?>)</h2>
             <a href="<?=routeTo('')?>">Kembali ke halaman awal</a>
             <p></p>

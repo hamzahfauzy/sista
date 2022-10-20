@@ -7,6 +7,11 @@
       <link rel="icon" href="<?=asset('assets/img/main-logo.png')?>" sizes="32x32" />
       <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,500,600,700,700i,800,800i,900,900i" rel="stylesheet">
       <link href="<?=asset('assets/css/style.css')?>" rel="stylesheet">
+      <style>
+        a {
+            text-decoration:none;
+        }
+      </style>
    </head>
    <body>
         <div class="preloader" id="preloader">
@@ -34,7 +39,8 @@
                 <p>Data riwayat indeks keluarga sehat tidak ditemukan.</p>
             </div>
             <?php endif ?>
-            <p style="color: white; margin-top: 20px;">Surveyor <a href="<?=routeTo('auth/login')?>" style="font-weight: bold; color: #31ce36;">Login Disini</a> </p> 
+            <p style="color: white; margin-top: 20px;">Surveyor <a href="<?=routeTo('auth/login')?>" style="font-weight: bold; color: #31ce36;">Login Disini</a></p> 
+            <p style="color: white; margin-top: 20px;"><a href="<?=routeTo('default/rekapitulasi')?>" style="font-weight: bold; color: #31ce36;">Rekapitulasi Indeks Keluarga Sehat</a></p> 
         </div>
         <script src="<?=asset('assets/js/main.js')?>"></script>
    </body>

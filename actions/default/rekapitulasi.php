@@ -6,7 +6,7 @@ $db   = new Database($conn);
 $kecamatan = $db->all('kecamatan');
 $content = "";
 
-if(isset($_GET['tampil']) || isset($_GET['print']))
+if(isset($_GET['tampil']))
 {
     if(isset($_GET['kecamatan_id']) && $_GET['kecamatan_id'] != '*')
     {

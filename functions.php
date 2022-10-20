@@ -7,6 +7,7 @@ require '../libs/Session.php';
 require '../libs/Database.php';
 require '../libs/Page.php';
 require '../libs/Validation.php';
+require '../libs/Rekapitulasi.php';
 
 require '../vendor/autoload.php';
 
