@@ -159,7 +159,7 @@ table th {
                                         <td colspan="2">Indeks Keluarga Sehat IKS</td>
                                         <?php if($all_survey): ?>
                                         <?php $survey = $all_survey[0]; ?>
-                                        <td style="color:#FFF;<?=isset($survey->kategori)?'background:'.$survey->kategori->warna:''?>"><?=number_format($survey->total_skor,3)?></td>
+                                        <td style="color:#FFF;<?=isset($survey->kategori)?'background:'.$survey->kategori->warna:''?>"><?=number_format($survey->total_skor*100,2)?></td>
                                         <?php 
                                         if(isset($all_survey[1])): 
                                         $skor = 0; 
@@ -172,7 +172,7 @@ table th {
                                         <?php endif ?>
                                         <?php endif ?>
                                         <td colspan="3"></td>
-                                        <td style="color:#FFF;background:<?=$iks_lingkungan->warna?>"><?=$skor_iks_lingkungan?></td>
+                                        <td style="color:#FFF;background:<?=$iks_lingkungan->warna?>"><?=number_format($skor_iks_lingkungan*100,2)?></td>
                                     </tr>
                                 </table>
                             </div>
