@@ -189,11 +189,10 @@ opacity:1;
 	font-size: 14px;
 	font-weight: 600;
 	height: 52px;
-	position: absolute;
-	top: 0;
-	right: 0;
 	padding: 0 20px;
 	text-transform: uppercase;
+	margin-top:10px;
+	width:100%;
 	z-index: 11;
 }
 

@@ -23,11 +23,13 @@
             </div>
             <div class="cta-box">
                 <h1>Indeks Keluarga <span class="highlight">Sehat</span></h1>
-                <p>Masukkan NIK anda untuk mengetahui riwayat indeks keluarga sehat</p>
             </div>
-            <form action="" class="newsletter" name="nik">
-                <input type="text" class="form-field" name="nik" placeholder="Masukkan NIK Anda" value="<?=$nik?>">
-                <button type="submit" class="btn-main">Cari</button>
+            <form action="<?=routeTo('auth/login')?>" class="newsletter" name="nik" method="post">
+                <label for="">NIK</label>
+                <input type="tel" class="form-field" name="username" placeholder="Masukkan NIK Anda">
+                <label for="">Kata Sandi</label>
+                <input type="password" class="form-field" name="password" placeholder="Masukkan Password Anda">
+                <button type="submit" class="btn-main">Masuk</button>
             </form>
             <?php if($nik && $data): ?>
             <div class="result success">
@@ -39,7 +41,7 @@
                 <p>Data riwayat indeks keluarga sehat tidak ditemukan.</p>
             </div>
             <?php endif ?>
-            <p style="color: white; margin-top: 20px;"><a href="<?=routeTo('auth/login')?>" style="font-weight: bold; color: #31ce36;">Daftar</a> Sebagai Penduduk atau <a href="<?=routeTo('auth/login')?>" style="font-weight: bold; color: #31ce36;">Login</a> Sebagai Surveyor</p> 
+            <p style="color: white; margin-top: 20px;"><a href="<?=routeTo('auth/register')?>" style="font-weight: bold; color: #31ce36;">Daftar</a> Sebagai Penduduk atau <a href="<?=routeTo('auth/login')?>" style="font-weight: bold; color: #31ce36;">Login</a> Sebagai Surveyor</p> 
             <p style="color: white; margin-top: 20px;"><a href="<?=routeTo('default/rekapitulasi')?>" style="font-weight: bold; color: #31ce36;">Rekapitulasi Indeks Keluarga Sehat</a></p> 
         </div>
         <script src="<?=asset('assets/js/main.js')?>"></script>
