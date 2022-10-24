@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<title>Masuk</title>
+	<title>Daftar</title>
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
 	<link rel="icon" href="<?= routeTo('assets/img/main-logo.png')?>" type="image/x-icon"/>
 
@@ -43,12 +43,14 @@
 
                         <form action="" method="post">
                             <div class="form-group">
-                                <label for="">Nama Pengguna</label>
+                                <label for="">NIK</label>
                                 <input type="text" name="username" id="" class="form-control mb-2" placeholder="Nama Pengguna Disini...">
+                                <label for="">Nama</label>
+                                <input type="text" name="name" id="" class="form-control mb-2" placeholder="Nama Pengguna Disini...">
                                 <label for="">Kata Sandi</label>
                                 <input type="password" name="password" id="" class="form-control mb-2" placeholder="Kata Sandi Disini...">
-                                <button class="btn btn-success btn-block btn-round">Masuk</button>
-                                <center>atau <a href="<?=routeTo('auth/register')?>">Daftar</a> sebagai penduduk</center>
+                                <button class="btn btn-success btn-block btn-round">Daftar</button>
+                                <center>atau <a href="<?=routeTo('auth/login')?>">Login</a></center>
                             </div>
                         </form>
                     </div>

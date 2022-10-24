@@ -1,6 +1,6 @@
 <?php
 
-if(!isset($_GET['nik']))
+if(!isset($_GET['nik']) || $_GET['nik'] != auth()->user->username)
 {
     header('location:'.routeTo('default/landing'));
     die();

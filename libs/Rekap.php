@@ -1,6 +1,6 @@
 <?php
 
-class Rekapitulasi {
+class Rekap {
 
     function __construct()
     {
@@ -13,80 +13,31 @@ class Rekapitulasi {
         $db = $this->db;
         $periode = isset($_GET['tahun']) ? $_GET['tahun'] : date('Y');
 
-        $cachefile = 'cached/rekapitulasi/index-'.$periode.'.html';
-        if (file_exists($cachefile) && !isset($_GET['nocache'])) {
-            ob_start();
-            readfile($cachefile);
-            return ob_get_clean();
+        $iks = [];
+        $kecamatan = $db->all('kecamatan');
+        foreach($kecamatan as $kec)
+        {
+            $iks_kec = (new Iks)->byKecamatan($periode, $kec->id);
+            $db->query = "SELECT * FROM kategori WHERE nilai_awal <= $iks_kec AND nilai_akhir >= $iks_kec";
+            $iks_kategori = $db->exec('single');
+
+            $jumlah_kk = $db->exists('penduduk',['kecamatan_id'=>$kec->id]);
+            $kk_nilai = $db->exists('iks_penduduk',['status'=>'publish','tahun'=>$periode,'kecamatan_id'=>$kec->id]);
+
+            $data_iks = [
+                'nama' => $kec->nama,
+                'jumlah_kk' => number_format($jumlah_kk),
+                'kk_nilai' => number_format($kk_nilai),
+                'kk_belum_nilai' => number_format($jumlah_kk-$kk_nilai),
+                'kategori' => $iks_kategori
+            ];
+
+            $iks[] = json_decode(json_encode($data_iks));
         }
 
-        $all_kecamatan = $db->all('kecamatan');
-        $penduduk = $db->exists('penduduk');
-
-        $iks = array_map(function($k) use ($db, $periode){
-            $counter = 0;
-            $total_iks = 0;
-            $db->query = "SELECT no_kk FROM penduduk WHERE kecamatan_id = $k->id GROUP BY no_kk";
-            $p = $db->exec('all');
-            if($p)
-            foreach($p as $_p)
-            {
-                $survey = $db->single('survey',['tanggal' => ['LIKE','%'.$periode.'%'],'no_kk'=>$_p->no_kk]);
-                if($survey && $survey->status == 'publish')
-                {
-                    $survey->nilai = json_decode($survey->nilai);
-                    $survey->kategori = json_decode($survey->kategori);
-                    
-                    $all_skor = [];
-                    foreach($survey->nilai as $nilai): 
-                        $all_skor[] = $nilai->skor;
-                    endforeach;
-                    $nilai = array_count_values($all_skor);
-                    $question = array_sum($nilai) - ($nilai['N']??0);
-                    if(isset($nilai['N'])) unset($nilai['N']);
-                    if($nilai[1] == 0 || $question == 0) continue;
-                    $_total_nilai = ($nilai[1] / $question);
-                    if(is_nan($_total_nilai)) continue;
-                    $total_iks += $_total_nilai;
-                    $counter++;
-                }
-            }
-
-            if($counter)
-            {
-                $skor = $total_iks/$counter;
-                $db->query = "SELECT * FROM kategori WHERE nilai_awal <= $skor AND nilai_akhir >= $skor";
-                $k->kategori = $db->exec('single');
-                $k->total_skor = $skor;
-            }
-            else
-            {
-                $k->total_skor = 0;
-            }
-            $k->periode = $periode;
-            $k->jumlah_kk = count($p);
-            $k->kk_nilai = $counter;
-            $k->kk_belum_nilai = $k->jumlah_kk - $k->kk_nilai;
-            return $k;
-        }, $all_kecamatan);
-
-        $db->query = "SELECT no_kk FROM penduduk GROUP BY no_kk";
-        $jumlah_kk = $db->exec('exists');
-
-        $iks_kabupaten = (array) $iks;
-        $iks_kabupaten = array_sum(array_column($iks_kabupaten,'total_skor'));
-        $iks_kabupaten = number_format($iks_kabupaten / $jumlah_kk,3);
-
-        $db->query = "SELECT * FROM kategori WHERE nilai_awal <= $iks_kabupaten AND nilai_akhir >= $iks_kabupaten";
-        $iks_kabupaten = $db->exec('single');
-
-        // return compact('kecamatan','kelurahan','lingkungan','penduduk','iks','jumlah_kk','iks_kabupaten');
         ob_start();
         require '../templates/rekapitulasi/tpl/index.php';
         $content = ob_get_clean();
-        $cached = fopen($cachefile, 'w');
-        fwrite($cached, $content);
-        fclose($cached);
         return $content;
     }
 

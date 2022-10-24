@@ -2,6 +2,12 @@
 // reference the Dompdf namespace
 use Dompdf\Dompdf;
 
+if(!isset($_GET['nik']) || $_GET['nik'] != auth()->user->username)
+{
+    header('location:'.routeTo('default/landing'));
+    die();
+}
+
 $conn = conn();
 $db   = new Database($conn);
 

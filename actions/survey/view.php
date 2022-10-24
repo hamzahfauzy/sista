@@ -10,6 +10,7 @@ $data->nilai = json_decode($data->nilai);
 $data->kategori = json_decode($data->kategori);
 
 $rekap_nilai = [];
+$_penduduk = [];
 $skor_in_count = 0;
 $total_skor = 0;
 foreach($data->nilai as $nilai)
@@ -19,6 +20,7 @@ foreach($data->nilai as $nilai)
     $jawaban_penduduk = [];
     foreach($nilai->rekap_penduduk as $penduduk)
     {
+        $_penduduk = $penduduk->penduduk;
         $rekap_penduduk[] = [
             'penduduk' => $penduduk->penduduk,
             'jawaban'  => $penduduk->jawaban 
@@ -44,6 +46,35 @@ foreach($data->nilai as $nilai)
         $skor = 'N';
     }
 
+    $iks_indikator = $db->single('iks_indikator',[
+        'tahun'=>date('Y',strtotime($data->tanggal)),
+        'no_kk' => $data->no_kk,
+        'indikator_id' => $nilai->indikator->id
+    ]);
+    if($iks_indikator)
+    {
+        $db->update('iks_indikator',[
+            'skor' => $skor,
+            'status' => $data->status,
+        ],[
+            'tahun'=>date('Y',strtotime($data->tanggal)),
+            'no_kk' => $data->no_kk,
+            'indikator_id' => $nilai->indikator->id
+        ]);
+    }
+    else
+    {
+        $db->insert('iks_indikator',[
+            'tahun' => date('Y',strtotime($data->tanggal)),
+            'no_kk' => $data->no_kk,
+            'indikator_id' => $nilai->indikator->id,
+            'kecamatan_id' => $_penduduk->kecamatan_id,
+            'kelurahan_id' => $_penduduk->kelurahan_id,
+            'lingkungan_id' => $_penduduk->lingkungan_id,
+            'skor' => $skor,
+        ]);
+    }
+
     $rekap_nilai[] = [
         'indikator' => $indikator,
         'rekap_penduduk'  => $rekap_penduduk,
@@ -52,6 +83,7 @@ foreach($data->nilai as $nilai)
 }
 
 $skor = in_array(0,[$total_skor,$skor_in_count]) ? 0 : $total_skor / $skor_in_count;
+$skor = number_format($skor, 3);
 $db->query = "SELECT * FROM kategori WHERE nilai_awal <= $skor AND nilai_akhir >= $skor";
 $status = $db->exec('single');
 
@@ -62,5 +94,31 @@ $data = $db->update('survey',[
 
 $data->nilai = json_decode($data->nilai);
 $data->kategori = json_decode($data->kategori);
+
+$iks_penduduk = $db->single('iks_penduduk',[
+    'tahun'=>date('Y',strtotime($data->tanggal)),
+    'no_kk' => $data->no_kk
+]);
+if($iks_penduduk)
+{
+    $db->update('iks_penduduk',[
+        'skor' => $skor,
+        'status' => $data->status,
+    ],[
+        'tahun'=>date('Y',strtotime($data->tanggal)),
+        'no_kk' => $data->no_kk
+    ]);
+}
+else
+{
+    $db->insert('iks_penduduk',[
+        'tahun' => date('Y',strtotime($data->tanggal)),
+        'no_kk' => $data->no_kk,
+        'kecamatan_id' => $_penduduk->kecamatan_id,
+        'kelurahan_id' => $_penduduk->kelurahan_id,
+        'lingkungan_id' => $_penduduk->lingkungan_id,
+        'skor' => $skor,
+    ]);
+}
 
 return compact('data');

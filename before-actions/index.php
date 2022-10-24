@@ -4,9 +4,11 @@ $route = get_route();
 
 if(startWith($route,'default/landing')) return true;
 
-if(startWith($route,'default/riwayat')) return true;
+// if(startWith($route,'default/riwayat')) return true;
 
-if(startWith($route,'default/download')) return true;
+// if(startWith($route,'default/download')) return true;
+
+if(startWith($route,'auth/register')) return true;
 
 if(startWith($route,'default/rekapitulasi')) return true;
 

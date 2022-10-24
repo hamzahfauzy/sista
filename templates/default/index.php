@@ -78,7 +78,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="col-12 col-md-6">
+                <div class="col-12 col-md-4">
                     <div class="card-body shadow-lg bg-white rounded">
                         <div class="row">
                             <div class="col">
@@ -100,7 +100,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="col-12 col-md-6">
+                <div class="col-12 col-md-4">
                     <div class="card-body shadow-lg bg-white rounded">
                         <div class="row">
                             <div class="col">
@@ -119,6 +119,28 @@
                         </div>
                         <p class="mt-3 mb-0 text-muted text-sm">
                             <span class="text-nowrap">Jumlah Total</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="card-body shadow-lg bg-white rounded">
+                        <div class="row">
+                            <div class="col">
+                                <h5 class="text-uppercase text-muted mb-0">IKS Kabupaten Tahun <?=$periode?></h5>
+                                <span class="h2 font-weight-bold mb-0"><?=$kategori_iks->nama?> (<?=$iks*100?>%)</span>
+                            </div>
+                            <div class="col-auto">
+                                <div class="icon icon-shape bg-danger text-white rounded-circle shadow p-1 px-2">
+                                    <i class="fas fa-chart-bar"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="mt-3 mb-0 text-muted text-sm">
+                            <select onchange="location='<?=routeTo('default/index')?>?tahun='+this.value" class="form-control">
+                                <?php for($i=date('Y');$i>=1990;$i--): ?>
+                                <option value="<?=$i?>" <?=$periode==$i?'selected=""':''?>><?=$i?></option>
+                                <?php endfor ?>
+                            </select>
                         </p>
                     </div>
                 </div>

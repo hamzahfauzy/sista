@@ -16,7 +16,14 @@ if(request() == 'POST')
     if($user)
     {
         Session::set(['user_id'=>$user->id]);
-        header('location:'.routeTo('default/index'));
+        if(get_role($user->id)->name=='penduduk')
+        {
+            header('location:'.routeTo('default/riwayat',['nik'=>$user->username]));
+        }
+        else
+        {
+            header('location:'.routeTo('default/index'));
+        }
         die();
     }
 

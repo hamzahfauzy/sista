@@ -28,5 +28,8 @@ $lingkungan = $db->exists('lingkungan');
 $penduduk = $db->exists('penduduk');
 $db->query = "SELECT no_kk FROM penduduk WHERE no_kk IS NOT NULL or no_kk != '' GROUP BY no_kk";
 $jumlah_kk = $db->exec('exists');
+$iks = (new Iks)->all($periode);
+$db->query = "SELECT * FROM kategori WHERE nilai_awal <= $iks AND nilai_akhir >= $iks";
+$kategori_iks = $db->exec('single');
 
-return compact('kecamatan','kelurahan','lingkungan','penduduk','jumlah_kk');
+return compact('kecamatan','kelurahan','lingkungan','penduduk','jumlah_kk','iks','periode','kategori_iks');

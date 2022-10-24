@@ -14,19 +14,19 @@ if(isset($_GET['tampil']) || isset($_GET['print']))
         {
             if(isset($_GET['lingkungan_id']) && $_GET['lingkungan_id'] != '*')
             {
-                $content = (new Rekap)->lingkungan();
+                $content = (new Rekapitulasi)->lingkungan();
                 return compact('kecamatan','content');
             }
 
-            $content = (new Rekap)->kelurahan();
+            $content = (new Rekapitulasi)->kelurahan();
             return compact('kecamatan','content');
         }
 
-        $content = (new Rekap)->kecamatan();
+        $content = (new Rekapitulasi)->kecamatan();
         return compact('kecamatan','content');
     }
 
-    $content = (new Rekap)->index();
+    $content = (new Rekapitulasi)->index();
     return compact('kecamatan','content');
 }
 
