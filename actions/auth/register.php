@@ -8,6 +8,18 @@ if(request() == 'POST')
     $conn  = conn();
     $db    = new Database($conn);
 
+    $penduduk = $db->exists('penduduk',[
+        'NIK' => $_POST['username'],
+        'nama' => $_POST['name'],
+    ]);
+
+    if(!$penduduk)
+    {
+        set_flash_msg(['error'=>'Pendaftaran Gagal! NIK dan Nama tidak sesuai dengan data kependudukan']);
+        header('location:'.routeTo('auth/register'));
+        die();
+    }
+
     $user = $db->single('users',[
         'username' => $_POST['username'],
     ]);
