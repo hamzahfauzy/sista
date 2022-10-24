@@ -10,31 +10,7 @@ $actions = [];
 
 $user = auth()->user;
 
-$data = $db->all($table);
-if(!in_array(get_role($user->id)->name,['administrator','bupati']))
-{
-    $petugas = $db->single('petugas',['user_id' => $user->id]);
-    $db->query = "SELECT no_kk FROM penduduk WHERE kecamatan_id = $petugas->kecamatan_id GROUP BY no_kk";
-    $all_kk = $db->exec('all');
-    $all_kk = array_map(function($a){
-        return $a->no_kk;
-    }, $all_kk);
-    if($all_kk)
-    {
-        $kk = "('".implode("','",$all_kk)."')";
-        $params = ['no_kk' => ['IN',$kk]];
-
-        if(get_role($user->id)->name == 'surveyor')
-        {
-            $params['user_id'] = $user->id;
-        }
-        $data = $db->all($table,$params);
-    }
-    else
-    {
-        $data = [];
-    }
-}
+$data = [];
 
 return [
     'datas' => $data,
