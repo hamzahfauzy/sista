@@ -78,8 +78,9 @@ class Iks
 
         if($iks)
         {
+            $num_of_kec = $db->exists('kecamatan');
             $penduduk = $db->exists('penduduk');
-            return number_format(($iks->hasil_iks/$penduduk)*100,3);
+            return number_format(($iks->hasil_iks/$penduduk)/$num_of_kec*100,3);
         }
 
         return 0;
