@@ -50,6 +50,7 @@
                                 <label for="">Kata Sandi</label>
                                 <input type="password" name="password" id="" class="form-control mb-2" placeholder="Kata Sandi Disini...">
                                 <button class="btn btn-success btn-block btn-round">Daftar</button>
+                                <br>
                                 <center>atau <a href="<?=routeTo('auth/login')?>">Login</a></center>
                             </div>
                         </form>
