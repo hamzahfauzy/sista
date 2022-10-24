@@ -61,7 +61,7 @@ class Iks
         $db->query = "SELECT SUM(skor) as hasil_iks FROM iks_penduduk WHERE status='publish' AND tahun='$tahun' AND kecamatan_id=$kecamatan_id";
         $iks = $db->exec('single');
 
-        if($iks)
+        if($iks && !empty($iks))
         {
             $penduduk = $db->exists('penduduk',['kecamatan_id'=>$kecamatan_id]);
             return number_format(($iks->hasil_iks/$penduduk)*100,3);
