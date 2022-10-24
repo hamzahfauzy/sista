@@ -139,8 +139,9 @@ class Rekap {
                 }
                 else
                 {
+                    $_presentase = ceil( $total_1 /  $pembagi);
                     $presentase = number_format( $total_1 /  $pembagi, 3 );
-                    $db->query = "SELECT * FROM kategori WHERE nilai_awal <= $presentase AND nilai_akhir >= $presentase";
+                    $db->query = "SELECT * FROM kategori WHERE nilai_awal <= $_presentase AND nilai_akhir >= $_presentase";
                     $warna = $db->exec('single')->warna;
                 }
 
@@ -246,7 +247,7 @@ class Rekap {
             if($counter)
             {
                 $skor = $total_iks/count($p);
-                $db->query = "SELECT * FROM kategori WHERE nilai_awal <= $skor AND nilai_akhir >= $skor";
+                $db->query = "SELECT * FROM kategori WHERE nilai_awal <= ".ceil($skor)." AND nilai_akhir >= ".ceil($skor);
                 $k->kategori = $db->exec('single');
                 $k->total_skor = $skor;
             }
@@ -273,8 +274,9 @@ class Rekap {
                 }
                 else
                 {
+                    $_presentase = ceil( $total_1 /  $pembagi);
                     $presentase = number_format( $total_1 /  $pembagi, 3 );
-                    $db->query = "SELECT * FROM kategori WHERE nilai_awal <= $presentase AND nilai_akhir >= $presentase";
+                    $db->query = "SELECT * FROM kategori WHERE nilai_awal <= $_presentase AND nilai_akhir >= $_presentase";
                     $warna = $db->exec('single')->warna;
                 }
 
@@ -365,7 +367,7 @@ class Rekap {
                 $survey->total_skor = $skor;
                 $all_survey[] = $survey;
 
-                $db->query = "SELECT * FROM kategori WHERE nilai_awal <= $skor AND nilai_akhir >= $skor";
+                $db->query = "SELECT * FROM kategori WHERE nilai_awal <= ".ceil($skor)." AND nilai_akhir >= ".ceil($skor);
                 $k->kategori = $db->exec('single');
                 $k->periode = explode('-',$periode);
                 $k->survey = $survey;
