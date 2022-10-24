@@ -97,7 +97,7 @@ class Rekap {
                     if(isset($nilai['N'])) unset($nilai['N']);
                     if($nilai[1] == 0 || $question == 0) continue;
                     $_total_nilai = ($nilai[1] / $question);
-                    if(is_nan($_total_nilai)) continue;
+                    if($_total_nilai == nan) continue;
                     $total_iks += $_total_nilai;
                     $counter++;
                 }

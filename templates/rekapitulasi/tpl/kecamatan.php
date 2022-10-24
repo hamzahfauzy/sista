@@ -58,9 +58,11 @@ Kecamatan <?=$detail_kecamatan->nama?></div>
             $presentase = number_format( $total/count($iks), 3 );
             $db->query = "SELECT * FROM kategori WHERE nilai_awal <= $presentase AND nilai_akhir >= $presentase";
             $warna = $db->exec('single')->warna;
+            $kekurangan = 100-($presentase*100) . '%';
             $presentase = $presentase*100 . '%';
             ?>
             <td style="color:#FFF;background:<?=$warna?>"><?=$presentase?></td>
+            <td><?=$kekurangan?></td>
         </tr>
         <?php endforeach ?>
         <tr>
