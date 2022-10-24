@@ -29,7 +29,7 @@
         <center>
             <img src="<?=asset('assets/img/main-logo.png')?>" alt="" width="100px">
             <h2>DATA RIWAYAT INDEKS KELUARGA SEHAT (<?=$penduduk->nama?>)</h2>
-            <a href="<?=routeTo('')?>">Kembali ke halaman awal</a>
+            <a href="<?=routeTo('')?>">Kembali ke halaman awal</a> | <a href="<?=routeTo('auth/logout')?>">Logout</a>
             <p></p>
         </center>
 
