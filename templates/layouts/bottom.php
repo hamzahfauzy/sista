@@ -189,8 +189,10 @@
 					one from current row and one from the next:*/
 					x = rows[i].getElementsByTagName("TD")[rows[i].getElementsByTagName("TD").length - 1];
 					y = rows[i + 1].getElementsByTagName("TD")[rows[i+1].getElementsByTagName("TD").length - 1];
+					var xn = x.innerHTML.replace('%','')
+					var yn = y.innerHTML.replace('%','')
 					//check if the two rows should switch place:
-					if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+					if (parseFloat(xn) > parseFloat(yn)) {
 						//if so, mark as a switch and break the loop:
 						shouldSwitch = true;
 						break;

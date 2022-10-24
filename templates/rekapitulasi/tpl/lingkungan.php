@@ -68,7 +68,8 @@
             else
             {
                 $presentase = number_format( $total_1 /  $pembagi, 3 );
-                $db->query = "SELECT * FROM kategori WHERE nilai_awal <= $presentase AND nilai_akhir >= $presentase";
+                $_presentase = ceil( $total_1 /  $pembagi);
+                $db->query = "SELECT * FROM kategori WHERE nilai_awal <= $_presentase AND nilai_akhir >= $_presentase";
                 $warna = $db->exec('single')->warna;
                 $presentase = $presentase*100 . '%';
             }

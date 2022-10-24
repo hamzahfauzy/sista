@@ -14,7 +14,7 @@
         <td><?=$k->jumlah_kk?></td>
         <td><?=$k->kk_nilai?></td>
         <td><?=$k->kk_belum_nilai?></td>
-        <?php if(isset($k->kategori)): ?>
+        <?php if(isset($k->kategori) && $k->kk_nilai): ?>
         <td style="background:<?=$k->kategori->warna?>;color:#FFF;">
             <?=$k->kategori->nama?>
         <?php else: ?>
@@ -26,7 +26,7 @@
     <?php endforeach ?>
 </table>
 
-<div class="card-title">Rekapitulasi Data Profil Kesehatan Keluarga Kecamatan <?=$detail_kelurahan->kecamatan->nama?>, <?=$detail_kelurahan->nama?>
+<div class="card-title">Prioritas Masalah Indeks Keluarga Sehat Kecamatan <?=$detail_kelurahan->kecamatan->nama?>, <?=$detail_kelurahan->nama?>
 </div>
 <br>
 
