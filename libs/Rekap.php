@@ -95,9 +95,15 @@ class Rekap {
                     $nilai = array_count_values($all_skor);
                     $question = array_sum($nilai) - ($nilai['N']??0);
                     if(isset($nilai['N'])) unset($nilai['N']);
-                    if($nilai[1] == 0 || $question == 0) continue;
-                    $_total_nilai = ($nilai[1] / $question);
-                    if($_total_nilai == nan) continue;
+                    if($nilai[1] == 0 && $nilai[0] == 0)
+                    {
+                        $_total_nilai = 1;
+                    }
+                    else
+                    {
+                        $_total_nilai = ($nilai[1] / $question);
+                        if($_total_nilai == nan) continue;
+                    }
                     $total_iks += $_total_nilai;
                     $counter++;
                 }
@@ -223,9 +229,15 @@ class Rekap {
                     $nilai = array_count_values($all_skor);
                     $question = array_sum($nilai) - ($nilai['N']??0);
                     if(isset($nilai['N'])) unset($nilai['N']);
-                    if($nilai[1] == 0 || $question == 0) continue;
-                    $_total_nilai = ($nilai[1] / $question);
-                    if(is_nan($_total_nilai)) continue;
+                    if($nilai[1] == 0 && $nilai[0] == 0)
+                    {
+                        $_total_nilai = 1;
+                    }
+                    else
+                    {
+                        $_total_nilai = ($nilai[1] / $question);
+                        if($_total_nilai == nan) continue;
+                    }
                     $total_iks += $_total_nilai;
                     $counter++;
                 }
@@ -341,9 +353,15 @@ class Rekap {
                 $nilai = array_count_values($all_skor);
                 $question = array_sum($nilai) - ($nilai['N']??0);
                 if(isset($nilai['N'])) unset($nilai['N']);
-                if($nilai[1] == 0 || $question == 0) continue;
-                $skor = ($nilai[1] / $question);
-                if(is_nan($skor)) continue;
+                if($nilai[1] == 0&& $nilai[0] == 0)
+                {
+                    $skor = 1;
+                }
+                else
+                {
+                    $skor = ($nilai[1] / $question);
+                    if(is_nan($skor)) continue;
+                }
                 $survey->total_skor = $skor;
                 $all_survey[] = $survey;
 

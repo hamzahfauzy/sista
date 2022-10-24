@@ -23,6 +23,7 @@
                 <th>Keluarga Bernilai N</th>
                 <th>Keluarga Belum Di Survey</th>
                 <th>% Cakupan Lingkungan</th>
+                <th>% Permasalahan</th>
             </tr>
         </thead>
         <?php foreach($indikator as $index => $i): ?>
@@ -71,6 +72,7 @@
                 $_presentase = ceil( $total_1 /  $pembagi);
                 $db->query = "SELECT * FROM kategori WHERE nilai_awal <= $_presentase AND nilai_akhir >= $_presentase";
                 $warna = $db->exec('single')->warna;
+                $kurangan = 100-($presentase*100) . '%';
                 $presentase = $presentase*100 . '%';
             }
             ?>
@@ -78,6 +80,7 @@
             <td><?= $n['N'] ?></td>
             <td><?= $unsurvey ?></td>
             <td style="color:#FFF;background:<?=$warna?>"><?= $presentase ?></td>
+            <td><?= $kurangan ?></td>
         </tr>
         <?php endforeach ?>
         <tr>
@@ -98,6 +101,7 @@
             <?php endif ?>
             <td colspan="3"></td>
             <td style="color:#FFF;background:<?=$iks_lingkungan->warna?>"><?=number_format($skor_iks_lingkungan*100,2)?></td>
+            <td><?=number_format(100-($skor_iks_lingkungan*100),2)?></td>
         </tr>
     </table>
 </div>
