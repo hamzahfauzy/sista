@@ -19,7 +19,7 @@ class Iks
 
         if($iks)
         {
-            return number_format($iks->skor*100,3);
+            return number_format($iks->skor,3);
         }
 
         return 0;
@@ -34,7 +34,7 @@ class Iks
         if($iks)
         {
             $penduduk = $db->exists('penduduk',['lingkungan_id'=>$lingkungan_id]);
-            return number_format(($iks->hasil_iks/$penduduk)*100,3);
+            return number_format(($iks->hasil_iks/$penduduk),3);
         }
 
         return 0;
@@ -49,7 +49,7 @@ class Iks
         if($iks)
         {
             $penduduk = $db->exists('penduduk',['kelurahan_id'=>$kelurahan_id]);
-            return number_format(($iks->hasil_iks/$penduduk)*100,3);
+            return number_format(($iks->hasil_iks/$penduduk),3);
         }
 
         return 0;
@@ -64,7 +64,7 @@ class Iks
         if($iks)
         {
             $penduduk = $db->exists('penduduk',['kecamatan_id'=>$kecamatan_id]);
-            return number_format(($iks->hasil_iks/$penduduk)*100,3);
+            return number_format(($iks->hasil_iks/$penduduk),3);
         }
 
         return 0;
@@ -79,8 +79,9 @@ class Iks
         if($iks)
         {
             $num_of_kec = $db->exists('kecamatan');
-            $penduduk = $db->exists('penduduk');
-            return number_format(($iks->hasil_iks/$penduduk)/$num_of_kec*100,3);
+            $db->query = "SELECT no_kk FROM penduduk GROUP BY no_kk";
+            $penduduk = $db->exec('exists');
+            return number_format((($iks->hasil_iks/$penduduk)/$num_of_kec),3);
         }
 
         return 0;
