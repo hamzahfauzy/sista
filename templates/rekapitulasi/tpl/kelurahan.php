@@ -26,7 +26,7 @@
     <?php endforeach ?>
 </table>
 
-<div class="card-title">Prioritas Masalah Indeks Keluarga Sehat Kecamatan <?=$detail_kelurahan->kecamatan->nama?>, <?=$detail_kelurahan->nama?>
+<div class="card-title">Rekapitulasi dan Prioritas Masalah Indeks Keluarga Sehat Kecamatan <?=$detail_kelurahan->kecamatan->nama?>, <?=$detail_kelurahan->nama?>
 </div>
 <br>
 
@@ -71,6 +71,7 @@
             <td style="color:#FFF;background:<?=isset($k->kategori) ? $k->kategori->warna : '#FFF'?>"><?=number_format($k->total_skor*100,2)?>%</td>
             <?php endforeach ?>
             <td style="color:#FFF;background:<?=$iks_kelurahan->warna?>"><?=number_format($skor_iks_kelurahan*100,2)?>%</td>
+            <td><?=number_format(100-($skor_iks_kelurahan*100),2)?>%</td>
         </tr>
     </table>
 </div>

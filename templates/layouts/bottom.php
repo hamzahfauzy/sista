@@ -187,8 +187,8 @@
 					shouldSwitch = false;
 					/*Get the two elements you want to compare,
 					one from current row and one from the next:*/
-					x = rows[i].getElementsByTagName("TD")[rows[i].getElementsByTagName("TD").length - 1];
-					y = rows[i + 1].getElementsByTagName("TD")[rows[i+1].getElementsByTagName("TD").length - 1];
+					x = rows[i].getElementsByTagName("TD")[rows[i].getElementsByTagName("TD").length - 2];
+					y = rows[i + 1].getElementsByTagName("TD")[rows[i+1].getElementsByTagName("TD").length - 2];
 					var xn = x.innerHTML.replace('%','')
 					var yn = y.innerHTML.replace('%','')
 					//check if the two rows should switch place:

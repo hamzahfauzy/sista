@@ -27,7 +27,7 @@
 </table>
 
 <div class="card-title">
-Rekapitulasi Data Profil Kesehatan Keluarga 
+Rekapitulasi dan Prioritas Masalah Indeks Keluarga Sehat
 Kecamatan <?=$detail_kecamatan->nama?></div>
 <br>
 
@@ -71,6 +71,7 @@ Kecamatan <?=$detail_kecamatan->nama?></div>
             <td style="color:#FFF;<?=isset($k->kategori) ? 'background:'.$k->kategori->warna : ''?>"><?=number_format($k->total_skor*100,2)?></td>
             <?php endforeach ?>
             <td style="color:#FFF;background:<?=$iks_kecamatan->warna?>"><?=number_format($skor_iks_kecamatan*100,2)?></td>
+            <td><?=number_format(100-($skor_iks_kecamatan*100),2)?>%</td>
         </tr>
     </table>
 </div>
