@@ -1,5 +1,5 @@
 <div class="card-title">
-    Rekapitulasi Data Profil Kesehatan Keluarga 
+    Rekapitulasi dan Prioritas Masalah Indeks Keluarga Sehat 
     Kecamatan <?=$detail_lingkungan->kecamatan->nama?>, 
     <?=$detail_lingkungan->kelurahan->nama?>,
     <?=$detail_lingkungan->nama?>    
