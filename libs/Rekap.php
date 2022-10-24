@@ -111,8 +111,8 @@ class Rekap {
 
             if($counter)
             {
-                $skor = $total_iks/count($p);
-                $db->query = "SELECT * FROM kategori WHERE nilai_awal <= ".ceil($skor)." AND nilai_akhir >= ".ceil($skor);
+                $skor = ceil($total_iks/count($p));
+                $db->query = "SELECT * FROM kategori WHERE nilai_awal <= $skor AND nilai_akhir >= $skor";
                 $k->kategori = $db->exec('single');
                 $k->total_skor = $skor;
             }
@@ -139,9 +139,9 @@ class Rekap {
                 }
                 else
                 {
-                    $_presentase = ceil( $total_1 /  $pembagi);
-                    $presentase = number_format( $total_1 /  $pembagi, 3 );
-                    $db->query = "SELECT * FROM kategori WHERE nilai_awal <= $_presentase AND nilai_akhir >= $_presentase";
+                    $presentase = ceil( $total_1 /  $pembagi);
+                    $presentase = number_format( $presentase, 3 );
+                    $db->query = "SELECT * FROM kategori WHERE nilai_awal <= $presentase AND nilai_akhir >= $presentase";
                     $warna = $db->exec('single')->warna;
                 }
 
@@ -166,7 +166,8 @@ class Rekap {
         $iks_kecamatan = json_decode(json_encode($iks),1);
         $iks_kecamatan = array_sum(array_column($iks_kecamatan,'total_skor'));
 
-        $iks_kecamatan = number_format($iks_kecamatan/$jumlah_kk, 3);
+        $iks_kecamatan = ceil($iks_kecamatan/$jumlah_kk);
+        $iks_kecamatan = number_format($iks_kecamatan, 3);
         $skor_iks_kecamatan = $iks_kecamatan;
 
         $db->query = "SELECT * FROM kategori WHERE nilai_awal <= $iks_kecamatan AND nilai_akhir >= $iks_kecamatan";
@@ -246,8 +247,8 @@ class Rekap {
 
             if($counter)
             {
-                $skor = $total_iks/count($p);
-                $db->query = "SELECT * FROM kategori WHERE nilai_awal <= ".ceil($skor)." AND nilai_akhir >= ".ceil($skor);
+                $skor = ceil($total_iks/count($p));
+                $db->query = "SELECT * FROM kategori WHERE nilai_awal <= $skor AND nilai_akhir >= $skor";
                 $k->kategori = $db->exec('single');
                 $k->total_skor = $skor;
             }
@@ -274,9 +275,9 @@ class Rekap {
                 }
                 else
                 {
-                    $_presentase = ceil( $total_1 /  $pembagi);
-                    $presentase = number_format( $total_1 /  $pembagi, 3 );
-                    $db->query = "SELECT * FROM kategori WHERE nilai_awal <= $_presentase AND nilai_akhir >= $_presentase";
+                    $presentase = ceil( $total_1 /  $pembagi);
+                    $presentase = number_format( $presentase, 3 );
+                    $db->query = "SELECT * FROM kategori WHERE nilai_awal <= $presentase AND nilai_akhir >= $presentase";
                     $warna = $db->exec('single')->warna;
                 }
 
@@ -303,7 +304,8 @@ class Rekap {
 
         $iks_kelurahan = array_sum(array_column($iks_kelurahan,'total_skor'));
 
-        $iks_kelurahan = number_format($iks_kelurahan/$jumlah_kk, 3);
+        $iks_kelurahan = ceil($iks_kelurahan/$jumlah_kk);
+        $iks_kelurahan = number_format($iks_kelurahan, 3);
         $skor_iks_kelurahan = $iks_kelurahan;
 
         $db->query = "SELECT * FROM kategori WHERE nilai_awal <= $iks_kelurahan AND nilai_akhir >= $iks_kelurahan";
@@ -361,13 +363,13 @@ class Rekap {
                 }
                 else
                 {
-                    $skor = ($nilai[1] / $question);
+                    $skor = ceil($nilai[1] / $question);
                     if(is_nan($skor)) continue;
                 }
                 $survey->total_skor = $skor;
                 $all_survey[] = $survey;
 
-                $db->query = "SELECT * FROM kategori WHERE nilai_awal <= ".ceil($skor)." AND nilai_akhir >= ".ceil($skor);
+                $db->query = "SELECT * FROM kategori WHERE nilai_awal <= $skor AND nilai_akhir >= $skor";
                 $k->kategori = $db->exec('single');
                 $k->periode = explode('-',$periode);
                 $k->survey = $survey;
@@ -382,7 +384,8 @@ class Rekap {
 
         $iks_lingkungan = (array) $iks;
         $iks_lingkungan = array_sum(array_column($iks_lingkungan,'total_skor'));
-        $skor_iks_lingkungan = number_format($iks_lingkungan / $jumlah_kk, 3);
+        $skor_iks_lingkungan = ceil($iks_lingkungan / $jumlah_kk);
+        $skor_iks_lingkungan = number_format($skor_iks_lingkungan, 3);
 
         $db->query = "SELECT * FROM kategori WHERE nilai_awal <= $skor_iks_lingkungan AND nilai_akhir >= $skor_iks_lingkungan";
         $iks_lingkungan = $db->exec('single');
