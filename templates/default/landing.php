@@ -41,7 +41,7 @@
                 <p>Data riwayat indeks keluarga sehat tidak ditemukan.</p>
             </div>
             <?php endif ?>
-            <p style="color: white; margin-top: 20px;"><a href="<?=routeTo('auth/register')?>" style="font-weight: bold; color: #31ce36;">Daftar</a> Sebagai Penduduk atau <a href="<?=routeTo('auth/login')?>" style="font-weight: bold; color: #31ce36;">Login</a> Sebagai Surveyor</p> 
+            <p style="color: white; margin-top: 20px;"><a href="<?=routeTo('auth/register')?>" style="font-weight: bold; color: #31ce36;">Daftar</a> Sebagai Penduduk atau <a href="<?=routeTo('auth/login')?>" style="font-weight: bold; color: #31ce36;">Login</a> Sebagai Admin/Surveyor</p> 
             <p style="color: white; margin-top: 20px;"><a href="<?=routeTo('default/rekapitulasi')?>" style="font-weight: bold; color: #31ce36;">Rekapitulasi Indeks Keluarga Sehat</a></p> 
         </div>
         <script src="<?=asset('assets/js/main.js')?>"></script>

@@ -65,7 +65,7 @@ th     { background:#eee; }
                                 </div>
                                 <?php endif ?>
                                 <div class="form-group">
-                                    <label for="">Tanggal</label>
+                                    <label for="">Tanggal Pelaksanaan Survey</label>
                                     <input type="date" name="tanggal" class="form-control" placeholder="Input Tanggal" value="<?=isset($_GET['tanggal'])?$_GET['tanggal']:''?>" required>
                                 </div>
                                 <div class="form-group">
