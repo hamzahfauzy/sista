@@ -112,7 +112,7 @@ class Rekap {
             if($counter)
             {
                 $skor = $total_iks/count($p);
-                $db->query = "SELECT * FROM kategori WHERE nilai_awal <= $skor AND nilai_akhir >= $skor";
+                $db->query = "SELECT * FROM kategori WHERE nilai_awal <= ".ceil($skor)." AND nilai_akhir >= ".ceil($skor);
                 $k->kategori = $db->exec('single');
                 $k->total_skor = $skor;
             }

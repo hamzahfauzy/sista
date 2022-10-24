@@ -39,8 +39,9 @@
                 <?php foreach($iks as $k): ?>
                 <th><?=$k->nama?></th>
                 <?php endforeach ?>
-                <th>% Cakupan Desa / Kelurahan</th>
-                <th>% Permasalahan</th>
+                <th>Target</th>
+                <th>Realisasi Cakupan Desa / Kelurahan</th>
+                <th>Permasalahan</th>
             </tr>
         </thead>
         <?php foreach($indikator as $index => $i): ?>
@@ -61,6 +62,7 @@
             $kekurangan = 100-($presentase*100) . '%';
             $presentase = $presentase*100 . '%';
             ?>
+            <td>100%</td>
             <td style="color:#FFF;background:<?=$warna?>"><?=$presentase?></td>
             <td><?=$kekurangan?></td>
         </tr>
@@ -70,6 +72,7 @@
             <?php foreach($iks as $k): ?>
             <td style="color:#FFF;background:<?=isset($k->kategori) ? $k->kategori->warna : '#FFF'?>"><?=number_format($k->total_skor*100,2)?>%</td>
             <?php endforeach ?>
+            <td></td>
             <td style="color:#FFF;background:<?=$iks_kelurahan->warna?>"><?=number_format($skor_iks_kelurahan*100,2)?>%</td>
             <td><?=number_format(100-($skor_iks_kelurahan*100),2)?>%</td>
         </tr>

@@ -22,8 +22,9 @@
                 <th>Keluarga Bernilai 1</th>
                 <th>Keluarga Bernilai N</th>
                 <th>Keluarga Belum Di Survey</th>
-                <th>% Cakupan Lingkungan</th>
-                <th>% Permasalahan</th>
+                <th>Target</th>
+                <th>Realisasi Cakupan Lingkungan</th>
+                <th>Permasalahan</th>
             </tr>
         </thead>
         <?php foreach($indikator as $index => $i): ?>
@@ -86,6 +87,7 @@
             <td><?= $n['1'] ?></td>
             <td><?= $n['N'] ?></td>
             <td><?= $unsurvey ?></td>
+            <td>100%</td>
             <td style="color:#FFF;background:<?=$warna?>"><?= $presentase ?></td>
             <td><?= $kurangan ?></td>
         </tr>
@@ -106,7 +108,7 @@
             <td><?=number_format(($skor/(count($all_survey)-1))*100,2)?>%</td>
             <?php endif ?>
             <?php endif ?>
-            <td colspan="3"></td>
+            <td colspan="4"></td>
             <td style="color:#FFF;background:<?=$iks_lingkungan->warna?>"><?=number_format($skor_iks_lingkungan*100,2)?></td>
             <td></td>
         </tr>
