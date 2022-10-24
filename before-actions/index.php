@@ -53,7 +53,14 @@ if(isset($auth->user) && !isset($auth->user->id) && $route != 'auth/logout')
 
 if(isset($auth->user) && $route == 'auth/login')
 {
-    header("location:".routeTo('default/index'));
+    if(get_role($auth->user->id)->name == 'penduduk')
+    {
+        header("location:".routeTo('default/riwayat',['nik'=>$auth->user->username]));
+    }
+    else
+    {
+        header("location:".routeTo('default/index'));
+    }
     die();
 }
 
