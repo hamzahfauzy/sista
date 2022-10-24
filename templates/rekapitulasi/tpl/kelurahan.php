@@ -39,9 +39,9 @@
                 <?php foreach($iks as $k): ?>
                 <th><?=$k->nama?></th>
                 <?php endforeach ?>
-                <th>Target</th>
-                <th>Realisasi Cakupan Desa / Kelurahan</th>
-                <th>Permasalahan</th>
+                <th style="text-transform: uppercase;">Target</th>
+                <th style="text-transform: uppercase;">Realisasi Cakupan Desa / Kelurahan</th>
+                <th style="text-transform: uppercase;">Permasalahan</th>
             </tr>
         </thead>
         <?php foreach($indikator as $index => $i): ?>
