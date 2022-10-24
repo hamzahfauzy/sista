@@ -56,10 +56,15 @@
             $unsurvey = $jumlah_kk - count($iks);
             $total_1 = $n['1'];
             $pembagi = $n['1']+$n['0']+$unsurvey;
-            if($total_1 == 0 && $pembagi == 0 && $n['N'])
+            if(($total_1 == 0 && $pembagi == 0 && $n['N']))
             {
                 $warna = 'blue';
                 $presentase = 'N';
+            }
+            else if($n['1'] == 0 && $n['0'] == 0)
+            {
+                $warna = 'green';
+                $presentase = '100%';
             }
             else if(in_array(0,[$total_1, $pembagi]))
             {
@@ -101,7 +106,7 @@
             <?php endif ?>
             <td colspan="3"></td>
             <td style="color:#FFF;background:<?=$iks_lingkungan->warna?>"><?=number_format($skor_iks_lingkungan*100,2)?></td>
-            <td><?=number_format(100-($skor_iks_lingkungan*100),2)?></td>
+            <td></td>
         </tr>
     </table>
 </div>
