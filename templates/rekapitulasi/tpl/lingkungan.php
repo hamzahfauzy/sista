@@ -63,6 +63,7 @@
             }
             else if($n['1'] == 0 && $n['0'] == 0)
             {
+                $kurangan = '0%';
                 $warna = 'green';
                 $presentase = '100%';
             }
@@ -70,6 +71,7 @@
             {
                 $warna = 'red';
                 $presentase = '0%';
+                $kurangan = '100%';
             }
             else
             {
