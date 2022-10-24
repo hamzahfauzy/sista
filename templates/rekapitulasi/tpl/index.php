@@ -14,7 +14,7 @@
         <td><?=$k->jumlah_kk?></td>
         <td><?=$k->kk_nilai?></td>
         <td><?=$k->kk_belum_nilai?></td>
-        <?php if(isset($k->kategori) && $k->kk_nilai > 0): ?>
+        <?php if(isset($k->kategori) && $k->kk_nilai != '0'): ?>
         <td style="background:<?=$k->kategori->warna?>;color:#FFF;">
             <?=$k->kategori->nama?>
         <?php else: ?>
