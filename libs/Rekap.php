@@ -18,7 +18,7 @@ class Rekap {
         foreach($kecamatan as $kec)
         {
             $iks_kec = (new Iks)->byKecamatan($periode, $kec->id);
-            if(is_nan($iks_kec)) $iks_kec = 0;
+            if(!is_numeric($iks_kec)) $iks_kec = 0;
             $db->query = "SELECT * FROM kategori WHERE nilai_awal <= $iks_kec AND nilai_akhir >= $iks_kec";
             $iks_kategori = $db->exec('single');
 
