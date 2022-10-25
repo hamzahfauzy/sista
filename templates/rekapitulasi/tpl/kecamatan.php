@@ -5,6 +5,7 @@
         <th>Total KK</th>
         <th>KK Sudah Dinilai</th>
         <th>KK Belum Dinilai</th>
+        <th>Skor</th>
         <th>Status</th>
     </tr>
     <?php foreach($iks as $index => $k): ?>
@@ -14,6 +15,7 @@
         <td><?=$k->jumlah_kk?></td>
         <td><?=$k->kk_nilai?></td>
         <td><?=$k->kk_belum_nilai?></td>
+        <td><?=$k->total_skor?></td>
         <?php if(isset($k->kategori)): ?>
         <td style="background:<?=$k->kategori->warna?>;color:#FFF;">
             <?=$k->kategori->nama?>
@@ -24,6 +26,14 @@
         </td>
     </tr>
     <?php endforeach ?>
+    <tr>
+        <td colspan="2">IKS Kecamatan</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td style="color:#FFF;background:<?=$iks_kecamatan->warna?>"><?=number_format($skor_iks_kecamatan*100,2)?></td>
+        <td><?=$iks_kecamatan->nama?></td>
+    </tr>
 </table>
 
 <div class="card-title">

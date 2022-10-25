@@ -75,7 +75,6 @@ table th {
                                         &nbsp;
                                         <select name="kecamatan_id" id="kecamatan_id" class="form-control" onchange="handleKecamatan(this)" required>
                                             <option value="">- Pilih Kecamatan -</option>
-                                            <option value="*" <?=$k == '*' ? 'selected=""' : '' ?>>Semua Kecamatan</option>
                                             <?php foreach($kecamatan as $kec): ?>
                                             <option value="<?=$kec->id?>" <?=$k == $kec->id ? 'selected=""' : '' ?>><?=$kec->nama?></option>
                                             <?php endforeach ?>
@@ -83,7 +82,6 @@ table th {
                                         &nbsp;
                                         <select name="kelurahan_id" id="kelurahan_id" class="form-control" onchange="handleKelurahan(this)" required>
                                             <option value="">- Pilih Desa / Kelurahan -</option>
-                                            <option value="*">Semua Desa / Kelurahan</option>
                                         </select>
                                         &nbsp;
                                         <select name="lingkungan_id" id="lingkungan_id" class="form-control" required>

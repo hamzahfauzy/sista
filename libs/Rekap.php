@@ -166,7 +166,7 @@ class Rekap {
         $iks_kecamatan = json_decode(json_encode($iks),1);
         $iks_kecamatan = array_sum(array_column($iks_kecamatan,'total_skor'));
 
-        $iks_kecamatan = number_format($iks_kecamatan/$jumlah_kk, 3);
+        $iks_kecamatan = number_format($iks_kecamatan/$kelurahan, 3);
         $skor_iks_kecamatan = $iks_kecamatan;
 
         $db->query = "SELECT * FROM kategori WHERE nilai_awal <= $iks_kecamatan AND nilai_akhir >= $iks_kecamatan";
@@ -303,7 +303,7 @@ class Rekap {
 
         $iks_kelurahan = array_sum(array_column($iks_kelurahan,'total_skor'));
 
-        $iks_kelurahan = number_format(($iks_kelurahan/$jumlah_kk)*100, 3);
+        $iks_kelurahan = number_format(($iks_kelurahan/$lingkungan)*100, 3);
         $skor_iks_kelurahan = $iks_kelurahan;
 
         $db->query = "SELECT * FROM kategori WHERE nilai_awal <= $iks_kelurahan AND nilai_akhir >= $iks_kelurahan";
