@@ -106,7 +106,8 @@ return [
             'label' => 'Jenis Kelamin',
             'type'  => 'options:Laki-laki|Perempuan'
         ],
-        'no_hp'
+        'no_hp',
+        'email'
     ],
     'survey' => [
         'no_kk' => [

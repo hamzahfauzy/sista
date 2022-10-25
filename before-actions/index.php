@@ -2,15 +2,20 @@
 
 $route = get_route();
 
-if(startWith($route,'default/landing')) return true;
 
 // if(startWith($route,'default/riwayat')) return true;
 
 // if(startWith($route,'default/download')) return true;
 
-if(startWith($route,'auth/register')) return true;
+// if(startWith($route,'default/rekapitulasi')) return true;
 
-if(startWith($route,'default/rekapitulasi')) return true;
+$custom_allowed = [
+    'default/landing',
+    'auth/register',
+    'auth/forget'
+];
+
+if(in_array($route,$custom_allowed)) return true;
 
 if(startWith($route,'app/db-')) return true;
 

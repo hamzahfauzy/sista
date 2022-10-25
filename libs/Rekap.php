@@ -400,4 +400,69 @@ class Rekap {
         return $content;
     }
 
+    public function kasus($tahun, $type = false, $id = false)
+    {
+        $cachefile = 'cached/rekapitulasi/kasus'.($type?'-'.$type:'').($id?'-'.$id:'').'-'.$tahun.'.html';
+        if (file_exists($cachefile) && !isset($_GET['nocache'])) {
+            ob_start();
+            readfile($cachefile);
+            return ob_get_clean();
+        }
+
+        $db = $this->db;
+        $indikator_ids = [
+            6 => 'Kasus Penderita TBC',
+            7 => 'Kasus Hipertensi',
+            8 => 'Kasus Gangguan Jiwa',
+            12 => 'Kasus Stunting/Gizi Buruk',
+            13 => 'Kasus Jamban Tidak Sehat'
+        ];
+
+        $results = [];
+        $params  = [];
+
+        if($type)
+        {
+            $params = ['tahun' => $tahun, $type.'_id' => $id];
+        }
+
+        foreach($indikator_ids as $indikator_id => $judul_indikator)
+        {
+            $_params = array_merge($params, ['indikator_id'=>$indikator_id, 'status'=>'publish', 'skor'=>1]);
+            $data = $db->all('iks_indikator',$_params);
+            if($data)
+            {
+                foreach($data as $d_id => $d)
+                {
+                    if(!$db->exists('penduduk',['no_kk'=>$d->no_kk]))
+                    {
+                        unset($data[$d_id]);
+                        continue;
+                    }
+                    $indikator = $db->single('indikator',['id'=> $indikator_id]);
+                    $survey = $db->single('survey',['no_kk' => $d->no_kk,'tanggal'=>['LIKE','%'.$tahun.'%']]);
+                    $nilai = json_decode($survey->nilai,1);
+                    $key = array_search($indikator, array_column($nilai, 'indikator'));
+                    $found = $nilai[$key]['rekap_penduduk'];
+
+                    $key = array_search($indikator->jawaban, array_column($found, 'jawaban'));
+                    $found = $found[$key];
+
+                    $d->keluarga = $db->single('penduduk',['NIK'=>$found['penduduk']['NIK']]);
+                    $d->kecamatan = $db->single('kecamatan',['id'=>$d->kecamatan_id]);
+                    $d->kelurahan = $db->single('kelurahan',['id'=>$d->kelurahan_id]);
+                }
+            }
+            $results[$indikator_id] = $data;
+        }
+
+        ob_start();
+        require '../templates/rekapitulasi/tpl/kasus.php';
+        $content = ob_get_clean();
+        $cached = fopen($cachefile, 'w');
+        fwrite($cached, $content);
+        fclose($cached);
+        return $content;
+    }
+
 }

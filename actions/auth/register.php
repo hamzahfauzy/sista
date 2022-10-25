@@ -43,7 +43,7 @@ if(request() == 'POST')
     ]);
 
     set_flash_msg(['success'=>'Pendaftaran Berhasil! Silahkan masukkan NIK sebagai username']);
-    header('location:'.routeTo('auth/login'));
+    header('location:'.routeTo(''));
     die();
 
 }

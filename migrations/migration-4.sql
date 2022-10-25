@@ -1,0 +1,1 @@
+ALTER TABLE `petugas` ADD `email` VARCHAR(50) DEFAULT NULL;

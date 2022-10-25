@@ -11,7 +11,10 @@ return [
         'indikator'  => 'crud/index?table=indikator',
     ],
     'survey' => 'survey/index',
-    'rekapitulasi' => 'rekapitulasi/index',
+    'rekapitulasi' => [
+        'Indeks Keluarga Sehat' => 'rekapitulasi/index',
+        'Kasus Penyakit' => 'rekapitulasi/kasus',
+    ],
     'pengguna'    => [
         'petugas' => 'crud/index?table=petugas',
         'semua pengguna'     => 'users/index',

@@ -64,7 +64,7 @@
                                                 }
                                                 else
                                                 {
-                                                    $data_value = $data->{$field};
+                                                    $data_value = $data->{$field}??'';
                                                 }
                                                 $label = _ucwords($label);
                                             ?>
