@@ -39,11 +39,11 @@
                             <img src="<?=routeTo('assets/img/main-logo.png')?>" width="150px" height="100px" alt="logo" style="object-fit:contain;">
                         </center>
                         <div class="card-title text-center">Login Form</div>
-                        <div class="card-category text-center">Masukkan Username dan Password anda pada bidang di bawah ini.</div>
+                        <div class="card-category text-center">Masukkan Nama Pengguna dan Password anda pada bidang di bawah ini.</div>
 
                         <form action="" method="post">
                             <div class="form-group">
-                                <label for="">Nama Pengguna</label>
+                                <label for="">NIK / Nama Pengguna</label>
                                 <input type="text" name="username" id="" class="form-control mb-2" placeholder="Nama Pengguna Disini...">
                                 <label for="">Kata Sandi</label>
                                 <input type="password" name="password" id="" class="form-control mb-2" placeholder="Kata Sandi Disini...">
