@@ -15,6 +15,7 @@ $order   = $_GET['order'];
 
 $columns = config('fields')[$table];
 $columns = array_keys($columns);
+$columns[] = 'status';
 
 $order_by = " ORDER BY ".$columns[$order[0]['column']]." ".$order[0]['dir'];
 
