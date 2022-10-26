@@ -11,6 +11,9 @@
                         <span>
                             <?=auth()->user->name?>
                             <span class="user-level" style="text-transform:capitalize;"><?=get_role(auth()->user->id)->name?></span>
+                            <span class="user-level" style="text-transform:capitalize;">
+                            <?= hari_ini().', '.date('d-m-Y')?>
+                            </span>
                         </span>
                     </a>
                     <div class="clearfix"></div>
