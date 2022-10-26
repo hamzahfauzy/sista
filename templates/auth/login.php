@@ -43,7 +43,7 @@
 
                         <form action="" method="post">
                             <div class="form-group">
-                                <label for="">NIK / Nama Pengguna</label>
+                                <label for="">Nama Pengguna</label>
                                 <input type="text" name="username" id="" class="form-control mb-2" placeholder="Nama Pengguna Disini...">
                                 <label for="">Kata Sandi</label>
                                 <input type="password" name="password" id="" class="form-control mb-2" placeholder="Kata Sandi Disini...">

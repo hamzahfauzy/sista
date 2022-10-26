@@ -44,7 +44,7 @@
                         <form action="" method="post">
                             <div class="form-group">
                                 <label for="">NIK</label>
-                                <input type="text" name="username" id="" class="form-control mb-2" placeholder="Nama Pengguna Disini...">
+                                <input type="text" name="username" id="" class="form-control mb-2" placeholder="NIK Disini...">
                                 <label for="">Nama</label>
                                 <input type="text" name="name" id="" class="form-control mb-2" placeholder="Nama Pengguna Disini...">
                                 <label for="">Kata Sandi</label>
