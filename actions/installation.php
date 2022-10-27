@@ -31,7 +31,7 @@ if(request() == 'POST')
     ]);
 
     $roles = [
-        'camat' => [
+        'pembina kecamatan' => [
             'default/index',
             'default/profile',
             'default/kecamatan',
@@ -58,7 +58,7 @@ if(request() == 'POST')
             'crud/index?table=penduduk',
             'crud/index?table=indikator',
         ],
-        'admin kelurahan' => [
+        'pembina kelurahan' => [
             'default/index',
             'default/profile',
             'default/kelurahan',
@@ -73,7 +73,7 @@ if(request() == 'POST')
             'crud/delete?table=penduduk',
             'crud/index?table=indikator',
         ],
-        'surveyor' => [
+        'petugas lapangan' => [
             'default/index',
             'default/profile',
             'default/kecamatan',
@@ -84,7 +84,7 @@ if(request() == 'POST')
             'crud/index?table=penduduk',
             'survey/*',
         ],
-        'bupati' => [
+        'pembina kabupaten' => [
             'default/*',
             'survey/index',
             'survey/view',

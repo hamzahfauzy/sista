@@ -15,7 +15,7 @@ if (file_exists($cachefile) && !isset($_GET['nocache'])) {
     exit;
 }
 
-if(!in_array(get_role($user->id)->name,['administrator','bupati']))
+if(!in_array(get_role($user->id)->name,['administrator','pembina kabupaten','bupati']))
 {
     $petugas = $db->single('petugas',['user_id'=>$user->id]);
     $kecamatan_id = $petugas->kecamatan_id;

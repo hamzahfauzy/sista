@@ -26,7 +26,7 @@ if(!empty($search))
     $where = "WHERE no_kk LIKE '%$search%'";
 }
 
-if(!in_array(get_role($user->id)->name,['administrator','bupati']))
+if(!in_array(get_role($user->id)->name,['administrator','pembina kabupaten','bupati']))
 {
     $petugas = $db->single('petugas',['user_id' => $user->id]);
     $db->query = "SELECT no_kk FROM penduduk WHERE kecamatan_id = $petugas->kecamatan_id GROUP BY no_kk";
@@ -38,7 +38,7 @@ if(!in_array(get_role($user->id)->name,['administrator','bupati']))
     {
         $where .= (empty($where) ? 'WHERE ' : 'AND ') . "no_kk IN ('".implode("','",$all_kk)."')";
 
-        if(get_role($user->id)->name == 'surveyor')
+        if(get_role($user->id)->name == 'petugas lapangan')
         {
             $where .= (empty($where) ? 'WHERE ' : 'AND ') . "user_id = $user->id";
         }
