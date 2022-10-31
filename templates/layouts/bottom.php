@@ -115,34 +115,54 @@
 		$('.datatable').dataTable();
 		<?php endif ?>
 
-		$('.datatable-anak').dataTable({
-			processing: true,
-			search: {
-				return: true
-			},
-			serverSide: true,
-			ajax: "<?=routeTo('api/penduduk/pilih-anak')?>",
-			drawCallback: function( settings ) {
-				var anak = window.anak
-				anak.forEach(an => {
-					if(document.querySelector("#NIK-"+an))
-						document.querySelector("#NIK-"+an).checked = true
-				})
-			}
-		})
-
-		$('.datatable-penduduk').dataTable({
-			processing: true,
-			search: {
-				return: true
-			},
-			serverSide: true,
-			ajax: "<?=routeTo('api/penduduk/pilih-penduduk')?>"
-		})
-
 		function targetPenduduk(name)
 		{
-			window.target_input = name
+			var tanggal = document.querySelector('#tanggal_pelaksanaan_survey')
+			if(tanggal.value)
+			{
+				$('#exampleModal').modal('show')
+				window.target_input = name
+				$('.datatable-penduduk').dataTable({
+					processing: true,
+					search: {
+						return: true
+					},
+					serverSide: true,
+					ajax: "<?=routeTo('api/penduduk/pilih-penduduk')?>?tanggal="+tanggal.value
+				})
+			}
+			else
+			{
+				alert('Input Tanggal Survey Terlebih Dahulu');
+			}
+		}
+
+		function targetAnak()
+		{
+			var tanggal = document.querySelector('#tanggal_pelaksanaan_survey')
+			if(tanggal.value)
+			{
+				$('#exampleModal1').modal('show')
+				$('.datatable-anak').dataTable({
+					processing: true,
+					search: {
+						return: true
+					},
+					serverSide: true,
+					ajax: "<?=routeTo('api/penduduk/pilih-anak')?>?tanggal="+tanggal.value,
+					drawCallback: function( settings ) {
+						var anak = window.anak
+						anak.forEach(an => {
+							if(document.querySelector("#NIK-"+an))
+								document.querySelector("#NIK-"+an).checked = true
+						})
+					}
+				})
+			}
+			else
+			{
+				alert('Input Tanggal Survey Terlebih Dahulu');
+			}
 		}
 
 		function pilihPenduduk(NIK)

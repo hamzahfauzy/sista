@@ -5,6 +5,9 @@ $auth    = auth();
 $conn    = conn();
 $db      = new Database($conn);
 
+$tanggal = $_GET['tanggal'];
+$tahun   = date('Y', strtotime($tanggal));
+
 $draw    = $_GET['draw'];
 $start   = $_GET['start'];
 $length  = $_GET['length'];
@@ -15,7 +18,7 @@ $columns = ['NIK','nama','alamat'];
 
 $order_by = " ORDER BY ".$columns[$order[0]['column']]." ".$order[0]['dir'];
 
-$where = "WHERE NIK <> ''";
+$where = "WHERE NIK <> '' AND NOT EXISTS (SELECT * FROM survey WHERE survey.no_kk = $table.no_kk AND survey.status='publish' AND survey.tanggal LIKE '%$tahun%') ";
 
 if(!empty($search))
 {

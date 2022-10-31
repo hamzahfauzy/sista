@@ -33,6 +33,10 @@ th     { background:#eee; }
                             <div class="alert alert-danger"><?=$error_msg?></div>
                             <?php endif ?>
                             <form action="">
+                                <div class="form-group">
+                                    <label for="">Tanggal Pelaksanaan Survey</label>
+                                    <input type="date" id="tanggal_pelaksanaan_survey" name="tanggal" class="form-control" placeholder="Input Tanggal" value="<?=isset($_GET['tanggal'])?$_GET['tanggal']:''?>" required>
+                                </div>
                                 <?php if(isset($_GET['no_kk'])): ?>
                                 <div class="form-group">
                                     <label for="">ID Keluarga</label>
@@ -44,7 +48,7 @@ th     { background:#eee; }
                                     <div class="d-flex">
                                         <input type="text" name="nik_ayah" class="form-control" placeholder="Input NIK Ayah" value="<?=isset($_GET['nik_ayah'])?$_GET['nik_ayah']:''?>">
                                         &nbsp;
-                                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" onclick="targetPenduduk('ayah')">Cari</button>
+                                        <button type="button" class="btn btn-success" onclick="targetPenduduk('ayah')">Cari</button>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -52,7 +56,7 @@ th     { background:#eee; }
                                     <div class="d-flex">
                                         <input type="text" name="nik_ibu" class="form-control" placeholder="Input NIK Ibu" value="<?=isset($_GET['nik_ibu'])?$_GET['nik_ibu']:''?>">
                                         &nbsp;
-                                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" onclick="targetPenduduk('ibu')">Cari</button>
+                                        <button type="button" class="btn btn-success" onclick="targetPenduduk('ibu')">Cari</button>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -60,14 +64,10 @@ th     { background:#eee; }
                                     <div class="d-flex">
                                         <input type="text" name="nik_anak" class="form-control" placeholder="Input NIK Anak" value="<?=isset($_GET['nik_anak'])?$_GET['nik_anak']:''?>">
                                         &nbsp;
-                                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal1">Cari</button>
+                                        <button type="button" class="btn btn-success" onclick="targetAnak()">Cari</button>
                                     </div>
                                 </div>
                                 <?php endif ?>
-                                <div class="form-group">
-                                    <label for="">Tanggal Pelaksanaan Survey</label>
-                                    <input type="date" name="tanggal" class="form-control" placeholder="Input Tanggal" value="<?=isset($_GET['tanggal'])?$_GET['tanggal']:''?>" required>
-                                </div>
                                 <div class="form-group">
                                     <button class="btn btn-success" name="filter">Submit</button>
                                 </div>
