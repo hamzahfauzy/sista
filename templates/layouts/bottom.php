@@ -226,6 +226,24 @@
 				}
 			}
 		}
+		var rekapPenduduk = $('.rekap-penduduk').DataTable({
+			processing: true,
+			search: {
+				return: true
+			},
+			serverSide: true,
+			ajax:'<?=routeTo('rekapitulasi/penduduk')?>?tampil=true&tahun=<?=date('Y')?>'
+		});
+
+		function loadRekapPenduduk(form)
+		{
+			event.preventDefault();
+			const formData = new FormData(form);
+			const params = new URLSearchParams(formData);
+			rekapPenduduk.ajax.url("<?=routeTo('rekapitulasi/penduduk')?>?tampil=true&"+params.toString()).load();
+
+			return false;
+		}
 
 		<?php if(get_route() == 'rekapitulasi/index'): ?>
 		sortTable();

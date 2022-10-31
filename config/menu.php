@@ -14,6 +14,7 @@ return [
     'rekapitulasi' => [
         'Indeks Keluarga Sehat' => 'rekapitulasi/index',
         'Kasus Penyakit' => 'rekapitulasi/kasus',
+        'Penduduk' => 'rekapitulasi/penduduk',
     ],
     'pengguna'    => [
         'petugas' => 'crud/index?table=petugas',
