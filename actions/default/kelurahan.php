@@ -7,10 +7,14 @@ Page::set_title('Dashboard');
 
 $user = auth()->user;
 
-if(get_role($user->id)->name == 'admin kelurahan')
+if(get_role($user->id)->name == 'pembina kelurahan')
 {
     $petugas = $db->single('petugas',['user_id'=>$user->id]);
     $kelurahan_id = $petugas->kelurahan_id??($_GET['kelurahan_id']??0);
+}
+else
+{
+    die();
 }
 
 $lingkungan = $db->exists('lingkungan',['kelurahan_id'=>$kelurahan_id]);
