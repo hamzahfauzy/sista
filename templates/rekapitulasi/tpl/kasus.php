@@ -9,11 +9,12 @@
         <th>Desa / Kelurahan</th>
     </tr>
     <?php 
+    $no = 1;
     foreach($r as $index => $k): 
         foreach($k->keluarga as $kel):
     ?>
     <tr>
-        <td><?=$index+1?></td>
+        <td><?=$no+1?></td>
         <td><?=$k->no_kk?></td>
         <td><?=$keluarga->nama?></td>
         <td><?=$k->kecamatan->nama?></td>

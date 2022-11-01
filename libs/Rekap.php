@@ -455,10 +455,10 @@ class Rekap {
 
                     foreach($answers[$indikator_id] as $ans)
                     {
-                        $key = array_search($ans, array_column($found, 'jawaban'));
-                        $found = $found[$key];
+                        $_key = array_search($ans, array_column($found, 'jawaban'));
+                        $_found = $found[$_key];
     
-                        $d->keluarga[] = $db->single('penduduk',['NIK'=>$found['penduduk']['NIK']]);
+                        $d->keluarga[] = $db->single('penduduk',['NIK'=>$_found['penduduk']['NIK']]);
                     }
                     $d->kecamatan = $db->single('kecamatan',['id'=>$d->kecamatan_id]);
                     $d->kelurahan = $db->single('kelurahan',['id'=>$d->kelurahan_id]);
