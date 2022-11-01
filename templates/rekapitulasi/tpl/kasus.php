@@ -16,7 +16,7 @@
     <tr>
         <td><?=$no+1?></td>
         <td><?=$k->no_kk?></td>
-        <td><?=$keluarga->nama?></td>
+        <td><?=$kel->nama?></td>
         <td><?=$k->kecamatan->nama?></td>
         <td><?=$k->kelurahan->nama?></td>
     </tr>
