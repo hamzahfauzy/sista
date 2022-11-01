@@ -456,6 +456,7 @@ class Rekap {
                     foreach($answers[$indikator_id] as $ans)
                     {
                         $_key = array_search($ans, array_column($found, 'jawaban'));
+                        if(!$_key) continue;
                         $_found = $found[$_key];
     
                         $d->keluarga[] = $db->single('penduduk',['NIK'=>$_found['penduduk']['NIK']]);
