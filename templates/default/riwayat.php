@@ -50,7 +50,7 @@
                 <td><?=$d->no_kk?></td>
                 <td><?=$d->tanggal?></td>
                 <td style="background-color:<?=$d->kategori->warna?>"><?=$d->kategori->nama?></td>
-                <td><a href="<?=routeTo('default/download',['id'=>$d->no_kk])?>" class="btn btn-success"><i class="fas fa-download fa-fw"></i> Download</a></td>
+                <td><a href="<?=routeTo('default/download',['nik'=>auth()->user->username,'id'=>$d->no_kk])?>" class="btn btn-success"><i class="fas fa-download fa-fw"></i> Download</a></td>
             </tr>
             <?php endforeach ?>
         </table>
