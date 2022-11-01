@@ -100,7 +100,7 @@ function generated_menu($user_id)
                     $active = startWith($r, $start_route)||(isset($_GET['table'])&&$_GET['table']==$key);;
                 $dropdown .= '<li class="'.(startWith($r, $start_route)?'active':'').'">
                                 <a href="'.routeTo().$submenu.'">
-                                    <span class="sub-item">'.ucwords($label).'</span>
+                                    <span class="sub-item">'.($label == 'Cakupan Realisasi dan Masalah Kesehatan' ? $label : ucwords($label)).'</span>
                                 </a>
                             </li>';
             }
