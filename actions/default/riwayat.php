@@ -37,12 +37,6 @@ foreach($data as $survey)
     $survey->total_skor = $skor;
 }
 
-if(empty($data))
-{
-    header('location:'.routeTo('default/landing'));
-    die();
-}
-
 $kecamatan = $db->all('kecamatan');
 $content = "";
 
