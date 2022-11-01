@@ -411,11 +411,19 @@ class Rekap {
 
         $db = $this->db;
         $indikator_ids = [
-            6 => 'Kasus Penderita TBC',
-            7 => 'Kasus Hipertensi',
-            8 => 'Kasus Gangguan Jiwa',
-            12 => 'Kasus Stunting/Gizi Buruk',
-            13 => 'Kasus Jamban Tidak Sehat'
+            6 => 'Kasus Penderita TBC', // N
+            7 => 'Kasus Hipertensi', // N
+            8 => 'Kasus Gangguan Jiwa', // N
+            14 => 'Kasus Stunting/Gizi Buruk', // N
+            12 => 'Kasus Jamban Tidak Sehat' // T
+        ];
+
+        $answers = [
+            6 => ['Y','T'], // N
+            7 => ['Y','T'], // N
+            8 => ['Y','T'], // N
+            14 => ['Y','T'], // N
+            12 => ['Y','N'] // T
         ];
 
         $results = [];
@@ -445,10 +453,13 @@ class Rekap {
                     $key = array_search($indikator, array_column($nilai, 'indikator'));
                     $found = $nilai[$key]['rekap_penduduk'];
 
-                    $key = array_search($indikator->jawaban, array_column($found, 'jawaban'));
-                    $found = $found[$key];
-
-                    $d->keluarga = $db->single('penduduk',['NIK'=>$found['penduduk']['NIK']]);
+                    foreach($answers[$indikator_id] as $ans)
+                    {
+                        $key = array_search($ans, array_column($found, 'jawaban'));
+                        $found = $found[$key];
+    
+                        $d->keluarga[] = $db->single('penduduk',['NIK'=>$found['penduduk']['NIK']]);
+                    }
                     $d->kecamatan = $db->single('kecamatan',['id'=>$d->kecamatan_id]);
                     $d->kelurahan = $db->single('kelurahan',['id'=>$d->kelurahan_id]);
                 }

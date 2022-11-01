@@ -8,14 +8,18 @@
         <th>Kecamatan</th>
         <th>Desa / Kelurahan</th>
     </tr>
-    <?php foreach($r as $index => $k): ?>
+    <?php 
+    foreach($r as $index => $k): 
+        foreach($k->keluarga as $kel):
+    ?>
     <tr>
         <td><?=$index+1?></td>
         <td><?=$k->no_kk?></td>
-        <td><?=$k->keluarga->nama?></td>
+        <td><?=$keluarga->nama?></td>
         <td><?=$k->kecamatan->nama?></td>
         <td><?=$k->kelurahan->nama?></td>
     </tr>
+    <?php endforeach ?>
     <?php endforeach ?>
 </table>
 <?php endforeach ?>
