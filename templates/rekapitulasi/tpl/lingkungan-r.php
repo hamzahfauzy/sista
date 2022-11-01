@@ -74,7 +74,7 @@
         </tr>
         <?php endforeach ?>
         <tr>
-            <td colspan="2">Indeks Keluarga Sehat IKS</td>
+            <td colspan="2"></td>
             <td></td>
             <td style="color:#FFF;background:<?=$iks_lingkungan->warna?>"><?=number_format($skor_iks_lingkungan*100,2)?></td>
             <td></td>
