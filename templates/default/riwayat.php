@@ -40,6 +40,11 @@
                 <th>Status</th>
                 <th>Aksi</th>
             </tr>
+            <?php if(empty($data)): ?>
+            <tr>
+                <td colspan="4"><i>Tidak ada data</i></td>
+            </tr>
+            <?php endif ?>
             <?php foreach($data as $d): ?>
             <tr>
                 <td><?=$d->no_kk?></td>
