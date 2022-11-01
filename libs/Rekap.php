@@ -448,6 +448,7 @@ class Rekap {
                         continue;
                     }
                     $indikator = $db->single('indikator',['id'=> $indikator_id]);
+                    $indikator = (array) $indikator;
                     $survey = $db->single('survey',['no_kk' => $d->no_kk,'tanggal'=>['LIKE','%'.$tahun.'%']]);
                     $nilai = json_decode($survey->nilai,1);
                     $key = array_search($indikator, array_column($nilai, 'indikator'));

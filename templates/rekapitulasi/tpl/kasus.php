@@ -14,7 +14,7 @@
         foreach($k->keluarga as $kel):
     ?>
     <tr>
-        <td><?=$no+1?></td>
+        <td><?=$no++?></td>
         <td><?=$k->no_kk?></td>
         <td><?=$kel->nama?></td>
         <td><?=$k->kecamatan->nama?></td>
