@@ -8,7 +8,7 @@ class Rekap {
         $this->db   = new Database($conn);
     }
 
-    function index()
+    function index($realisasi = false)
     {
         $db = $this->db;
         $periode = isset($_GET['tahun']) ? $_GET['tahun'] : date('Y');
@@ -37,12 +37,12 @@ class Rekap {
         }
 
         ob_start();
-        require '../templates/rekapitulasi/tpl/index.php';
+        require '../templates/rekapitulasi/tpl/index'.($realisasi?'-r':'').'.php';
         $content = ob_get_clean();
         return $content;
     }
 
-    function kecamatan()
+    function kecamatan($realisasi = false)
     {
         $db = $this->db;
 
@@ -50,7 +50,7 @@ class Rekap {
 
         $kecamatan_id = $_GET['kecamatan_id'];
 
-        $cachefile = 'cached/rekapitulasi/kecamatan-'.$kecamatan_id.'-'.$periode.'.html';
+        $cachefile = 'cached/rekapitulasi/kecamatan-'.$kecamatan_id.'-'.$periode.''.($realisasi?'-r':'').'.html';
         if (file_exists($cachefile) && !isset($_GET['nocache'])) {
             ob_start();
             readfile($cachefile);
@@ -176,7 +176,7 @@ class Rekap {
         // return compact('kelurahan','lingkungan','penduduk','iks','detail_kecamatan','iks_kecamatan','jumlah_kk','indikator','skor_iks_kecamatan','db');
 
         ob_start();
-        require '../templates/rekapitulasi/tpl/kecamatan.php';
+        require '../templates/rekapitulasi/tpl/kecamatan'.($realisasi?'-r':'').'.php';
         $content = ob_get_clean();
         $cached = fopen($cachefile, 'w');
         fwrite($cached, $content);
@@ -184,7 +184,7 @@ class Rekap {
         return $content;
     }
     
-    function kelurahan()
+    function kelurahan($realisasi = false)
     {
 
         $db   = $this->db;
@@ -193,7 +193,7 @@ class Rekap {
 
         $periode = isset($_GET['tahun']) ? $_GET['tahun'] : date('Y');
 
-        $cachefile = 'cached/rekapitulasi/kelurahan-'.$kelurahan_id.'-'.$periode.'.html';
+        $cachefile = 'cached/rekapitulasi/kelurahan-'.$kelurahan_id.'-'.$periode.''.($realisasi?'-r':'').'.html';
         if (file_exists($cachefile) && !isset($_GET['nocache'])) {
             ob_start();
             readfile($cachefile);
@@ -311,7 +311,7 @@ class Rekap {
 
         // return compact('lingkungan','penduduk','iks','detail_kelurahan','jumlah_kk','iks_kelurahan','skor_iks_kelurahan','indikator','db');
         ob_start();
-        require '../templates/rekapitulasi/tpl/kelurahan.php';
+        require '../templates/rekapitulasi/tpl/kelurahan'.($realisasi?'-r':'').'.php';
         $content = ob_get_clean();
         $cached = fopen($cachefile, 'w');
         fwrite($cached, $content);
@@ -319,7 +319,7 @@ class Rekap {
         return $content;
     }
     
-    function lingkungan()
+    function lingkungan($realisasi = false)
     {
         $db   = $this->db;
 
@@ -327,7 +327,7 @@ class Rekap {
 
         $periode = isset($_GET['tahun']) ? $_GET['tahun'] : date('Y');
 
-        $cachefile = 'cached/rekapitulasi/lingkungan-'.$_GET['lingkungan_id'].'-'.$periode.'.html';
+        $cachefile = 'cached/rekapitulasi/lingkungan-'.$_GET['lingkungan_id'].'-'.$periode.''.($realisasi?'-r':'').'.html';
         if (file_exists($cachefile) && !isset($_GET['nocache'])) {
             ob_start();
             readfile($cachefile);
@@ -392,7 +392,7 @@ class Rekap {
         // return compact('penduduk','iks','detail_lingkungan','jumlah_kk','iks_lingkungan','indikator','all_survey','db','skor_iks_lingkungan');
 
         ob_start();
-        require '../templates/rekapitulasi/tpl/lingkungan.php';
+        require '../templates/rekapitulasi/tpl/lingkungan'.($realisasi?'-r':'').'.php';
         $content = ob_get_clean();
         $cached = fopen($cachefile, 'w');
         fwrite($cached, $content);

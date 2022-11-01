@@ -13,6 +13,7 @@ return [
     'survey' => 'survey/index',
     'rekapitulasi' => [
         'Indeks Keluarga Sehat' => 'rekapitulasi/index',
+        'Cakupan Realisasi dan Masalah Kesehatan' => 'rekapitulasi/realisasi',
         'Kasus Penyakit' => 'rekapitulasi/kasus',
         'Penduduk' => 'rekapitulasi/penduduk',
     ],
