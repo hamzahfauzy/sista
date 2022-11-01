@@ -137,7 +137,7 @@
                         </div>
                         <p class="mt-3 mb-0 text-muted text-sm">
                             <select onchange="location='<?=routeTo('default/index')?>?tahun='+this.value" class="form-control">
-                                <?php for($i=date('Y');$i>=1990;$i--): ?>
+                                <?php for($i=2030;$i>=2010;$i--): ?>
                                 <option value="<?=$i?>" <?=$periode==$i?'selected=""':''?>><?=$i?></option>
                                 <?php endfor ?>
                             </select>
