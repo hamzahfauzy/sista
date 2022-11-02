@@ -36,7 +36,7 @@ foreach($datas as $data)
         $jawaban_penduduk = [];
         foreach($nilai->rekap_penduduk as $penduduk)
         {
-            $_penduduk = $penduduk->penduduk;
+            $_penduduk = $db->single('penduduk',['id'=>$penduduk->penduduk->id]);
             $rekap_penduduk[] = [
                 'penduduk' => $penduduk->penduduk,
                 'jawaban'  => $penduduk->jawaban 
