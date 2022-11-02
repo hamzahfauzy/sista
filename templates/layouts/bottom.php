@@ -248,6 +248,20 @@
 		<?php if(get_route() == 'rekapitulasi/index'): ?>
 		sortTable();
 		<?php endif ?>
+
+		<?php if(in_array(get_route(),['crud/create','crud/edit']) && isset($_GET['table']) && $_GET['table'] == 'penduduk'): ?>
+		document.querySelector('[name="penduduk[kecamatan_id]"]').onchange = e => {
+			var value = document.querySelector('[name="penduduk[kecamatan_id]"]').value
+			document.querySelector('[name="penduduk[kelurahan_id]"]').querySelectorAll('option').forEach(opt => { opt.style.display = 'none' })
+			document.querySelector('[name="penduduk[kelurahan_id]"]').querySelectorAll('.kec-'+value).forEach(opt => { opt.style.display = 'block' })
+		}
+		
+		document.querySelector('[name="penduduk[kelurahan_id]"]').onchange = e => {
+			var value = document.querySelector('[name="penduduk[kelurahan_id]"]').value
+			document.querySelector('[name="penduduk[lingkungan_id]"]').querySelectorAll('option').forEach(opt => { opt.style.display = 'none' })
+			document.querySelector('[name="penduduk[lingkungan_id]"]').querySelectorAll('.kel-'+value).forEach(opt => { opt.style.display = 'block' })
+		}
+		<?php endif ?>
 	</script>
 </body>
 </html>

@@ -65,7 +65,9 @@ class Form
                 $lists .= "<option value=''>- Pilih -</option>";
                 foreach($options as $option)
                 {
-                    $lists .= "<option value='".$option->{$obj_array[1]}."' ".($option->{$obj_array[1]}==$value?'selected=""':'').">".$option->{$obj_array[2]}."</option>";
+                    $class = $types[1] == 'kelurahan' ? 'class="kec-'.$option->kecamatan_id.'"' : '';
+                    $class = $types[1] == 'lingkungan' ? 'class="kel-'.$option->kelurahan_id.'"' : $class;
+                    $lists .= "<option value='".$option->{$obj_array[1]}."' ".($option->{$obj_array[1]}==$value?'selected=""':'')." ".$class.">".$option->{$obj_array[2]}."</option>";
                 }
             }
             else
