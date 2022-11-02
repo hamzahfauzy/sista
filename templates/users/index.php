@@ -22,7 +22,7 @@
                             <div class="alert alert-success"><?=$success_msg?></div>
                             <?php endif ?>
                             <div class="table-responsive table-hover table-sales">
-                                <table class="table">
+                                <table class="table datatable">
                                     <thead>
                                         <tr>
                                             <th width="20px">#</th>
