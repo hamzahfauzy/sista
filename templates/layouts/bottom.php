@@ -262,6 +262,15 @@
 			document.querySelector('[name="penduduk[lingkungan_id]"]').querySelectorAll('.kel-'+value).forEach(opt => { opt.style.display = 'block' })
 		}
 		<?php endif ?>
+
+		<?php if(in_array(get_route(),['crud/create','crud/edit']) && isset($_GET['table']) && $_GET['table'] == 'petugas'): ?>
+		document.querySelector('[name="petugas[kecamatan_id]"]').onchange = e => {
+			var value = document.querySelector('[name="petugas[kecamatan_id]"]').value
+			document.querySelector('[name="petugas[kelurahan_id]"]').querySelectorAll('option').forEach(opt => { opt.style.display = 'none' })
+			document.querySelector('[name="petugas[kelurahan_id]"]').querySelectorAll('.kec-'+value).forEach(opt => { opt.style.display = 'block' })
+		}
+		
+		<?php endif ?>
 	</script>
 </body>
 </html>
