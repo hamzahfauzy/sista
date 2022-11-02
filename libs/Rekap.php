@@ -505,7 +505,7 @@ class Rekap {
                             $_found = $found[$_key];
                         }
     
-                        $d->keluarga[] = $db->single('penduduk',['NIK'=>$_found['penduduk']['NIK']]);
+                        $d->keluarga[] = $db->single('penduduk',['no_kk'=>$d->no_kk,'NIK'=>$_found['penduduk']['NIK']]);
                     }
                     $d->kecamatan = $db->single('kecamatan',['id'=>$d->kecamatan_id]);
                     $d->kelurahan = $db->single('kelurahan',['id'=>$d->kelurahan_id]);
