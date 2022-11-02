@@ -411,19 +411,50 @@ class Rekap {
 
         $db = $this->db;
         $indikator_ids = [
+            1 => 'Kasus Tidak Mengikuti Program KB', // Y
+            2 => 'Kasus Ibu Tidak bersalin di Fasilitas Kesehatan', // Y
+            3 => 'Kasus Bayi tidak Imunisasi Dasar Lengkap', // Y
+            4 => 'Kasus Bayi tidak mendapat ASI Eksklusif', // Y
+            5 => 'Kasus Balita tidak di pantau pertumbuhannya', // Y
             6 => 'Kasus Penderita TBC', // N
             7 => 'Kasus Hipertensi', // N
             8 => 'Kasus Gangguan Jiwa', // N
-            14 => 'Kasus Stunting/Gizi Buruk', // N
-            12 => 'Kasus Jamban Tidak Sehat' // T
+            9 => 'Kasus anggota keluarga yang merokok', // Y
+            10 => 'Kasus Keluarga tidak menjadi peserta JKN', // N
+            11 => 'Kasus Keluarga tidak mempunyai air bersih', // N
+            12 => 'Kasus Jamban Tidak Sehat', // T
+            13 => 'Kasus Stunting/Gizi Buruk', // N
+            14 => 'Kasus Stunting/Gizi Buruk yang Tidak di tangani', // N
+            15 => 'Kasus Keluarga tidak ke Posyandu',
+            16 => 'Kasus Saung Posyandu tidak layak',
+            17 => 'Kasus keluarga terinfeksi Covid-19',
+            18 => 'Kasus keluarga tidak divaksin Covid-19',
+            19 => 'Kasus tenaga kesehatan tidak profesional',
+            20 => 'Kasus tidak berperannya pemerintah dan stakeholders'
         ];
 
+        // penilaian individu dan keluarga
         $answers = [
+            1 => [0], // Y, cek logika (penilaian keluarga)
+            2 => [0], // Y, (penilaian keluarga)
+            3 => ['T'], // Y
+            4 => ['T'], // Y
+            5 => ['T'], // Y
             6 => ['Y','T'], // N
             7 => ['Y','T'], // N
             8 => ['Y','T'], // N
-            14 => ['Y','T'], // N
-            12 => ['Y','N'] // T
+            9 => ['T'], // Y
+            10 => ['T'], // Y
+            11 => [0], // Y, cek logika (penilaian keluarga)
+            12 => [0], // Y, (penilaian keluarga)
+            13 => ['T'], // Y
+            14 => ['T'], // Y
+            15 => [0], // Y, (penilaian keluarga)
+            16 => [0], // Y, cek logika (penilaian keluarga)
+            17 => ['T'], // Y
+            18 => ['T'], // Y
+            19 => [0], // Y, (penilaian keluarga)
+            20 => [0], // Y, (penilaian keluarga)
         ];
 
         $results = [];
@@ -456,9 +487,23 @@ class Rekap {
 
                     foreach($answers[$indikator_id] as $ans)
                     {
-                        $_key = array_search($ans, array_column($found, 'jawaban'));
-                        if(!$_key) continue;
-                        $_found = $found[$_key];
+                        if($ans==0 && $nilai[$key]['skor'] == 0)
+                        {
+                            $found_p = array_map(function($f_p){
+                                return $f_p['penduduk'];
+                            }, $found);
+                            $_key = array_search('Ayah', array_column($penduduk, 'sebagai'));
+                            if(!$_key){
+                                $_key = array_search('Ibu', array_column($penduduk, 'sebagai'));
+                            }
+                            $_found = $found[$_key];
+                        }
+                        else
+                        {
+                            $_key = array_search($ans, array_column($found, 'jawaban'));
+                            if(!$_key) continue;
+                            $_found = $found[$_key];
+                        }
     
                         $d->keluarga[] = $db->single('penduduk',['NIK'=>$_found['penduduk']['NIK']]);
                     }
