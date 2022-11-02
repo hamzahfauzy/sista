@@ -8,9 +8,16 @@
         <th>Kecamatan</th>
         <th>Desa / Kelurahan</th>
     </tr>
+    <?php if(empty($r)): ?>
+    <tr>
+        <td colspan="5"><i>Tidak ada data</i></td>
+    </tr>
+    <?php endif ?>
     <?php 
     $no = 1;
+    if(!empty($r))
     foreach($r as $index => $k): 
+        if(isset($k->keluarga))
         foreach($k->keluarga as $kel):
     ?>
     <tr>
