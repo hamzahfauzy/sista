@@ -507,6 +507,7 @@ class Rekap {
     
                         $d->keluarga[] = $db->single('penduduk',['no_kk'=>$d->no_kk,'NIK'=>$_found['penduduk']['NIK']]);
                     }
+                    $d->survey_id = $survey->id;
                     $d->kecamatan = $db->single('kecamatan',['id'=>$d->kecamatan_id]);
                     $d->kelurahan = $db->single('kelurahan',['id'=>$d->kelurahan_id]);
                 }
