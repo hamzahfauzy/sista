@@ -6,12 +6,12 @@ if (!in_array(php_sapi_name(),["cli","cgi-fcgi"])) {
     $parent_path = 'public/';
 }
 
-if(file_exists($parent_path . 'lock.txt'))
+if(file_exists($parent_path . 'lock-patch.txt'))
 {
     die();
 }
 
-file_put_contents($parent_path . 'lock.txt', strtotime('now'));
+file_put_contents($parent_path . 'lock-patch.txt', strtotime('now'));
 
 echo "Patch Start\n";
 
@@ -32,6 +32,6 @@ foreach($penduduk as $p)
 
 echo "Patch Finish\n";
 
-unlink($parent_path . 'lock.txt');
+unlink($parent_path . 'lock-patch.txt');
 
 die();
