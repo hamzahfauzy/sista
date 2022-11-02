@@ -69,7 +69,7 @@
                             ?>
                             <select name="tahun" id="" class="form-control">
                                 <option value="">- Pilih Tahun -</option>
-                                <?php for($i=date('Y');$i>=1990;$i--): ?>
+                                <?php for($i=2030;$i>=2010;$i--): ?>
                                 <option <?=$t==$i ? 'selected=""' : '' ?>><?=$i?></option>
                                 <?php endfor ?>
                             </select>
