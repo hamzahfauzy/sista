@@ -55,7 +55,7 @@ table th {
                 <div class="col-12">
                     <div class="card full-height">
                         <div class="card-body">
-                            <div class="card-title">Rekapitulasi 5 Kasus kesehatan/penyakit di masyarakat</div>
+                            <div class="card-title">REKAPITULASI MASALAH KESEHATAN BERDASARKAN IKS</div>
 
                             <div class="filter">
                                 <form action="">
