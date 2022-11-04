@@ -20,7 +20,7 @@ CREATE TABLE feedback_receivers (
     id INT AUTO_INCREMENT PRIMARY KEY,
     feedback_id INT NOT NULL,
     user_id INT NOT NULL,
-    status INT DEFAULT NULL,
+    status INT DEFAULT NULL
 );
 
 INSERT INTO topik (content) VALUES("Tingkatkan Profesional Tenaga Kesehatan");
