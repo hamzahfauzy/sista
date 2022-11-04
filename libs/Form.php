@@ -57,10 +57,15 @@ class Form
             {
                 $obj_array = explode(',',$options);
                 $options = $obj_array[0];
+                $params = [];
+                if(isset($obj_array[3]) && isset($obj_array[4]))
+                {
+                    $params = [$obj_array[3] => $obj_array[4]];
+                }
 
                 $conn = conn();
                 $db   = new Database($conn);
-                $datas = $db->all($options);
+                $datas = $db->all($options,$params);
                 $options = $datas;
                 $lists .= "<option value=''>- Pilih -</option>";
                 foreach($options as $option)

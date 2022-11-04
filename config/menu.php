@@ -9,6 +9,7 @@ return [
         'penduduk'   => 'crud/index?table=penduduk',
         'kategori'   => 'crud/index?table=kategori',
         'indikator'  => 'crud/index?table=indikator',
+        'topik'  => 'crud/index?table=topik',
     ],
     'survey' => 'survey/index',
     'rekapitulasi' => [
@@ -17,6 +18,7 @@ return [
         'Kasus Penyakit' => 'rekapitulasi/kasus',
         'Penduduk' => 'rekapitulasi/penduduk',
     ],
+    'tindak lanjut permasalahan' => 'feedbacks/index',
     'pengguna'    => [
         'petugas' => 'crud/index?table=petugas',
         'semua pengguna'     => 'users/index',

@@ -57,7 +57,7 @@
 
 	<!-- Atlantis DEMO methods, don't include it in your project! -->
 	<script src="<?=asset('assets/js/setting-demo.js')?>"></script>
-	<script src="<?=asset('assets/js/demo.js')?>"></script>
+	<!-- <script src="<?=asset('assets/js/demo.js')?>"></script> -->
 	<script src="<?=asset('assets/js/plugin/datatables-pagingtype/full_numbers_no_ellipses.js')?>"></script>
 	<script>
 		window.anak = []
@@ -270,6 +270,44 @@
 			document.querySelector('[name="petugas[kelurahan_id]"]').querySelectorAll('.kec-'+value).forEach(opt => { opt.style.display = 'block' })
 		}
 		
+		<?php endif ?>
+
+		<?php if(get_route() == 'feedbacks/create'): ?>
+		if(document.querySelector('[name="feedbacks[kecamatan_id]"]'))
+		document.querySelector('[name="feedbacks[kecamatan_id]"]').onchange = e => {
+			var value = document.querySelector('[name="feedbacks[kecamatan_id]"]').value
+			document.querySelector('[name="feedbacks[kelurahan_id]"]').querySelectorAll('option').forEach(opt => { opt.style.display = 'none' })
+			document.querySelector('[name="feedbacks[kelurahan_id]"]').querySelectorAll('.kec-'+value).forEach(opt => { opt.style.display = 'block' })
+		}
+		
+		if(document.querySelector('[name="feedbacks[kelurahan_id]"]'))
+		document.querySelector('[name="feedbacks[kelurahan_id]"]').onchange = e => {
+			var value = document.querySelector('[name="feedbacks[kelurahan_id]"]').value
+			document.querySelector('[name="feedbacks[lingkungan_id]"]').querySelectorAll('option').forEach(opt => { opt.style.display = 'none' })
+			document.querySelector('[name="feedbacks[lingkungan_id]"]').querySelectorAll('.kel-'+value).forEach(opt => { opt.style.display = 'block' })
+		}
+
+		if(document.querySelector('[name="feedbacks[clause_dest]"]'))
+		document.querySelector('[name="feedbacks[clause_dest]"]').onchange = async e => {
+			var value = e.target.value
+
+			if(value != 'pilih')
+			{
+				var request = await fetch("<?=routeTo('api/referensi/get-user-by-role')?>?role="+value)
+				if(request.ok)
+				{
+					var response = await request.json()
+					// console.log(response)
+					var tujuan   = document.querySelector('[name="feedbacks[clause_dest_item]"]')
+					tujuan.innerHTML = '<option>pilih</option>'
+					tujuan.innerHTML += '<option value="Semua">Semua</option>'
+					response.data.forEach(d => {
+						tujuan.innerHTML += `<option value="${d.id}">${d.name}</option>`
+					})
+				}
+			}
+			
+		}
 		<?php endif ?>
 	</script>
 </body>

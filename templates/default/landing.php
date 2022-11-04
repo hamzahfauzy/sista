@@ -30,9 +30,9 @@
             </div>
             <?php endif ?>
             <form action="<?=routeTo('auth/login')?>" class="newsletter" name="nik" method="post">
-                <label for="">NIK</label>
+                <label for="">&nbsp;</label>
                 <input type="tel" class="form-field" name="username" placeholder="Masukkan NIK Anda">
-                <label for="">Kata Sandi</label>
+                <label for="">&nbsp;</label>
                 <input type="password" class="form-field" name="password" placeholder="Masukkan Password Anda">
                 <button type="submit" class="btn-main">Masuk</button>
             </form>

@@ -118,5 +118,45 @@ return [
             'label' => 'Tanggal',
             'type'  => 'date'
         ],
-    ]
+    ],
+    'topik' => [
+        'content' => [
+            'label' => 'Topik',
+            'type' => 'textarea',
+        ]
+    ],
+    'feedbacks' => [
+        'clause_dest' => [
+            'label' => 'Kepada',
+            'type'  => 'options:pilih|pembina kabupaten|pembina kecamatan'
+        ],
+        'clause_dest_item' => [
+            'label' => 'Tujuan',
+            'type'  => 'options:pilih'
+        ],
+        'kecamatan_id' => [
+            'label' => 'Kecamatan',
+            'type'  => 'options-obj:kecamatan,id,nama'
+        ],
+        'kelurahan_id' => [
+            'label' => 'Desa/Kelurahan',
+            'type'  => 'options-obj:kelurahan,id,nama'
+        ],
+        'lingkungan_id' => [
+            'label' => 'Dusun/Lingkungan',
+            'type'  => 'options-obj:lingkungan,id,nama'
+        ],
+        'topik' => [
+            'label' => 'Topik',
+            'type'  => 'options-obj:topik,content,content'
+        ],
+        'content' => [
+            'label' => 'Isi Pesan Tindak Lanjut Permasalahan',
+            'type'  => 'textarea'
+        ],
+        'created_at' => [
+            'label' => 'Tanggal',
+            'type'  => 'date'
+        ]
+    ],
 ];

@@ -4,8 +4,11 @@ $auth = auth();
 
 if(isset($auth->user))
 {
-    header('location:'.routeTo('default/riwayat',['nik'=>$auth->user->username]));
-    die();
+    if(get_role(auth()->user->id)->name == 'penduduk')
+    {
+        header('location:'.routeTo('default/riwayat',['nik'=>$auth->user->username]));
+        die();
+    }
 }
 $conn = conn();
 $db   = new Database($conn);
