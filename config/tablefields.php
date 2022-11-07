@@ -128,11 +128,11 @@ return [
     'feedbacks' => [
         'clause_dest' => [
             'label' => 'Kepada',
-            'type'  => 'options:pilih|pembina kabupaten|pembina kecamatan'
+            'type'  => 'options:Pilih Semua|pembina kabupaten|pembina kecamatan'
         ],
         'clause_dest_item' => [
-            'label' => 'Tujuan',
-            'type'  => 'options:pilih'
+            'label' => 'Untuk',
+            'type'  => 'options:-'
         ],
         'kecamatan_id' => [
             'label' => 'Kecamatan',

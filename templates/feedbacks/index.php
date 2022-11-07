@@ -9,7 +9,7 @@
                     </div>
                     <div class="ml-md-auto py-2 py-md-0">
                         <?php if(is_allowed(get_route_path('feedbacks/create'),auth()->user->id)): ?>
-                            <a href="<?=routeTo('feedbacks/create')?>" class="btn btn-secondary btn-round">Buat Umpan Balik</a>
+                            <a href="<?=routeTo('feedbacks/create')?>" class="btn btn-secondary btn-round">Buat Tindak Lanjut Permasalahan</a>
                         <?php endif ?>
                     </div>
                 </div>

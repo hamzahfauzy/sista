@@ -299,7 +299,6 @@
 					var response = await request.json()
 					// console.log(response)
 					var tujuan   = document.querySelector('[name="feedbacks[clause_dest_item]"]')
-					tujuan.innerHTML = '<option>pilih</option>'
 					tujuan.innerHTML += '<option value="Semua">Semua</option>'
 					response.data.forEach(d => {
 						tujuan.innerHTML += `<option value="${d.id}">${d.name}</option>`

@@ -36,12 +36,13 @@ if(get_role($user->id)->name == 'pembina kecamatan')
 
 else
 {
-    unset($fields['kecamatan_id']);
-    unset($fields['kelurahan_id']);
-    unset($fields['lingkungan_id']);
-    
     if(!isset($_GET['feedbacks']))
     {
+        unset($fields['kecamatan_id']);
+        unset($fields['kelurahan_id']);
+        unset($fields['lingkungan_id']);
+        unset($fields['content']);
+        unset($fields['topik']);
     }
     else
     {
