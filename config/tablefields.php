@@ -127,31 +127,31 @@ return [
     ],
     'feedbacks' => [
         'clause_dest' => [
-            'label' => 'Kepada',
-            'type'  => 'options:Pilih Semua|pembina kabupaten|pembina kecamatan'
+            'label' => 'Kepada :',
+            'type'  => 'options:- Pilih -|Semua Pembina|Pembina Kabupaten|Pembina Kecamatan'
         ],
         'clause_dest_item' => [
-            'label' => 'Untuk',
-            'type'  => 'options:-'
+            'label' => 'Untuk :',
+            'type'  => 'select'
         ],
-        'kecamatan_id' => [
-            'label' => 'Kecamatan',
-            'type'  => 'options-obj:kecamatan,id,nama'
-        ],
-        'kelurahan_id' => [
-            'label' => 'Desa/Kelurahan',
-            'type'  => 'options-obj:kelurahan,id,nama'
-        ],
-        'lingkungan_id' => [
-            'label' => 'Dusun/Lingkungan',
-            'type'  => 'options-obj:lingkungan,id,nama'
-        ],
+        // 'kecamatan_id' => [
+        //     'label' => 'Kecamatan',
+        //     'type'  => 'options-obj:kecamatan,id,nama'
+        // ],
+        // 'kelurahan_id' => [
+        //     'label' => 'Desa/Kelurahan',
+        //     'type'  => 'options-obj:kelurahan,id,nama'
+        // ],
+        // 'lingkungan_id' => [
+        //     'label' => 'Dusun/Lingkungan',
+        //     'type'  => 'options-obj:lingkungan,id,nama'
+        // ],
         'topik' => [
-            'label' => 'Topik',
+            'label' => 'Topik :',
             'type'  => 'options-obj:topik,content,content'
         ],
         'content' => [
-            'label' => 'Isi Pesan Tindak Lanjut Permasalahan',
+            'label' => 'Isi Pesan Tindak Lanjut Permasalahan :',
             'type'  => 'textarea'
         ],
         'created_at' => [

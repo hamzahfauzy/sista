@@ -1,6 +1,6 @@
 <?php
 
-$role = $_GET['role'];
+$role = strtolower($_GET['role']);
 $conn = conn();
 $db   = new Database($conn);
 

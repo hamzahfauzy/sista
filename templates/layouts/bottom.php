@@ -17,10 +17,16 @@
 </div>
 <!-- End Custom template -->
 </div>
+    <style>
+    .select2 option {
+        display: none;
+    }
+    </style>
 	<!--   Core JS Files   -->
 	<script src="<?=asset('assets/js/core/jquery.3.2.1.min.js')?>"></script>
 	<script src="<?=asset('assets/js/core/popper.min.js')?>"></script>
 	<script src="<?=asset('assets/js/core/bootstrap.min.js')?>"></script>
+	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 	<!-- jQuery UI -->
 	<script src="<?=asset('assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js')?>"></script>
@@ -291,22 +297,58 @@
 		document.querySelector('[name="feedbacks[clause_dest]"]').onchange = async e => {
 			var value = e.target.value
 
-			if(value != 'pilih')
+			if(value != 'Pilih')
 			{
-				var request = await fetch("<?=routeTo('api/referensi/get-user-by-role')?>?role="+value)
-				if(request.ok)
-				{
-					var response = await request.json()
-					// console.log(response)
-					var tujuan   = document.querySelector('[name="feedbacks[clause_dest_item]"]')
-					tujuan.innerHTML += '<option value="Semua">Semua</option>'
-					response.data.forEach(d => {
-						tujuan.innerHTML += `<option value="${d.id}">${d.name}</option>`
-					})
-				}
+			    $('.select2').html('').select2({data: [{id: '', text: ''}]});
+			    if(value == 'Semua Pembina')
+			    {
+			        $('.select2').prop("disabled", true)
+			     //   document.querySelector('[name="feedbacks[clause_dest_item]"]').setAttribute('readonly','readonly')
+			    }
+			    else
+			    {
+			        $('.select2').prop("disabled", false)
+			        var request = await fetch("<?=routeTo('api/referensi/get-user-by-role')?>?role="+value)
+    				if(request.ok)
+    				{
+    				    var allOption = new Option('Semua', 'Semua', true, true);
+                        $('.select2').append(allOption)
+                        
+    					var response = await request.json()
+        				for(var i=0;i<response.data.length;i++)
+        				{
+        				    var d = response.data[i]
+                            var newOption = new Option(d.name, d.id, false, false);
+                            $('.select2').append(newOption);
+    					}
+                        
+                        $('.select2').val('Semua').trigger('change')
+    				}
+			    }
 			}
 			
 		}
+		
+		$( ".select2" ).select2({
+		    placeholder: '- Pilih -',
+		    allowClear: true
+		});
+		
+		$('.select2').on('select2:select', function (e) {
+            var data = e.params.data
+            console.log(data);
+            if(data.id == 'Semua')
+            {
+                $('.select2').val(null).trigger('change');
+                $('.select2').val('Semua').trigger('change')
+            }
+            else
+            {
+                var wanted_option = $('.select2 option[value="Semua"]');
+                wanted_option.prop('selected', false);
+                $('.select2').trigger('change.select2');
+            }
+        });
 		<?php endif ?>
 	</script>
 </body>

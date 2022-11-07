@@ -21,7 +21,7 @@
                             <?php if($error_msg): ?>
                             <div class="alert alert-danger"><?=$error_msg?></div>
                             <?php endif ?>
-                            <form action="" method="<?= !isset($_GET['feedbacks']) && get_role(auth()->user->id)->name != 'pembina kecamatan' ? 'get' : 'post' ?>">
+                            <form action="" method="post">
                                 <?php 
                                 foreach($fields as $key => $field): 
                                     $label = $field;
@@ -38,17 +38,19 @@
                                     $attribute = [
                                         'class'=>($type == 'color' ? 'd-block' :'form-control'),"placeholder"=>$label,"value"=>$old[$field]??$data->{$field}
                                     ];
-                                    if(isset($_GET['feedbacks']))
+                                    
+                                    $fieldname = $table."[".$field."]";
+                                    
+                                    if($field == 'clause_dest_item')
                                     {
-                                        if(in_array($field,['clause_dest','clause_dest_item']))
-                                        {
-                                            $attribute['readonly'] = 'readonly';
-                                        }
+                                        $attribute['multiple'] = 'multiple';
+                                        $attribute['class'] .= ' select2';
+                                        $fieldname .= "[]";
                                     }
                                 ?>
                                 <div class="form-group">
                                     <label for=""><?=$label?></label>
-                                    <?= Form::input($type, $table."[".$field."]", $attribute) ?>
+                                    <?= Form::input($type, $fieldname, $attribute) ?>
                                 </div>
                                 <?php endforeach ?>
                                 <div class="form-group">
