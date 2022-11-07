@@ -11,8 +11,8 @@ $fields = config('fields')[$table];
 unset($fields['created_at']);
 
 $data = json_decode(json_encode([
-    'clause_dest' => isset($_GET['feedbacks']['clause_dest'])?$_GET['feedbacks']['clause_dest']:'',
-    'clause_dest_item' => isset($_GET['feedbacks']['clause_dest_item'])?$_GET['feedbacks']['clause_dest_item']:'',
+    'clause_dest' => '',
+    'clause_dest_item' => '',
     'kecamatan_id' => '',
     'kelurahan_id' => '',
     'lingkungan_id' => '',
@@ -34,56 +34,56 @@ if(get_role($user->id)->name == 'pembina kecamatan')
 
 if(request() == 'POST')
 {
-    // $req = $_POST[$table];
-    // $req['clause_dest'] = strtolower($req['clause_dest']);
+    $_POST[$table]['clause_dest'] = isset($_POST[$table]['clause_dest']) ? strtolower($_POST[$table]['clause_dest']) : 'pembina kelurahan';
+    $_POST[$table]['user_id'] = auth()->user->id;
     
-    // $clause_dest_item = implode(",",$req['clause_dest_item']);
+    $clause_dest_item = implode(",",$_POST[$table]['clause_dest_item']);
+    $role  = $db->single('roles',['name' => $_POST[$table]['clause_dest']]);
+    $items = [];
 
-    // $_POST[$table]['clause_dest'] = $req['clause_dest'];
-    // $_POST[$table]['clause_dest_item'] = $clause_dest_item;
-    // $_POST[$table]['user_id'] = auth()->user->id;
+    if($_POST[$table]['clause_dest_item'][0] != 'Semua')
+    {
+        $query = "";
+        if($_POST[$table]['clause_dest'] == 'pembina kelurahan')
+        {
+            $query = "SELECT * FROM petugas WHERE kelurahan_id IN ($clause_dest_item) AND user_id IN (SELECT user_id FROM user_roles WHERE role_id=$role->id)";
+        }
+        else
+        {
+            $query = "SELECT * FROM petugas WHERE user_id IN ($clause_dest_item)";
+        }
+    }
+    else
+    {
+        $query = "";
+        if($_POST[$table]['clause_dest'] == 'pembina kelurahan')
+        {
+            // semua akun pembina kelurahan pada 1 kecamatan
+            $query = "SELECT * FROM petugas WHERE kecamatan_id = $petugas->kecamatan_id AND user_id IN (SELECT user_id FROM user_roles WHERE role_id=$role->id)";
+        }
+        else
+        {
+            // semua akun sesuai dengan roles
+            $query = "SELECT * FROM petugas WHERE user_id IN (SELECT user_id FROM user_roles WHERE role_id=$role->id)";
+        }
+    }
 
-    // $insert = $db->insert($table,$_POST[$table]);
+    $db->query = $query;
+    $items = $db->exec('all');
+    $clause_dest_item = array_map(function($i){
+        return $i->nama;
+    }, $items);
 
-    // if(get_role($user->id)->name == 'pembina kecamatan')
-    // {
-    //     $role = $db->single('roles',['name' => 'pembina kelurahan']);
+    $clause_dest_item = implode(',',$clause_dest_item);
+
+    $_POST[$table]['clause_dest_item'] = $clause_dest_item;
+
+    $insert = $db->insert($table,$_POST[$table]);
         
-    //     if($req['clause_dest_item'][0] == 'Semua')
-    //     {
-    //         $db->query = "SELECT user_id FROM petugas WHERE kecamatan_id = ".$petugas->kecamatan_id." AND user_id IN (SELECT user_id FROM user_roles WHERE role_id=$role->id)";
-    //     }
-    //     else
-    //     {
-    //         $db->query = "SELECT user_id FROM petugas WHERE kelurahan_id IN ($clause_dest_item) AND user_id IN (SELECT user_id FROM user_roles WHERE role_id=$role->id)";
-    //     }
-        
-    //     $users = $db->exec('all');
-        
-    //     foreach($users as $user)
-    //     {
-    //         $db->insert('feedback_receivers',['feedback_id'=>$insert->id,'user_id'=>$user->user_id]);
-    //     }
-    // }
-    // else
-    // {
-    //     $role = $db->single('roles',['name' => $insert->clause_dest]);
-    //     if($req['clause_dest_item'][0] != 'Semua')
-    //     {
-    //         $db->query = "SELECT user_id FROM petugas WHERE user_id IN (SELECT user_id FROM user_roles WHERE role_id=$role->id)";
-    //     }
-    //     else
-    //     {
-    //         $db->query = "SELECT user_id FROM petugas WHERE user_id IN ($clause_dest_item)";
-    //     }
-        
-    //     $users = $db->exec('all');
-        
-    //     foreach($users as $user)
-    //     {
-    //         $db->insert('feedback_receivers',['feedback_id'=>$insert->id,'user_id'=>$user->user_id]);
-    //     }
-    // }
+    foreach($items as $item)
+    {
+        $db->insert('feedback_receivers',['feedback_id'=>$insert->id,'user_id'=>$item->user_id]);
+    }
 
     set_flash_msg(['success'=>'Umpan balik berhasil ditambahkan']);
     header('location:'.routeTo('feedbacks/index'));
