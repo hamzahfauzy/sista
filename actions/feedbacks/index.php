@@ -25,15 +25,16 @@ if(in_array('instruktur',$roles))
     ]);
 }
 
+
 if((in_array('pembina kabupaten',$roles) && !in_array('instruktur',$roles) || in_array('pembina kecamatan',$roles)))
 {
     $own = $db->all($table,[
         'user_id' => $user->id
-    ],[],['id'=>'desc']);
+    ],['id'=>'desc']);
 
     $receiver = $db->all('feedback_receivers',[
         'user_id' => $user->id
-    ],[],['id'=>'desc']);
+    ],['id'=>'desc']);
 
     $receiver = array_map(function($r) use ($db) {
         return $db->single('feedbacks',['id'=>$r->feedback_id]);
@@ -46,7 +47,7 @@ if(in_array('pembina kelurahan',$roles))
 {
     $receiver = $db->all('feedback_receivers',[
         'user_id' => $user->id
-    ],[],['id'=>'desc']);
+    ],['id'=>'desc']);
 
     $data = array_map(function($r) use ($db) {
         return $db->single('feedbacks',['id'=>$r->feedback_id]);
