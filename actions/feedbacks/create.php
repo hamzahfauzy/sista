@@ -28,6 +28,7 @@ $user = auth()->user;
 if(get_role($user->id)->name == 'pembina kecamatan')
 {
     $petugas = $db->single('petugas',['user_id'=>$user->id]);
+    unset($fields['clause_dest']);
     $fields['clause_dest_item']['type'] = 'options-obj:kelurahan,id,nama,kecamatan_id,'.$petugas->kecamatan_id;
 }
 

@@ -7,17 +7,13 @@ $db   = new Database($conn);
 $success_msg = get_flash_msg('success');
 $error_msg = get_flash_msg('error');
 $fields = config('fields')[$table];
-$user = auth()->user;
 
 unset($fields['content']);
-if(get_role($user->id)->name == 'pembina kecamatan')
-{
-    unset($fields['clause_dest']);
-}
 
 $actions = [];
 
 $data = $db->all($table,[],['id'=>'desc']);
+$user = auth()->user;
 $roles = array_map(function($role){
     return $role->name;
 }, get_roles($user->id));
