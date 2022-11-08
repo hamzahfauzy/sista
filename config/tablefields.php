@@ -132,7 +132,7 @@ return [
         ],
         'clause_dest_item' => [
             'label' => 'Untuk :',
-            'type'  => 'select'
+            'type'  => 'options:-'
         ],
         // 'kecamatan_id' => [
         //     'label' => 'Kecamatan',
