@@ -147,7 +147,7 @@ return [
         //     'type'  => 'options-obj:lingkungan,id,nama'
         // ],
         'topik' => [
-            'label' => 'Topik :',
+            'label' => 'Topik Permasalahan :',
             'type'  => 'options-obj:topik,content,content'
         ],
         'content' => [

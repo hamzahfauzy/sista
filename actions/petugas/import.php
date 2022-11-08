@@ -4,6 +4,9 @@ if(request() == 'POST')
 {
     $conn = conn();
     $db   = new Database($conn);
+
+    $role = $db->single('roles',['name' => $_POST['sebagai']]);
+
     // Open uploaded CSV file with read-only mode
     $csvFile = fopen($_FILES['file']['tmp_name'], 'r');
 
@@ -12,56 +15,73 @@ if(request() == 'POST')
 
     // Parse data from CSV file line by line
     while(($line = fgetcsv($csvFile)) !== FALSE){
-        $name = ucwords(strtolower($line[0]));
-        $arrName = explode(' ',$name);
-        $frontName = $arrName[0];
+        // 0 -> no, 1 -> Instansi, 2 -> username
+        if($_POST['sebagai'] == 'pembina kabupaten')
+        {
+            $name = ucwords(strtolower($line[1]));
+            $arrName = explode(' ',$name);
+            $frontName = $arrName[0];
+    
+            unset($arrName[0]);
+            $backName = implode('',$arrName);
+            $username = $frontName.'_'.strtolower($backName);
+    
+            $user = $db->insert('users', [
+                'name' => $name,
+                'username' => $username,
+                'password' => md5(123456)
+            ]);
+    
+            $db->insert('user_roles',[
+                'user_id' => $user->id,
+                'role_id' => $role->id,
+            ]);
+    
+            $db->insert('petugas',[
+                'user_id' => $user->id,
+                'kecamatan_id' => 0,
+                'kelurahan_id' => 0,
+                'NIK' => strtotime('now') . $user->id,
+                'nama' => $name,
+                'alamat' => '-',
+                'jenis_kelamin' => 'Laki-laki',
+                'no_hp' => strtotime('now') . $user->id,
+                'email' => strtotime('now') . $user->id.'@pasta.com'
+            ]);
+        }
 
-        unset($arrName[0]);
-        $backName = implode('',$arrName);
-        $username = $frontName.'_'.strtolower($backName);
-
-        $user = $db->insert('users', [
-            'name' => $name,
-            'username' => $username,
-            'password' => md5(123456)
-        ]);
-
-        $db->insert('user_roles',[
-            'user_id' => $user->id,
-            'role_id' => 6,
-        ]);
-
-        $db->insert('petugas',[
-            'user_id' => $user->id,
-            'kecamatan_id' => 0,
-            'kelurahan_id' => 0,
-            'NIK' => strtotime('now') . $user->id,
-            'nama' => $name,
-            'alamat' => '-',
-            'jenis_kelamin' => 'Laki-laki',
-            'no_hp' => strtotime('now') . $user->id,
-            'email' => strtotime('now') . $user->id.'@pasta.com'
-        ]);
-
-
-
-        // Get row data
-        // $name   = $line[0];
-        // $email  = $line[1];
-        // $phone  = $line[2];
-        // $status = $line[3];
+        if($_POST['sebagai'] == 'pembina kecamatan')
+        {
+            $kecamatan = $db->single('kecamatan',['nama' => ['LIKE','%'.$line[1].'%']]);
+            
+            if($kecamatan)
+            {
+                $username = $line[2];
+                $user = $db->insert('users', [
+                    'name' => $username,
+                    'username' => $username,
+                    'password' => md5(123456)
+                ]);
+    
+                $db->insert('user_roles',[
+                    'user_id' => $user->id,
+                    'role_id' => $role->id,
+                ]);
         
-        // // Check whether member already exists in the database with the same email
-        // $prevQuery = "SELECT id FROM members WHERE email = '".$line[1]."'";
-        // $prevResult = $db->query($prevQuery);
-        
-        // if($prevResult->num_rows > 0){
-        //     // Update member data in the database
-        //     $db->query("UPDATE members SET name = '".$name."', phone = '".$phone."', status = '".$status."', modified = NOW() WHERE email = '".$email."'");
-        // }else{
-        //     // Insert member data in the database
-        //     $db->query("INSERT INTO members (name, email, phone, created, modified, status) VALUES ('".$name."', '".$email."', '".$phone."', NOW(), NOW(), '".$status."')");
-        // }
+                $db->insert('petugas',[
+                    'user_id' => $user->id,
+                    'kecamatan_id' => $kecamatan->id,
+                    'kelurahan_id' => 0,
+                    'NIK' => strtotime('now') . $user->id,
+                    'nama' => $username,
+                    'alamat' => '-',
+                    'jenis_kelamin' => 'Laki-laki',
+                    'no_hp' => strtotime('now') . $user->id,
+                    'email' => strtotime('now') . $user->id.'@pasta.com'
+                ]);
+            }
+
+        }
     }
 
     // Close opened CSV file

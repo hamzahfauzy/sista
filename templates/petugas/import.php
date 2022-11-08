@@ -21,7 +21,15 @@
                             <form action="" method="post" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label for="">File Import</label>
-                                    <input type="file" class="form-control" name="file">
+                                    <input type="file" class="form-control" name="file" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Sebagai</label>
+                                    <select name="sebagai" class="form-control" required>
+                                        <option value="">Pilih</option>
+                                        <option value="pembina kabupaten">Pembina Kabupaten</option>
+                                        <option value="pembina kecamatan">Pembina Kecamatan</option>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <button class="btn btn-primary">Import</button>
