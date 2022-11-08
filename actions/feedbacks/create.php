@@ -29,7 +29,15 @@ if(get_role($user->id)->name == 'pembina kecamatan')
 {
     $petugas = $db->single('petugas',['user_id'=>$user->id]);
     unset($fields['clause_dest']);
-    $fields['clause_dest_item']['type'] = 'options-obj:kelurahan,id,nama,kecamatan_id,'.$petugas->kecamatan_id;
+
+    $all_petugas = $db->all('petugas',['kecamatan_id'=>$petugas->kecamatan_id,'id'=>['<>',$petugas->id]]);
+    $clause_dest_item = [];
+    foreach($all_petugas as $p)
+    {
+        $clause_dest_item[$p->user_id] = $p->nama;
+    }
+
+    $fields['clause_dest_item']['type'] = 'options-cus:'.json_encode($clause_dest_item);
 }
 
 

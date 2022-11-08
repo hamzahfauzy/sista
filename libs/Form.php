@@ -75,6 +75,16 @@ class Form
                     $lists .= "<option value='".$option->{$obj_array[1]}."' ".($option->{$obj_array[1]}==$value?'selected=""':'')." ".$class.">".$option->{$obj_array[2]}."</option>";
                 }
             }
+            elseif(substr($type, 8,3) == 'cus')
+            {
+                $obj = str_replace("options-cus:","",$type);
+                $options = json_decode($obj);
+                $lists .= "<option value=''>- Pilih -</option>";
+                foreach($options as $key => $val)
+                {
+                    $lists .= "<option value='".$key."' ".($key==$value?'selected=""':'').">".$val."</option>";
+                }
+            }
             else
             {
                 $options = explode('|',$options);
