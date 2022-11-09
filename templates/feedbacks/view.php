@@ -23,16 +23,17 @@
                                     <td style="vertical-align:top !important;padding-top:10px !important;"><b>Kepada</b></td>
                                     <td style="vertical-align:top !important;padding-top:10px !important;"><?=ucwords($data->clause_dest)?></td>
                                 </tr>
-                                <?php if($data->clause_dest_item): ?>
                                 <tr>
                                     <td style="vertical-align:top !important;padding-top:10px !important;"><b>Tujuan</b></td>
                                     <td style="vertical-align:top !important;padding-top:10px !important;"><?=ucwords($data->clause_dest_item)?></td>
                                 </tr>
-                                <?php endif ?>
+                                <tr>
+                                    <td style="vertical-align:top !important;padding-top:10px !important;"><b>Topik</b></td>
+                                    <td style="vertical-align:top !important;padding-top:10px !important;"><?=$data->topik?></td>
+                                </tr>
                                 <tr>
                                     <td style="vertical-align:top !important;padding-top:10px !important;"><b>Instruksi</b></td>
                                     <td style="vertical-align:top !important;padding-top:10px !important;">
-                                        <b><?=$data->topik?></b>
                                         <p><?=$data->content?></p>
                                     </td>
                                 </tr>
