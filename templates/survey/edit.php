@@ -1,6 +1,6 @@
 <?php load_templates('layouts/top') ?>
 <style>
-.tableFixHead          { overflow: auto; height: 500px; }
+.tableFixHead          { overflow: auto; height: 800px; }
 .tableFixHead thead { position: sticky; top: 0; z-index: 1; }
 
 /* Just common table stuff. Really. */

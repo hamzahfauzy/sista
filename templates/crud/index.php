@@ -69,7 +69,7 @@
                                                 $label = _ucwords($label);
                                             ?>
                                             <td>
-                                            <?=$label == 'Warna' ? "<div style='background:".$data_value.";padding:10px'></div>" : $data_value?>
+                                            <?=$label == 'Warna' ? "<div style='background:".$data_value.";padding:10px'></div>" : nl2br($data_value)?>
                                             </td>
                                             <?php endforeach ?>
                                             <td>

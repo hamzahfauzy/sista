@@ -54,6 +54,27 @@
     <table width="100%">
         <thead>
             <tr>
+                <th style="text-align:center;width:30%">INDIKATOR TAMBAHAN</th>
+                <th style="text-align:center">PILIHAN</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php 
+            $indikator_tambahan = json_decode($data->indikator_tambahan);
+            foreach($indikator_tambahan as $id => $indi): 
+                $indi_t = $db->single('indikator_tambahan',['id'=>$id]);
+            ?>
+            <tr>
+                <td><?=$indi_t->deskripsi?></td>
+                <td><?=$indi?></td>
+            </tr>
+            <?php endforeach ?>
+        </tbody>
+    </table>
+
+    <table width="100%">
+        <thead>
+            <tr>
                 <th style="text-align:center;width:30%" rowspan="3">INDIKATOR</th>
                 <th style="text-align:center" colspan="<?=count($data->nilai[0]->rekap_penduduk)*3?>">VARIABEL PENILAIAN</th>
                 <th rowspan="3">Skor</th>
@@ -106,6 +127,7 @@
         if(isset($nilai['N'])) unset($nilai['N']);
         // $label = $nilai[1] ." / ". $question;
         $nilai = $nilai[1] / $question;
+        if($data->status == 'publish'): ?>
         ?>
         <tr>
             <td>Total Nilai IKS</td>
@@ -117,6 +139,7 @@
             <td style="text-align:center" colspan="<?=count($data->nilai[0]->rekap_penduduk)*3?>"><?=$data->kategori->nama?></td>
             <td style="background:<?=$data->kategori->warna?>"></td>
         </tr>
+        <?php endif ?>
     </table>
 </body>
 </html>

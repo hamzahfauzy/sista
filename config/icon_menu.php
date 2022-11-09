@@ -2,6 +2,7 @@
 
 return [
     'dashboard' => 'fas fa-home',
+    // 'timeline'  => 'fas fa-desktop',
     'master'  => 'fas fa-cubes',
     'survey'  => 'fas fa-file',
     'rekapitulasi'  => 'fas fa-file',

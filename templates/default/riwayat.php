@@ -29,10 +29,17 @@
         <center>
             <img src="<?=asset('assets/img/main-logo.png')?>" alt="" width="100px">
             <h2>DATA RIWAYAT INDEKS KELUARGA SEHAT (<?=$penduduk->nama?>)</h2>
-            <a href="<?=routeTo('')?>">Kembali ke halaman awal</a> | <a href="<?=routeTo('auth/logout')?>">Logout</a>
+            <a href="<?=routeTo('')?>">Kembali ke halaman awal</a> | <a href="<?=routeTo('default/riwayat',['nik'=>$penduduk->NIK,'page'=>'form-survey'])?>">Form Survey Mandiri</a> | <a href="<?=routeTo('auth/logout')?>">Logout</a>
             <p></p>
         </center>
 
+        <?php if(isset($_GET['page'])) : ?>
+        <div class="row">
+            <div class="col-12">
+                <?php require $_GET['page'].'.php'; ?>
+            </div>
+        </div>
+        <?php else: ?>
         <table class="table table-bordered table-striped">
             <tr>
                 <th>ID</th>
@@ -49,7 +56,11 @@
             <tr>
                 <td><?=$d->no_kk?></td>
                 <td><?=$d->tanggal?></td>
+                <?php if($d->status == 'publish'): ?>
                 <td style="background-color:<?=$d->kategori->warna?>"><?=$d->kategori->nama?></td>
+                <?php else: ?>
+                <td><?=$d->status?></td>
+                <?php endif ?>
                 <td><a href="<?=routeTo('default/download',['nik'=>auth()->user->username,'id'=>$d->no_kk])?>" class="btn btn-success"><i class="fas fa-download fa-fw"></i> Download</a></td>
             </tr>
             <?php endforeach ?>
@@ -100,6 +111,7 @@
                 </div>
             </div>
         </div>
+        <?php endif ?>
     </div>
     <script>
     var kecamatan = e => {

@@ -1,0 +1,1 @@
+ALTER TABLE `survey` ADD `indikator_tambahan` LONGTEXT DEFAULT NULL;

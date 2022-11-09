@@ -159,4 +159,14 @@ return [
             'type'  => 'date'
         ]
     ],
+    'indikator_tambahan' => [
+        'deskripsi' => [
+            'label' => 'Deskripsi',
+            'type'  => 'textarea'
+        ],
+        'pilihan' => [
+            'label' => 'Pilihan',
+            'type'  => 'textarea'
+        ]
+    ]
 ];

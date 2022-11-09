@@ -31,9 +31,9 @@ class Database
         $this->query = "INSERT INTO $table";
         $fields = implode(',',array_keys($val));
         $vals = array_values($val);
-        $vals = array_map(function($valss){
-            return preg_replace('/[\x00-\x1F\x7F-\xFF]/', '', $valss);
-        }, $vals);
+        // $vals = array_map(function($valss){
+        //     return preg_replace('/[\x00-\x1F\x7F-\xFF]/', '', $valss);
+        // }, $vals);
         $values = "'".implode("','",$vals)."'";
         $this->query .= "($fields)VALUES($values)";
         return $this->exec('insert');

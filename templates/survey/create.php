@@ -2,7 +2,7 @@
     <?php require '_modal-penduduk.php' ?>
     <?php require '_modal-anak.php' ?>
 <style>
-.tableFixHead          { overflow: auto; height: 500px; }
+.tableFixHead          { overflow: auto; height: 800px; }
 .tableFixHead thead { position: sticky; top: 0; z-index: 1; }
 
 /* Just common table stuff. Really. */
@@ -139,14 +139,14 @@ th     { background:#eee; }
                                                                 ?>
                                                                 <td style="text-align:center;">
                                                                     <?php if($i->id <= 14): ?>
-                                                                    <input type="radio" name="pengaturan[<?=$i->id?>][<?=$k->id?>]" value="N" style="transform:scale(1.5)">
+                                                                    <input type="radio" name="pengaturan[<?=$i->id?>][<?=$k->id?>]" value="N" style="transform:scale(1.5)" required>
                                                                     <?php endif ?>
                                                                 </td>
                                                                 <td style="text-align:center;">
-                                                                    <input type="radio" name="pengaturan[<?=$i->id?>][<?=$k->id?>]" value="Y" style="transform:scale(1.5)">
+                                                                    <input type="radio" name="pengaturan[<?=$i->id?>][<?=$k->id?>]" value="Y" style="transform:scale(1.5)" required>
                                                                 </td>
                                                                 <td style="text-align:center;">
-                                                                    <input type="radio" name="pengaturan[<?=$i->id?>][<?=$k->id?>]" value="T" style="transform:scale(1.5)">
+                                                                    <input type="radio" name="pengaturan[<?=$i->id?>][<?=$k->id?>]" value="T" style="transform:scale(1.5)" required>
                                                                 </td>
                                                                 <?php else: ?>
                                                                 <td style="background:silver;"><input type="hidden" name="pengaturan[<?=$i->id?>][<?=$k->id?>]" value="disable"></td>

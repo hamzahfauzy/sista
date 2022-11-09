@@ -20,19 +20,19 @@
                         <div class="card-body">
                             <table class="table table-striped">
                                 <tr>
-                                    <td style="vertical-align:top !important;padding-top:10px !important;"><b>Kepada</b></td>
+                                    <td style="vertical-align:top !important;padding-top:10px !important;"><b>Kepada :</b></td>
                                     <td style="vertical-align:top !important;padding-top:10px !important;"><?=ucwords($data->clause_dest)?></td>
                                 </tr>
                                 <tr>
-                                    <td style="vertical-align:top !important;padding-top:10px !important;"><b>Tujuan</b></td>
+                                    <td style="vertical-align:top !important;padding-top:10px !important;"><b>Tujuan :</b></td>
                                     <td style="vertical-align:top !important;padding-top:10px !important;"><?=ucwords($data->clause_dest_item)?></td>
                                 </tr>
                                 <tr>
-                                    <td style="vertical-align:top !important;padding-top:10px !important;"><b>Topik</b></td>
-                                    <td style="vertical-align:top !important;padding-top:10px !important;"><?=$data->topik?></td>
+                                    <td style="vertical-align:top !important;padding-top:10px !important;"><b>Topik Permasalahan :</b></td>
+                                    <td style="vertical-align:top !important;padding-top:10px !important;"><b><?=$data->topik?></b></td>
                                 </tr>
                                 <tr>
-                                    <td style="vertical-align:top !important;padding-top:10px !important;"><b>Instruksi</b></td>
+                                    <td style="vertical-align:top !important;padding-top:10px !important;"><b>Instruksi :</b></td>
                                     <td style="vertical-align:top !important;padding-top:10px !important;">
                                         <p><?=$data->content?></p>
                                     </td>
