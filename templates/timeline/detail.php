@@ -1,5 +1,5 @@
 <?php load_templates('layouts/top') ?>
-    <style>.timeline-panel{background: #FFF;border: 1px solid #eaeaea;max-width:50%;margin-left:auto;margin-right:auto}</style>
+    <style>.timeline-panel{background: #FFF;border: 1px solid #eaeaea;max-width:720px;margin-left:auto;margin-right:auto}</style>
     <div class="content">
         <div class="page-inner">
             <h4 class="page-title"><?=$title?></h4>
