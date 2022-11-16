@@ -63,8 +63,10 @@
 
 	<!-- Atlantis DEMO methods, don't include it in your project! -->
 	<script src="<?=asset('assets/js/setting-demo.js')?>"></script>
+	<script src="<?=asset('assets/js/gallery-grid.js')?>"></script>
 	<!-- <script src="<?=asset('assets/js/demo.js')?>"></script> -->
 	<script src="<?=asset('assets/js/plugin/datatables-pagingtype/full_numbers_no_ellipses.js')?>"></script>
+	<script src="https://cdn.tiny.cloud/1/rsb9a1wqmvtlmij61ssaqj3ttq18xdwmyt7jg23sg1ion6kn/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 	<script>
 		window.anak = []
 		<?php if(isset($_GET['table']) && $_GET['table'] == 'penduduk'): ?>
@@ -350,6 +352,22 @@
             }
         });
 		<?php endif ?>
+
+		tinymce.init({
+			selector: '.tinymce',
+			// images_upload_url: '<?=routeTo('crud/upload')?>',
+			// document_base_url: '<?=routeTo()?>',
+			// relative_urls: false,
+			// remove_script_host: false,
+			// plugins: [
+			// 'advlist','autolink',
+			// 'lists','link','image','charmap','preview','anchor','searchreplace','visualblocks',
+			// 'fullscreen','insertdatetime','media','table','help','wordcount'
+			// ],
+			// toolbar: 'undo redo | formatpainter casechange blocks | bold italic backcolor | ' +
+			// 'alignleft aligncenter alignright alignjustify | ' +
+			// 'bullist numlist checklist outdent indent | removeformat | a11ycheck code table help'
+		});
 	</script>
 </body>
 </html>

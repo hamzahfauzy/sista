@@ -2,7 +2,7 @@
 
 return [
     'dashboard' => 'default/index',
-    // 'timeline'  => 'timeline/index',
+    'timeline'  => 'timeline/index',
     'master'  => [
         'kecamatan'  => 'crud/index?table=kecamatan',
         'Desa / Kelurahan'  => 'crud/index?table=kelurahan',

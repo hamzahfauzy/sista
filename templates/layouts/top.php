@@ -24,7 +24,24 @@
 
 	<!-- CSS Just for demo purpose, don't include it in your project -->
 	<link rel="stylesheet" href="<?=asset('assets/css/demo.css')?>">
+	<link rel="stylesheet" href="<?=asset('assets/css/gallery-grid.css')?>">
 	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+	<style>
+	.timeline-footer {
+		padding-top:10px;
+		padding-bottom:10px;
+		border-top:1px solid #eaeaea;
+	}
+	.timeline>li>.timeline-panel {
+		padding:0;
+	}
+	.timeline-heading {
+		border-bottom:1px solid #eaeaea;
+	}
+	.timeline-heading,.timeline-footer,.timeline-body {
+		padding:20px;
+	}
+	</style>
 </head>
 <body>
 	<div class="wrapper">

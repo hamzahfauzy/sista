@@ -674,3 +674,61 @@ function hari_ini(){
 	return "<b>" . $hari_ini . "</b>";
  
 }
+
+function do_upload($file, $folder, $field = false, $multiple = false)
+{
+    $filename = $file['name'];
+    $tmp      = $file['tmp_name'];
+    if($field)
+    {
+        $filename = $filename[$field];
+        $tmp      = $tmp[$field];
+    }
+
+    if($multiple)
+    {
+        $files = [];
+        foreach($filename as $index => $f)
+        {
+            $ext  = pathinfo($f, PATHINFO_EXTENSION);
+            $name = strtotime('now').'.'.$ext;
+            $file_ = $folder.'/'.$name;
+            copy($tmp[$index],$file_);
+            $files[] = $file_;
+        }
+
+        return $files;
+    }
+    else
+    {
+        $ext  = pathinfo($filename, PATHINFO_EXTENSION);
+        $name = strtotime('now').'.'.$ext;
+        $file = $folder.'/'.$name;
+        copy($tmp,$file);
+        return $file;
+    }
+
+    return false;
+
+}
+
+function tgl_indo($raw, $time = false){
+    $tanggal = date('Y-m-d', strtotime($raw));
+	$bulan = array (
+		1 =>   'Januari',
+		'Februari',
+		'Maret',
+		'April',
+		'Mei',
+		'Juni',
+		'Juli',
+		'Agustus',
+		'September',
+		'Oktober',
+		'November',
+		'Desember'
+	);
+	$pecahkan = explode('-', $tanggal);
+ 
+	return $pecahkan[2] . ' ' . $bulan[ (int)$pecahkan[1] ] . ' ' . $pecahkan[0].($time ? ' '.date('H:i', strtotime($raw)) : '');
+}

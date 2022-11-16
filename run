@@ -1,0 +1,18 @@
+<?php
+
+require 'functions.php';
+
+$protocol = 'http';
+$port = '8080';
+$address = 'localhost';
+$command = "";
+
+// count command line arguments
+$num_of_arg = count($argv);
+if($num_of_arg == 1)
+{
+	echo "Z-Techno PHP Boilerplate Started at $protocol://$address:$port\n";
+	$cmd = "php -S ".$address.":".$port." -t public/";
+	shell_exec($cmd);
+	die();
+}
