@@ -63,7 +63,9 @@
 
 	<!-- Atlantis DEMO methods, don't include it in your project! -->
 	<script src="<?=asset('assets/js/setting-demo.js')?>"></script>
+	<?php if(startWith(get_route(),'timeline/')): ?>
 	<script src="<?=asset('assets/js/gallery-grid.js')?>"></script>
+	<?php endif ?>
 	<!-- <script src="<?=asset('assets/js/demo.js')?>"></script> -->
 	<script src="<?=asset('assets/js/plugin/datatables-pagingtype/full_numbers_no_ellipses.js')?>"></script>
 	<script src="https://cdn.tiny.cloud/1/rsb9a1wqmvtlmij61ssaqj3ttq18xdwmyt7jg23sg1ion6kn/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
