@@ -691,7 +691,7 @@ function do_upload($file, $folder, $field = false, $multiple = false)
         foreach($filename as $index => $f)
         {
             $ext  = pathinfo($f, PATHINFO_EXTENSION);
-            $name = strtotime('now').'.'.$ext;
+            $name = strtotime('now').rand(0, strtotime('now')).'.'.$ext;
             $file_ = $folder.'/'.$name;
             copy($tmp[$index],$file_);
             $files[] = $file_;
@@ -702,7 +702,7 @@ function do_upload($file, $folder, $field = false, $multiple = false)
     else
     {
         $ext  = pathinfo($filename, PATHINFO_EXTENSION);
-        $name = strtotime('now').'.'.$ext;
+        $name = strtotime('now').rand(0, strtotime('now')).'.'.$ext;
         $file = $folder.'/'.$name;
         copy($tmp,$file);
         return $file;
