@@ -9,7 +9,7 @@
             <?php endif ?>
             <div class="row">
                 <div class="col-md-12">
-                    <div class="timeline-panel" style="max-width:50%">
+                    <div class="timeline-panel">
                         <div class="timeline-heading">
                             <h4 class="timeline-title"><b><?=$post->user->name?> - <small class="text-muted"><?=$post->date?></small></b></h4>
                         </div>
