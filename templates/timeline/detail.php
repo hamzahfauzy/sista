@@ -1,5 +1,10 @@
 <?php load_templates('layouts/top') ?>
-    <style>.timeline-panel{background: #FFF;border: 1px solid #eaeaea;max-width:720px;margin-left:auto;margin-right:auto}</style>
+    <style>
+    .timeline-panel{background: #FFF;border: 1px solid #eaeaea;max-width:720px;margin-left:auto;margin-right:auto}
+    .list-group-item-action:focus, .list-group-item-action:hover {
+        background-color: transparent !important;
+    }
+    </style>
     <div class="content">
         <div class="page-inner">
             <h4 class="page-title"><?=$title?></h4>
@@ -11,7 +16,9 @@
                 <div class="col-md-12">
                     <div class="timeline-panel">
                         <div class="timeline-heading">
-                            <h4 class="timeline-title"><b><?=$post->user->name?> - <small class="text-muted"><?=$post->date?></small></b></h4>
+                            <a href="<?=routeTo('timeline/detail',['id'=>$post->id])?>">
+                                <h4 class="timeline-title"><b><?=$post->user->name?> - <small class="text-muted"><?=$post->date?></small></b></h4>
+                            </a>
                         </div>
                         <div class="timeline-body">
                             <p><?=nl2br($post->content)?></p>
@@ -46,10 +53,15 @@
                             <?php endif ?>
                         </div>
                         <div class="timeline-footer">
+                            <button class="text-muted like response-btn <?=$post->post_response->response_type == 'like' ? 'active' : ''?>" data-type="like" data-id="<?=$post->id?>"><i class="fas fa-fw fa-thumbs-up"></i> Suka (<?=$post->post_response_like_count?>)</button>
+                            <button class="text-muted dislike response-btn <?=$post->post_response->response_type == 'dislike' ? 'active' : ''?>" data-type="dislike" data-id="<?=$post->id?>"><i class="fas fa-fw fa-thumbs-down"></i> Tidak Suka (<?=$post->post_response_dislike_count?>)</button>
+                            <a href="<?=routeTo('timeline/detail',['id'=>$post->id])?>" class="text-muted">
+                                <i class="fas fa-fw fa-comments"></i> Komentar (<?=$post->comment_count?>)
+                            </a>
                             <!-- List komentar -->
-                            <div class="list-group">
+                            <div class="list-group mt-3">
                                 <?php foreach($post->comments as $comment): ?>
-                                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start pl-0 pr-0">
                                     <div class="d-flex w-100 justify-content-between">
                                     <h5 class="mb-1"><b><?=$comment->user->name?></b></h5>
                                     <small><?=$comment->date?></small>
@@ -61,11 +73,10 @@
                             
                             <div class="form-comment">
                                 <form action="<?=routeTo('timeline/post-comment',['id'=>$post->id])?>" method="post">
-                                    <div class="form-group">
-                                        <label for="">Komentar</label>
-                                        <textarea name="content" id="" cols="30" rows="5" class="form-control"></textarea>
+                                    <div class="form-group mb-2 mt-3" style="padding:0">
+                                        <textarea name="content" id="" cols="30" class="form-control" style="resize:none;" placeholder="Komentar anda disini..."></textarea>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" style="padding:0">
                                         <button class="btn btn-success">Posting Komentar</button>
                                     </div>
                                 </form>

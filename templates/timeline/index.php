@@ -49,7 +49,9 @@
                     <?php foreach($posts as $index => $post): ?>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
+                                <a href="<?=routeTo('timeline/detail',['id'=>$post->id])?>">
                                 <h4 class="timeline-title"><b><?=$post->user->name?> - <small class="text-muted"><?=$post->date?></small></b></h4>
+                                </a>
                             </div>
                             <div class="timeline-body">
                                 <p><?=nl2br($post->content)?></p>
@@ -84,8 +86,10 @@
                                 <?php endif ?>
                             </div>
                             <div class="timeline-footer">
+                                <button class="text-muted like response-btn <?=$post->post_response->response_type == 'like' ? 'active' : ''?>" data-type="like" data-id="<?=$post->id?>"><i class="fas fa-fw fa-thumbs-up"></i> Suka (<?=$post->post_response_like_count?>)</button>
+                                <button class="text-muted dislike response-btn <?=$post->post_response->response_type == 'dislike' ? 'active' : ''?>" data-type="dislike" data-id="<?=$post->id?>"><i class="fas fa-fw fa-thumbs-down"></i> Tidak Suka (<?=$post->post_response_dislike_count?>)</button>
                                 <a href="<?=routeTo('timeline/detail',['id'=>$post->id])?>" class="text-muted">
-                                    <i class="fas fa-fw fa-comments"></i> Komentar
+                                    <i class="fas fa-fw fa-comments"></i> Komentar (<?=$post->comment_count?>)
                                 </a>
                             </div>
                         </div>

@@ -1,0 +1,7 @@
+CREATE TABLE post_responses (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    post_id INT DEFAULT NULL,
+    user_id VARCHAR(255) NOT NULL,
+    response_type VARCHAR(20) NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);

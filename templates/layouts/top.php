@@ -32,6 +32,26 @@
 		padding-bottom:10px;
 		border-top:1px solid #eaeaea;
 	}
+	.timeline-footer button {
+		border:0;
+		background:transparent;
+		cursor: pointer;
+	}
+	.timeline-footer button.like:hover, .timeline-footer button.like.active {
+		color: var(--green) !important;
+	}
+	.timeline-footer button.dislike:hover, .timeline-footer button.dislike.active {
+		color: var(--red) !important;
+	}
+	.timeline-footer a:hover {
+		color: var(--blue) !important;
+	}
+	.timeline-footer a {
+		text-decoration:none;
+	}
+	.timeline-footer a, .timeline-footer button {
+		padding-right:10px;
+	}
 	.timeline>li>.timeline-panel {
 		padding:0;
 	}
