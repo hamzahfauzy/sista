@@ -1,5 +1,5 @@
 <?php load_templates('layouts/top') ?>
-    <style>.timeline-panel{background: #FFF;border: 1px solid #eaeaea;}</style>
+    <style>.timeline-panel{background: #FFF;border: 1px solid #eaeaea;max-width:50%;margin-left:auto;margin-right:auto}</style>
     <div class="content">
         <div class="page-inner">
             <h4 class="page-title"><?=$title?></h4>
@@ -9,7 +9,7 @@
             <?php endif ?>
             <div class="row">
                 <div class="col-md-12">
-                    <div class="timeline-panel">
+                    <div class="timeline-panel" style="max-width:50%">
                         <div class="timeline-heading">
                             <h4 class="timeline-title"><b><?=$post->user->name?> - <small class="text-muted"><?=$post->date?></small></b></h4>
                         </div>

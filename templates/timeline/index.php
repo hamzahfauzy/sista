@@ -1,5 +1,6 @@
 <?php load_templates('layouts/top') ?>
     <!-- Modal -->
+    <style>.timeline-panel{background: #FFF;border: 1px solid #eaeaea;max-width:50%;margin-left:auto;margin-right:auto}</style>
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -45,72 +46,50 @@
             <?php endif ?>
             <div class="row">
                 <div class="col-md-12">
-                    
-                    <ul class="timeline">
-                        <?php foreach($posts as $index => $post): ?>
-                        <li <?=($count-($index+1))%2==0 ? 'class="timeline-inverted"' : ''?> style="position: relative!important;z-index: <?=1000-$index?>;">
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4 class="timeline-title"><b><?=$post->user->name?> - <small class="text-muted"><?=$post->date?></small></b></h4>
-                                </div>
-                                <div class="timeline-body">
-                                    <p><?=nl2br($post->content)?></p>
-                                    <?php if($post->files): ?>
-                                    <p>
-                                        <br>
-                                    </p>
-                                    <div class="grid-container">
-                                        <?php
-                                        $files_counter = count($post->files);
-                                        $class = $files_counter == 1 ? 'w-6 h-3' : '';
-                                        $class = $files_counter == 2 ? 'w-3 h-2' : $class;
-                                        foreach($post->files as $file_index => $file):
-                                            $c = $class; 
-                                            if($c == '')
-                                            {
-                                                if(($file_index+1) % 5 == 1)
-                                                $c = 'w-3 h-3';
-                                                else if(($file_index+1) % 5 == 2)
-                                                $c = 'w-3 h-2';  
-                                            }
-                                        ?>
-                                        <div class="gallery-container <?=$c?>">
-                                            <div class="gallery-item">
-                                                <div class="images"><img src="<?=asset($file->file_url)?>" alt="<?=$post->user->name.' - '.($file_index+1)?>">
-                                                </div>
-                                                <div class="title"><?=$post->user->name.' - '.($file_index+1)?></div>
-                                            </div>
-                                        </div>
-                                        <?php endforeach ?>
-                                    </div>
-                                    <?php /*
-                                    <!-- Gallery -->
-                                    <div class="row">
-                                    <?php foreach($post->files as $files): ?>
-                                        <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-                                            <?php foreach($files as $file): ?>
-                                            <img
-                                            src="<?=asset($file->file_url)?>"
-                                            class="w-100 shadow-1-strong rounded mb-4"
-                                            alt="<?=$post->user->name?>"
-                                            />
-                                            <?php endforeach ?>
-                                        </div>
-                                    <!-- Gallery -->
-                                    <?php endforeach ?>
-                                    </div>
-                                    */ ?>
-                                    <?php endif ?>
-                                </div>
-                                <div class="timeline-footer">
-                                    <a href="<?=routeTo('timeline/detail',['id'=>$post->id])?>" class="text-muted">
-                                        <i class="fas fa-fw fa-comments"></i> Komentar
-                                    </a>
-                                </div>
+                    <?php foreach($posts as $index => $post): ?>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4 class="timeline-title"><b><?=$post->user->name?> - <small class="text-muted"><?=$post->date?></small></b></h4>
                             </div>
-                        </li>
-                        <?php endforeach ?>
-                    </ul>
+                            <div class="timeline-body">
+                                <p><?=nl2br($post->content)?></p>
+                                <?php if($post->files): ?>
+                                <p>
+                                    <br>
+                                </p>
+                                <div class="grid-container">
+                                    <?php
+                                    $files_counter = count($post->files);
+                                    $class = $files_counter == 1 ? 'w-6 h-3' : '';
+                                    $class = $files_counter == 2 ? 'w-3 h-2' : $class;
+                                    foreach($post->files as $file_index => $file):
+                                        $c = $class; 
+                                        if($c == '')
+                                        {
+                                            if(($file_index+1) % 5 == 1)
+                                            $c = 'w-3 h-3';
+                                            else if(($file_index+1) % 5 == 2)
+                                            $c = 'w-3 h-2';  
+                                        }
+                                    ?>
+                                    <div class="gallery-container <?=$c?>">
+                                        <div class="gallery-item">
+                                            <div class="images"><img src="<?=asset($file->file_url)?>" alt="<?=$post->user->name.' - '.($file_index+1)?>">
+                                            </div>
+                                            <div class="title"><?=$post->user->name.' - '.($file_index+1)?></div>
+                                        </div>
+                                    </div>
+                                    <?php endforeach ?>
+                                </div>
+                                <?php endif ?>
+                            </div>
+                            <div class="timeline-footer">
+                                <a href="<?=routeTo('timeline/detail',['id'=>$post->id])?>" class="text-muted">
+                                    <i class="fas fa-fw fa-comments"></i> Komentar
+                                </a>
+                            </div>
+                        </div>
+                    <?php endforeach ?>
                 </div>
             </div>
         </div>
