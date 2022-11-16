@@ -40,8 +40,8 @@
             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
             Posting Timeline
             </button>
-            <?php if($success_msg): ?>
             <p></p>
+            <?php if($success_msg): ?>
             <div class="alert alert-success"><?=$success_msg?></div>
             <?php endif ?>
             <div class="row">
