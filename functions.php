@@ -139,7 +139,7 @@ function generated_menu($user_id)
                                     </a>
                                 </li>';
             }
-            if($key == 'timeline')
+            else if($key == 'timeline')
             {
                 $counter = user_less_counter();
                 $generated .= '<li class="nav-item '.($active?'active':'').'">
