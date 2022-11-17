@@ -50,21 +50,13 @@ if(request() == 'POST')
     $role  = $db->single('roles',['name' => $_POST[$table]['clause_dest']]);
     $items = [];
 
+    $query = "";
     if($_POST[$table]['clause_dest_item'][0] != 'Semua')
     {
-        $query = "";
-        if($_POST[$table]['clause_dest'] == 'pembina kelurahan')
-        {
-            $query = "SELECT * FROM petugas WHERE kelurahan_id IN ($clause_dest_item) AND user_id IN (SELECT user_id FROM user_roles WHERE role_id=$role->id)";
-        }
-        else
-        {
-            $query = "SELECT * FROM petugas WHERE user_id IN ($clause_dest_item)";
-        }
+        $query = "SELECT * FROM petugas WHERE user_id IN ($clause_dest_item)";
     }
     else
     {
-        $query = "";
         if($_POST[$table]['clause_dest'] == 'pembina kelurahan')
         {
             // semua akun pembina kelurahan pada 1 kecamatan
