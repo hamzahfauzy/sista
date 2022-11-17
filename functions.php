@@ -139,6 +139,16 @@ function generated_menu($user_id)
                                     </a>
                                 </li>';
             }
+            if($key == 'timeline')
+            {
+                $counter = user_less_counter();
+                $generated .= '<li class="nav-item '.($active?'active':'').'">
+                                    <a href="'.routeTo().$route.'">
+                                        <i class="'.$icon[$key].'"></i>
+                                        <p>'.ucwords($key).'</p>'.($counter?'<span class="badge badge-success">'.$counter.'</span>':'').'
+                                    </a>
+                                </li>';
+            }
             else
             {
                 $generated .= '<li class="nav-item '.($active?'active':'').'">
@@ -731,4 +741,32 @@ function tgl_indo($raw, $time = false){
 	$pecahkan = explode('-', $tanggal);
  
 	return $pecahkan[2] . ' ' . $bulan[ (int)$pecahkan[1] ] . ' ' . $pecahkan[0].($time ? ' '.date('H:i', strtotime($raw)) : '');
+}
+
+function all_notif()
+{
+    $conn  = conn();
+    $db    = new Database($conn);
+
+    return $db->exists('posts',['status'=>'Publish']);
+}
+
+function user_notif_counter()
+{
+    $conn  = conn();
+    $db    = new Database($conn);
+
+    $user = auth()->user;
+    $notif = $db->single('post_notif_counter',['user_id'=>$user->id]);
+    if($notif)
+    {
+        return $notif->post_counter;
+    }
+
+    return 0;
+}
+
+function user_less_counter()
+{
+    return all_notif() - user_notif_counter();
 }

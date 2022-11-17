@@ -21,4 +21,20 @@ $posts = array_map(function($post) use ($db, $user){
 $count = $db->exists($table,['status'=>'Publish']);
 $success_msg = get_flash_msg('success');
 
+if(user_notif_counter())
+{
+    $db->update('post_notif_counter',[
+        'post_counter' => all_notif()
+    ],[
+        'user_id' => $user->id
+    ]);
+}
+else
+{
+    $db->insert('post_notif_counter',[
+        'post_counter' => all_notif(),
+        'user_id' => $user->id
+    ]);
+}
+
 return compact('success_msg', 'posts','count');
