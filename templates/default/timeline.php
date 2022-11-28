@@ -1,49 +1,44 @@
-<?php load_templates('layouts/top') ?>
-    <!-- Modal -->
+    <style>
+	.timeline-footer {
+		padding-top:10px;
+		padding-bottom:10px;
+		border-top:1px solid #eaeaea;
+	}
+	.timeline-footer button {
+		border:0;
+		background:transparent;
+		cursor: pointer;
+	}
+	.timeline-footer button.like:hover, .timeline-footer button.like.active {
+		color: var(--green) !important;
+	}
+	.timeline-footer button.dislike:hover, .timeline-footer button.dislike.active {
+		color: var(--red) !important;
+	}
+	.timeline-footer a:hover {
+		color: var(--blue) !important;
+	}
+	.timeline-footer a {
+		text-decoration:none;
+	}
+	.timeline-footer a, .timeline-footer button {
+		padding-right:10px;
+	}
+	.timeline>li>.timeline-panel {
+		padding:0;
+	}
+	.timeline-heading {
+		border-bottom:1px solid #eaeaea;
+	}
+	.timeline-heading,.timeline-footer,.timeline-body {
+		padding:20px;
+	}
+	</style>
     <style>.timeline-panel{background: #FFF;border: 1px solid #eaeaea;max-width:720px;margin-left:auto;margin-right:auto;margin-bottom:15px;}</style>
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Posting Timeline</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form class="posting-timeline" method="post" action="<?=routeTo('timeline/post')?>" id="posting_timeline" name="posting_timeline" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <label for="">Konten</label>
-                        <textarea name="content" id="content" cols="30" rows="10" class="form-control" style="resize:none;" placeholder="Konten timeline anda disini..."></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="">Berkas</label>
-                        <input type="file"  id="fileinput" class="form-control" name="files[]" multiple="multiple" accept="image/jpeg,image/gif,image/png">
-                    </div>
-                    <?php /*
-                    <div class="form-group">
-                        <label for="">Status</label>
-                        <?= Form::input('options:Publish|Draft', 'status', ['class'=>'form-control']) ?>
-                    </div> */ ?>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary btn-post-submit" onclick="submitPost()">Simpan</button>
-            </div>
-            </div>
-        </div>
-    </div>
     <div class="content">
         <div class="page-inner">
             <h4 class="page-title">Time Line</h4>
-            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
-            Posting Timeline
-            </button>
             <p></p>
-            <?php if($success_msg): ?>
-            <div class="alert alert-success"><?=$success_msg?></div>
-            <?php endif ?>
             <div class="row">
                 <div class="col-md-12 all-timeline-content">
                 </div>
@@ -51,47 +46,6 @@
         </div>
     </div>
     <script>
-    function submitPost()
-    {
-        var input = document.getElementById('fileinput');
-        if (input.files.length) {
-            // var file = input.files[0];
-            // addPara("File " + file.name + " is " +  + " bytes in size");
-            // console.log(input.files)
-            var isValidated = true
-            for(var i=0;i<input.files.length;i++)
-            {
-                var file = input.files[i];
-                var fileSize = file.size/1024/1024
-                if(fileSize > 0.6)
-                {
-                    isValidated = false
-                    break
-                }
-            }
-
-            if(!isValidated)
-            {
-                alert("File tidak boleh lebih dari 500kb")
-                return
-            }
-        }
-
-        var formData = new FormData(posting_timeline)
-        $('.btn-post-submit').html('Memproses...')
-        fetch('/api/timeline/submit-post',{
-            method:'POST',
-            body:formData
-        }).then(res => {
-            $('#exampleModal').modal('hide')
-            $('.btn-post-submit').html('Submit')
-            posting_timeline.reset()
-        })
-        return false
-
-        // posting_timeline.submit();
-    }
-
     // check new post trigger
     var lastPostId       = 0
     var new_post_trigger = null
@@ -113,7 +67,7 @@
                     newContent += `
                         <div class="timeline-panel">
                             <div class="timeline-heading">
-                                <a href="/timeline/detail?id=${post.id}">
+                                <a href="?nik=<?=$_GET['nik']?>&page=timeline-detail&timeline_id=${post.id}">
                                 <h4 class="timeline-title"><b>${post.user.name} - <small class="text-muted">${post.date}</small></b></h4>
                                 </a>
                             </div>
@@ -156,7 +110,7 @@
                             <div class="timeline-footer">
                                 <button class="text-muted like response-btn ${post.post_response && post.post_response.response_type == 'like' ? 'active' : ''}" data-type="like" data-id="${post.id}"><i class="fas fa-fw fa-thumbs-up"></i> Suka (${post.post_response_like_count})</button>
                                 <button class="text-muted dislike response-btn ${post.post_response && post.post_response.response_type == 'dislike' ? 'active' : ''}" data-type="dislike" data-id="${post.id}"><i class="fas fa-fw fa-thumbs-down"></i> Tidak Suka (${post.post_response_dislike_count})</button>
-                                <a href="/timeline/detail?id=${post.id}" class="text-muted">
+                                <a href="?nik=<?=$_GET['nik']?>&page=timeline-detail&timeline_id=${post.id}" class="text-muted">
                                     <i class="fas fa-fw fa-comments"></i> Komentar (${post.comment_count})
                                 </a>
                             </div>
@@ -166,7 +120,6 @@
                 allTimelineContent.innerHTML = newContent + oldContent
                 lastPostId = response.data[0].id
 
-                initResponseButton()
             }
 
         }
@@ -186,5 +139,3 @@
 
     new_post_trigger = setInterval(newPostTrigger, 2000)
     </script>
-
-<?php load_templates('layouts/bottom') ?>

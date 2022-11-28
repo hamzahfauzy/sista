@@ -371,31 +371,34 @@
 			// 'bullist numlist checklist outdent indent | removeformat | a11ycheck code table help'
 		// });
 
-		if(document.querySelector('.response-btn'))
+		function initResponseButton()
 		{
-			document.querySelectorAll('.response-btn').forEach(el => {
-				el.onclick = ev => {
-					// alert(ev.target)
-					var responseType = el.dataset.type == 'like' ? '.dislike' : '.like'
-					var parent = el.parentElement
-					parent.querySelector(responseType).classList.remove('active')
-					el.classList.toggle('active')
-
-					// post to database
-					var formData = new FormData
-					formData.append('post_id',el.dataset.id)
-					formData.append('response_type',el.dataset.type)
-					fetch('<?=routeTo('timeline/post-response')?>',{
-						method:'POST',
-						body:formData
-					})
-					.then(res => res.json())
-					.then(res => {
-						parent.querySelector('.like').innerHTML = '<i class="fas fa-fw fa-thumbs-up"></i> Suka ('+res.data.post_like_count+')'
-						parent.querySelector('.dislike').innerHTML = '<i class="fas fa-fw fa-thumbs-down"></i> Tidak Suka ('+res.data.post_dislike_count+')'
-					})
-				}
-			})
+			if(document.querySelector('.response-btn'))
+			{
+				document.querySelectorAll('.response-btn').forEach(el => {
+					el.onclick = ev => {
+						// alert(ev.target)
+						var responseType = el.dataset.type == 'like' ? '.dislike' : '.like'
+						var parent = el.parentElement
+						parent.querySelector(responseType).classList.remove('active')
+						el.classList.toggle('active')
+	
+						// post to database
+						var formData = new FormData
+						formData.append('post_id',el.dataset.id)
+						formData.append('response_type',el.dataset.type)
+						fetch('<?=routeTo('timeline/post-response')?>',{
+							method:'POST',
+							body:formData
+						})
+						.then(res => res.json())
+						.then(res => {
+							parent.querySelector('.like').innerHTML = '<i class="fas fa-fw fa-thumbs-up"></i> Suka ('+res.data.post_like_count+')'
+							parent.querySelector('.dislike').innerHTML = '<i class="fas fa-fw fa-thumbs-down"></i> Tidak Suka ('+res.data.post_dislike_count+')'
+						})
+					}
+				})
+			}
 		}
 	</script>
 </body>

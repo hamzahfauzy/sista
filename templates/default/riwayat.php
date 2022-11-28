@@ -23,13 +23,14 @@
 
 	<!-- CSS Just for demo purpose, don't include it in your project -->
 	<link rel="stylesheet" href="<?=asset('assets/css/demo.css')?>">
+    <link rel="stylesheet" href="<?=asset('assets/css/gallery-grid.css')?>">
 </head>
 <body>
     <div class="container">
         <center>
             <img src="<?=asset('assets/img/main-logo.png')?>" alt="" width="100px">
             <h2>DATA RIWAYAT INDEKS KELUARGA SEHAT (<?=$penduduk->nama?>)</h2>
-            <a href="<?=routeTo('')?>">Kembali ke halaman awal</a> | <a href="<?=routeTo('default/riwayat',['nik'=>$penduduk->NIK,'page'=>'form-survey'])?>">Form Survey Mandiri</a> | <a href="<?=routeTo('auth/logout')?>">Logout</a>
+            <a href="<?=routeTo('')?>">Kembali ke halaman awal</a> | <a href="<?=routeTo('default/riwayat',['nik'=>$penduduk->NIK,'page'=>'timeline'])?>">Timeline</a> | <a href="<?=routeTo('default/riwayat',['nik'=>$penduduk->NIK,'page'=>'form-survey'])?>">Form Survey Mandiri</a> | <a href="<?=routeTo('auth/logout')?>">Logout</a>
             <p></p>
         </center>
 
@@ -113,6 +114,7 @@
         </div>
         <?php endif ?>
     </div>
+    <script src="<?=asset('assets/js/gallery-grid.js')?>"></script>
     <script>
     var kecamatan = e => {
         return document.querySelector('#kecamatan_id')
@@ -167,7 +169,7 @@
         .then(res => res.json())
         .then(res => {
             var kel = kelurahan()
-            var kel_id = "<?=$kel?$kel:0?>";
+            var kel_id = "<?=isset($kel)?$kel:0?>";
             kel.innerHTML = `
             <option value="">- Pilih Desa / Kelurahan -</option>
             <option value="*" ${kel_id=='*'?'selected=""':''}>Semua Desa / Kelurahan</option>`
@@ -176,7 +178,7 @@
                 kel.innerHTML += `<option value="${data.id}" ${kel_id==data.id?'selected=""':''}>${data.nama}</option>`
             })
 
-            <?php if($kel && $kel!='*'): ?>
+            <?php if(isset($kel) && $kel!='*'): ?>
             loadLingkungan(<?=$kel?>);
             <?php endif ?>
         })
@@ -188,7 +190,7 @@
         .then(res => res.json())
         .then(res => {
             var ling = lingkungan()
-            var ling_id = "<?=$ling?$ling:0?>";
+            var ling_id = "<?=isset($ling)?$ling:0?>";
             ling.innerHTML = `
             <option value="">- Pilih Dusun / Lingkungan -</option>
             <option value="*" ${ling_id=='*'?'selected=""':''}>Semua Dusun / Lingkungan</option>`
@@ -199,11 +201,11 @@
         })
     }
 
-    <?php if($k): ?>
+    <?php if(isset($k)): ?>
     handleKecamatan(kecamatan());
     <?php endif ?>
 
-    <?php if($kel && $kel == '*'): ?>
+    <?php if(isset($kel) && $kel == '*'): ?>
     lingkungan().disabled = true
     <?php endif ?>
     </script>
