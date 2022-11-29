@@ -145,7 +145,7 @@ function generated_menu($user_id)
                 $generated .= '<li class="nav-item '.($active?'active':'').'">
                                     <a href="'.routeTo().$route.'">
                                         <i class="'.$icon[$key].'"></i>
-                                        '.($counter?'<span class="badge badge-success">'.$counter.'</span>':'').'<p>'.ucwords($key).'</p>
+                                        '.($counter?'<span class="badge badge-success" style="margin-left: -44px;margin-right: 10px;">'.$counter.'</span>':'').'<p>'.ucwords($key).'</p>
                                     </a>
                                 </li>';
             }
