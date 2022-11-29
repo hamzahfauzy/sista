@@ -15,14 +15,6 @@ $post->files = $files;
 $post->post_response = $db->single('post_responses',['post_id'=>$post->id,'user_id'=>$user->id]);
 $post->post_response_like_count = $db->exists('post_responses',['post_id'=>$post->id,'response_type'=>'like']);
 $post->post_response_dislike_count = $db->exists('post_responses',['post_id'=>$post->id,'response_type'=>'dislike']);
-
-$comments = $db->all('comments',['post_id'=>$post->id]);
-$comments = array_map(function($comment) use ($db){
-    $comment->user = $db->single('users',['id' => $comment->user_id]);
-    $comment->date = tgl_indo($comment->created_at, true);
-    return $comment;
-}, $comments);
-$post->comments = $comments;
 $title =  'Detail Timeline - '.$post->user->name.' '.$post->date;
 Page::set_title($title);
 $success_msg = get_flash_msg('success');

@@ -83,9 +83,13 @@
             method:'POST',
             body:formData
         }).then(res => {
-            $('#exampleModal').modal('hide')
-            $('.btn-post-submit').html('Submit')
-            posting_timeline.reset()
+            if(res.ok)
+            {
+                $('#exampleModal').modal('hide')
+                $('.btn-post-submit').html('Submit')
+                posting_timeline.reset()
+                return res.json()
+            }
         })
         return false
 
