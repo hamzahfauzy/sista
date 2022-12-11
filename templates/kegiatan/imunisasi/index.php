@@ -8,8 +8,8 @@
                         <h5 class="text-white op-7 mb-2">Memanajemen data <?=_ucwords($table)?></h5>
                     </div>
                     <div class="ml-md-auto py-2 py-md-0">
-                        <?php if(is_allowed(get_route_path('crud/create',['table'=>$table]),auth()->user->id)): ?>
-                            <a href="<?=routeTo('crud/create',['table'=>$table])?>" class="btn btn-secondary btn-round">Buat <?=_ucwords($table)?></a>
+                        <?php if(is_allowed(get_route_path('kegiatan/imunisasi/create',[]),auth()->user->id)): ?>
+                            <a href="<?=routeTo('kegiatan/imunisasi/create')?>" class="btn btn-secondary btn-round">Buat <?=_ucwords($table)?></a>
                         <?php endif ?>
                     </div>
                 </div>

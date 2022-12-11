@@ -26,14 +26,15 @@
 	<div class="container">
         <div class="row mt-4">
             <div class="col-sm-12 col-md-6 col-lg-4 mx-auto">
-                <?php if($success_msg): ?>
-                <div class="alert alert-success"><?=$success_msg?></div>
-                <?php endif ?>
-
-                <?php if($error_msg): ?>
-                <div class="alert alert-danger"><?=$error_msg?></div>
-                <?php endif ?>
                 <div class="card full-height">
+                    <?php if($success_msg): ?>
+                    <div class="alert alert-success"><?=$success_msg?></div>
+                    <?php endif ?>
+
+                    <?php if($error_msg): ?>
+                    <div class="alert alert-danger"><?=$error_msg?></div>
+                    <?php endif ?>
+                    
                     <div class="card-body">
                         <center>
                             <img src="<?=routeTo('assets/img/main-logo.png')?>" width="150px" height="100px" alt="logo" style="object-fit:contain;">

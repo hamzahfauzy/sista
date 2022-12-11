@@ -1,5 +1,5 @@
-<?php $nomor = 1; foreach($results as $indikator_id => $r): ?>
-<h2><?=$nomor++.'. '.$indikator_ids[$indikator_id]?></h2>
+<?php $nomor = 1; foreach($results as $indikator => $r): ?>
+<h2><?=$nomor++.'. '.$indikator?></h2>
 <table class="table table-bordered">
     <tr>
         <th>#</th>

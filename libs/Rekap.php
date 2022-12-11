@@ -410,52 +410,8 @@ class Rekap {
         }
 
         $db = $this->db;
-        $indikator_ids = [
-            1 => 'Kasus Tidak Mengikuti Program KB', // Y
-            2 => 'Kasus Ibu Tidak bersalin di Fasilitas Kesehatan', // Y
-            3 => 'Kasus Bayi tidak Imunisasi Dasar Lengkap', // Y
-            4 => 'Kasus Bayi tidak mendapat ASI Eksklusif', // Y
-            5 => 'Kasus Balita tidak di pantau pertumbuhannya', // Y
-            6 => 'Kasus Penderita TBC', // N
-            7 => 'Kasus Hipertensi', // N
-            8 => 'Kasus Gangguan Jiwa', // N
-            9 => 'Kasus anggota keluarga yang merokok', // Y
-            10 => 'Kasus Keluarga tidak menjadi peserta JKN', // N
-            11 => 'Kasus Keluarga tidak mempunyai air bersih', // N
-            12 => 'Kasus Jamban Tidak Sehat', // T
-            13 => 'Kasus Stunting/Gizi Buruk', // N
-            14 => 'Kasus Stunting/Gizi Buruk yang Tidak di tangani', // N
-            15 => 'Kasus Keluarga tidak ke Posyandu',
-            16 => 'Kasus Saung Posyandu tidak layak',
-            17 => 'Kasus keluarga terinfeksi Covid-19',
-            18 => 'Kasus keluarga tidak divaksin Covid-19',
-            19 => 'Kasus tenaga kesehatan tidak profesional',
-            20 => 'Kasus tidak berperannya pemerintah dan stakeholders'
-        ];
 
-        // penilaian individu dan keluarga
-        $answers = [
-            1 => [0], // Y, cek logika (penilaian keluarga)
-            2 => [0], // Y, (penilaian keluarga)
-            3 => ['T'], // Y
-            4 => ['T'], // Y
-            5 => ['T'], // Y
-            6 => ['Y','T'], // N
-            7 => ['Y','T'], // N
-            8 => ['Y','T'], // N
-            9 => ['T'], // Y
-            10 => ['T'], // Y
-            11 => [0], // Y, cek logika (penilaian keluarga)
-            12 => [0], // Y, (penilaian keluarga)
-            13 => ['T'], // Y
-            14 => ['T'], // Y
-            15 => [0], // Y, (penilaian keluarga)
-            16 => [0], // Y, cek logika (penilaian keluarga)
-            17 => ['T'], // Y
-            18 => ['T'], // Y
-            19 => [0], // Y, (penilaian keluarga)
-            20 => [0], // Y, (penilaian keluarga)
-        ];
+        $indikators = $db->all('indikator');
 
         $results = [];
         $params  = [];
@@ -465,9 +421,9 @@ class Rekap {
             $params = ['tahun' => $tahun, $type.'_id' => $id];
         }
 
-        foreach($indikator_ids as $indikator_id => $judul_indikator)
+        foreach($indikators as $indikator)
         {
-            $_params = array_merge($params, ['indikator_id'=>$indikator_id, 'status'=>'publish', 'skor'=>1]);
+            $_params = array_merge($params, ['indikator_id'=>$indikator->id, 'status'=>'publish', 'skor'=>1]);
             $data = $db->all('iks_indikator',$_params);
             if($data)
             {
@@ -478,41 +434,31 @@ class Rekap {
                         unset($data[$d_id]);
                         continue;
                     }
-                    $indikator = $db->single('indikator',['id'=> $indikator_id]);
+
                     $indikator = (array) $indikator;
                     $survey = $db->single('survey',['no_kk' => $d->no_kk,'tanggal'=>['LIKE','%'.$tahun.'%'],'status'=>'publish']);
                     $nilai = json_decode($survey->nilai,1);
                     $key = array_search($indikator, array_column($nilai, 'indikator'));
                     $found = $nilai[$key]['rekap_penduduk'];
 
-                    foreach($answers[$indikator_id] as $ans)
+                    if($indikator['logika'] == 'or' && in_array($nilai[$key]['skor'],['N','1']))
                     {
-                        if($ans==0 && $nilai[$key]['skor'] == 0)
-                        {
-                            $found_p = array_map(function($f_p){
-                                return $f_p['penduduk'];
-                            }, $found);
-                            $_key = array_search('Ayah', array_column($penduduk, 'sebagai'));
-                            if(!$_key){
-                                $_key = array_search('Ibu', array_column($penduduk, 'sebagai'));
-                            }
-                            $_found = $found[$_key];
-                        }
-                        else
-                        {
-                            $_key = array_search($ans, array_column($found, 'jawaban'));
-                            if(!$_key) continue;
-                            $_found = $found[$_key];
-                        }
-    
-                        $d->keluarga[] = $db->single('penduduk',['no_kk'=>$d->no_kk,'NIK'=>$_found['penduduk']['NIK']]);
+                        continue;
                     }
+                    // kalo logika or cek nilai apakah 1 atau 0
+                    // nilai 0, bermasalah
+                    // kalo logika and cari keluarga yang nilainya T
+                    $_key = array_search('T', array_column(ound, 'jawaban'));
+                    if(!$_key) continue;
+                    $_found = $found[$_key];
+
+                    $d->keluarga[] = $db->single('penduduk',['no_kk'=>$d->no_kk,'NIK'=>$_found['penduduk']['NIK']]);
                     $d->survey_id = $survey->id;
                     $d->kecamatan = $db->single('kecamatan',['id'=>$d->kecamatan_id]);
                     $d->kelurahan = $db->single('kelurahan',['id'=>$d->kelurahan_id]);
                 }
             }
-            $results[$indikator_id] = $data;
+            $results[$indikator->nama] = $data;
         }
 
         ob_start();

@@ -12,10 +12,16 @@ return [
         'indikator'  => 'crud/index?table=indikator',
         'indikator tambahan'  => 'crud/index?table=indikator_tambahan',
         'topik'  => 'crud/index?table=topik',
+        'posyandu'  => 'crud/index?table=posyandu',
     ],
     'survey' => [
         'Terverifikasi' => 'survey/index',
         'Mandiri'       => 'survey/mandiri',
+    ],
+    'kegiatan kesehatan' => [
+        'Imunisasi' => 'kegiatan/imunisasi/index',
+        'Ibu Hamil' => 'kegiatan/ibu-hamil/index',
+        'KB'        => 'kegiatan/kb/index',
     ],
     'rekapitulasi' => [
         'Indeks Keluarga Sehat' => 'rekapitulasi/index',

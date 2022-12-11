@@ -168,5 +168,55 @@ return [
             'label' => 'Pilihan',
             'type'  => 'textarea'
         ]
+    ],
+    'posyandu' => [
+        'nama',
+        'kecamatan_id' => [
+            'label' => 'Kecamatan',
+            'type'  => 'options-obj:kecamatan,id,nama'
+        ],
+        'kelurahan_id' => [
+            'label' => 'Desa / Kelurahan',
+            'type'  => 'options-obj:kelurahan,id,nama'
+        ],
+        'lingkungan_id' => [
+            'label' => 'Dusun / Lingkungan',
+            'type'  => 'options-obj:lingkungan,id,nama'
+        ],
+        'file' => [
+            'label' => 'Gambar Posyandu',
+            'type'  => 'file'
+        ]
+    ],
+    'imunisasi' => [
+        'posyandu_id' => [
+            'label' => 'Posyandu',
+            'type'  => 'options-obj:posyandu,id,nama'
+        ],
+        'nama',
+        'usia',
+        'berat',
+        'tinggi',
+        'jenis_imunisasi',
+    ],
+    'ibu_hamil' => [
+        'posyandu_id' => [
+            'label' => 'Posyandu',
+            'type'  => 'options-obj:posyandu,id,nama'
+        ],
+        'nama',
+        'alamat',
+        'berat',
+        'usia',
+        'kondisi'
+    ],
+    'kegiatan_kb' => [
+        'posyandu_id' => [
+            'label' => 'Posyandu',
+            'type'  => 'options-obj:posyandu,id,nama'
+        ],
+        'nama',
+        'jenis',
+        'kesehatan_akseptor'
     ]
 ];
