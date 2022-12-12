@@ -20,9 +20,9 @@ return [
     ],
     'kegiatan kesehatan' => [
         'Posyandu' => 'kegiatan/imunisasi/index',
-        'Posyandu Lansia' => '',
-        'Bulan Imunisasi Anak Nasional (BIAN)' => '',
-        'Bulan Imunisasi Anak Sekolah (BIAS)' => '',
+        'Posyandu Lansia' => 'kegiatan/posyandu-lansia/index',
+        'Bulan Imunisasi Anak Nasional (BIAN)' => 'kegiatan/bian/index',
+        'Bulan Imunisasi Anak Sekolah (BIAS)' => 'kegiatan/bias/index',
         // 'Imunisasi' => 'kegiatan/imunisasi/index',
         // 'Ibu Hamil' => 'kegiatan/ibu-hamil/index',
         // 'KB'        => 'kegiatan/kb/index',
