@@ -19,9 +19,13 @@ return [
         'Mandiri'       => 'survey/mandiri',
     ],
     'kegiatan kesehatan' => [
-        'Imunisasi' => 'kegiatan/imunisasi/index',
-        'Ibu Hamil' => 'kegiatan/ibu-hamil/index',
-        'KB'        => 'kegiatan/kb/index',
+        'Posyandu' => 'kegiatan/imunisasi/index',
+        'Posyandu Lansia' => '',
+        'Bulan Imunisasi Anak Nasional (BIAN)' => '',
+        'Bulan Imunisasi Anak Sekolah (BIAS)' => '',
+        // 'Imunisasi' => 'kegiatan/imunisasi/index',
+        // 'Ibu Hamil' => 'kegiatan/ibu-hamil/index',
+        // 'KB'        => 'kegiatan/kb/index',
     ],
     'rekapitulasi' => [
         'Indeks Keluarga Sehat' => 'rekapitulasi/index',
