@@ -8,7 +8,14 @@ $success_msg = get_flash_msg('success');
 $fields = config('fields')[$table];
 $actions = [];
 
-$data = $db->all($table);
+$params = [];
+
+if(isset($_GET['posyandu_id']))
+{
+    $params['posyandu_id'] = $_GET['posyandu_id'];
+}
+
+$data = $db->all($table, $params);
 
 return [
     'datas' => $data,

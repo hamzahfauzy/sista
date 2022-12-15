@@ -5,6 +5,7 @@ return [
     'timeline'  => 'fas fa-desktop',
     'master'  => 'fas fa-cubes',
     'survey'  => 'fas fa-file',
+    'posyandu'  => 'fas fa-hospital',
     'kegiatan kesehatan'  => 'fas fa-plus',
     'rekapitulasi'  => 'fas fa-file',
     'tindak lanjut permasalahan'  => 'fas fa-circle',

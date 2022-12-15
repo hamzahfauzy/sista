@@ -44,7 +44,20 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach($datas as $index => $data): ?>
+                                        <?php 
+                                        foreach($datas as $index => $data): 
+                                            if($table == 'posyandu')
+                                            {
+                                                $actions = [
+                                                    [
+                                                        'route' => 'posyandu/detail',
+                                                        'param' => ['id' => $data->id],
+                                                        'class' => 'btn btn-success btn-sm',
+                                                        'label' => 'Mulai Posyandu',
+                                                    ]
+                                                ];
+                                            }
+                                        ?>
                                         <tr>
                                             <td>
                                                 <?=$index+1?>

@@ -8,8 +8,12 @@ $error_msg = get_flash_msg('error');
 $old = get_flash_msg('old');
 $fields = config('fields')[$table];
 
-if(file_exists('../actions/'.$table.'/override-edit-fields.php'))
-    $fields = require '../actions/'.$table.'/override-edit-fields.php';
+$params = ['table'=>$table];
+if(isset($_GET['posyandu_id']))
+{
+    $params['posyandu_id'] = $_GET['posyandu_id'];
+    unset($fields['posyandu_id']);
+}
 
 $data = $db->single($table,[
     'id' => $_GET['id']
@@ -17,18 +21,12 @@ $data = $db->single($table,[
 
 if(request() == 'POST')
 {
-    if(file_exists('../actions/'.$table.'/before-edit.php'))
-        require '../actions/'.$table.'/before-edit.php';
-
     $edit = $db->update($table,$_POST[$table],[
         'id' => $_GET['id']
     ]);
 
-    if(file_exists('../actions/'.$table.'/after-edit.php'))
-        require '../actions/'.$table.'/after-edit.php';
-
     set_flash_msg(['success'=>$table.' berhasil diupdate']);
-    header('location:'.routeTo('crud/index',['table'=>$table]));
+    header('location:'.routeTo('kegiatan/imunisasi/index',$params));
 }
 
 return [

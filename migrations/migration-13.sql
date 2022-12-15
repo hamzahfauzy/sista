@@ -1,0 +1,1 @@
+ALTER TABLE `posyandu` ADD `strata` VARCHAR(100) DEFAULT NULL;

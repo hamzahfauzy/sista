@@ -12,15 +12,23 @@ return [
         'indikator'  => 'crud/index?table=indikator',
         'indikator tambahan'  => 'crud/index?table=indikator_tambahan',
         'topik'  => 'crud/index?table=topik',
-        'posyandu'  => 'crud/index?table=posyandu',
     ],
     'survey' => [
         'Terverifikasi' => 'survey/index',
         'Mandiri'       => 'survey/mandiri',
     ],
+    'posyandu'  => 'crud/index?table=posyandu',
     'kegiatan kesehatan' => [
-        'Posyandu' => 'kegiatan/imunisasi/index',
-        'Posyandu Lansia' => 'kegiatan/posyandu-lansia/index',
+        'Posyandu' => [
+            'Imunisasi Balita' => 'kegiatan/imunisasi/index',
+            'Ibu Hamil' => 'kegiatan/ibu-hamil/index',
+            'Gizi Balita' => 'kegiatan/ibu-hamil/index',
+            'KB'        => 'kegiatan/kb/index',
+        ],
+        'Posyandu Lansia' => [
+            'Pemeriksaan Kesehatan' => 'kegiatan/posyandu-lansia/index',
+            'Senam Prolanis' => 'kegiatan/senam-prolanis/index'
+        ],
         'Bulan Imunisasi Anak Nasional (BIAN)' => 'kegiatan/bian/index',
         'Bulan Imunisasi Anak Sekolah (BIAS)' => 'kegiatan/bias/index',
         // 'Imunisasi' => 'kegiatan/imunisasi/index',

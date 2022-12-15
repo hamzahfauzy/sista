@@ -175,6 +175,22 @@
 			}
 		}
 
+		function loadAnak()
+		{
+			$('#exampleModal').modal('show')
+			$('.datatable-anak').dataTable({
+				processing: true,
+				search: {
+					return: true
+				},
+				serverSide: true,
+				ajax: "<?=routeTo('api/imunisasi/load-anak',$_GET)?>",
+				drawCallback: function( settings ) {
+					var anak = window.anak
+				}
+			})
+		}
+
 		function pilihPenduduk(NIK)
 		{
 			document.querySelector('input[name=nik_'+window.target_input+']').value = NIK

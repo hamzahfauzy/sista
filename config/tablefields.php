@@ -183,6 +183,10 @@ return [
             'label' => 'Dusun / Lingkungan',
             'type'  => 'options-obj:lingkungan,id,nama'
         ],
+        'strata' => [
+            'label' => 'Strata',
+            'type'  => 'options:Pratma|Madya|Purnama|Mandiri'
+        ],
         'file' => [
             'label' => 'Gambar Posyandu',
             'type'  => 'file'
@@ -194,9 +198,18 @@ return [
             'type'  => 'options-obj:posyandu,id,nama'
         ],
         'nama',
-        'usia',
-        'berat',
-        'tinggi',
+        'usia' => [
+            'label' => 'Usia (Bulan)',
+            'type'  => 'number'
+        ],
+        'berat' => [
+            'label' => 'Berat (Kg)',
+            'type'  => 'number'
+        ],
+        'tinggi' => [
+            'label' => 'Tinggi (Cm)',
+            'type'  => 'number'
+        ],
         'jenis_imunisasi',
     ],
     'ibu_hamil' => [

@@ -8,7 +8,7 @@
                         <h5 class="text-white op-7 mb-2">Memanajemen data <?=_ucwords($table)?></h5>
                     </div>
                     <div class="ml-md-auto py-2 py-md-0">
-                    <a href="<?=routeTo('crud/index',['table'=>$table])?>" class="btn btn-warning btn-round">Kembali</a>
+                    <a href="<?=routeTo('kegiatan/imunisasi/index',isset($_GET['posyandu_id'])?['posyandu_id'=>$_GET['posyandu_id']]:[])?>" class="btn btn-warning btn-round">Kembali</a>
                     </div>
                 </div>
             </div>
@@ -40,10 +40,19 @@
                                     {
                                         $fieldname = $field;
                                     }
+                                    $attr = [
+                                        'class'=>($type == 'color' ? 'd-block' :'form-control'),
+                                        "placeholder"=>$label,
+                                        "value"=>isset($old[$field])?$old[$field]:($penduduk->{$field}??''),
+                                    ];
+                                    if(isset($penduduk->{$field}))
+                                    {
+                                        $attr['readonly'] = 'readonly';
+                                    }
                                 ?>
                                 <div class="form-group">
                                     <label for=""><?=$label?></label>
-                                    <?= Form::input($type, $fieldname, ['class'=>($type == 'color' ? 'd-block' :'form-control'),"placeholder"=>$label,"value"=>$old[$field]??'']) ?>
+                                    <?= Form::input($type, $fieldname, $attr) ?>
                                 </div>
                                 <?php endforeach ?>
                                 <div class="form-group">

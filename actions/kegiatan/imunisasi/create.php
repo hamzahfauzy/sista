@@ -6,15 +6,55 @@ $error_msg = get_flash_msg('error');
 $old = get_flash_msg('old');
 $fields = config('fields')[$table];
 
+$conn = conn();
+$db   = new Database($conn);
+
+if(isset($_GET['posyandu_id']))
+{
+    unset($fields['posyandu_id']);
+}
+
 if(request() == 'POST')
 {
-    $conn = conn();
-    $db   = new Database($conn);
+
+    $params = [];
+
+    if(isset($_GET['posyandu_id']))
+    {
+        $_POST[$table]['posyandu_id'] = $_GET['posyandu_id'];
+        $params = $_GET;
+    }
 
     $insert = $db->insert($table,$_POST[$table]);
 
     set_flash_msg(['success'=>$table.' berhasil ditambahkan']);
-    header('location:'.routeTo('kegiatan/imunisasi/index'));
+    header('location:'.routeTo('kegiatan/imunisasi/index',$params));
 }
 
-return compact('table','error_msg','old','fields');
+$penduduk = $db->single('penduduk',['id'=>$_GET['penduduk_id']]);
+$diff = abs(strtotime('now')-strtotime($penduduk->tanggal_lahir));
+$years = floor($diff / (365*60*60*24));
+$months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));
+$penduduk->usia = $months;
+
+$jenis_imunisasi = [
+    'Hepatitis B (HB-0)' => [2,3,4,18],
+    'Polio (IPV)' => [24,2,3,4],
+    'BCG' => [1],
+    'Campak Rubella' => [9,18,60],
+    'DPT-HB-HiB' => [2,3,4,18],
+];
+
+$available = [];
+foreach($jenis_imunisasi as $jenis => $usia)
+{
+    if(in_array($penduduk->usia,$usia))
+    {
+        $available[] = $jenis;
+    }
+}
+
+$fields['jenis_imunisasi']['label'] = 'Jenis Imunisasi';
+$fields['jenis_imunisasi']['type'] = 'options:'.implode('|',$available);
+
+return compact('table','error_msg','old','fields','penduduk');
