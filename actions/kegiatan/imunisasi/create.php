@@ -24,6 +24,11 @@ if(request() == 'POST')
         $_POST[$table]['posyandu_id'] = $_GET['posyandu_id'];
         $params = $_GET;
     }
+    
+    if(isset($_GET['penduduk_id']))
+    {
+        $_POST[$table]['penduduk_id'] = $_GET['penduduk_id'];
+    }
 
     $insert = $db->insert($table,$_POST[$table]);
 

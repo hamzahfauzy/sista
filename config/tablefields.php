@@ -202,6 +202,10 @@ return [
             'label' => 'Usia (Bulan)',
             'type'  => 'number'
         ],
+        'bulan' => [
+            'label' => 'Bulan Pelaksanaan',
+            'type'  => 'options:Pilih|Januari|Februari|Maret|April|Mei|Juni|Juli|Agustus|September|Oktober|November|Desember'
+        ],
         'berat' => [
             'label' => 'Berat (Kg)',
             'type'  => 'number'
