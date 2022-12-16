@@ -197,6 +197,26 @@
 			})
 		}
 
+		function loadJenisVaksin(data)
+		{
+			$('#modalJenisVaksin').modal('show')
+			var html = '<table class="table table-bordered">'
+			for(vaksin in data)
+			{
+				console.log(vaksin)
+				// var vaksin = data[i]
+				html += `<tr><td>${vaksin}</td><td>`
+				for(v in data[vaksin])
+				{
+					console.log(v)
+					html += `<label class="mr-3"><input type="checkbox" checked disabled> ${data[vaksin][v]}</label>`
+				}
+				html += `</td></tr>`
+			}
+			html += `</table>`
+			$(".jenis_vaksin_content").html(html)
+		}
+
 		function pilihPenduduk(NIK)
 		{
 			document.querySelector('input[name=nik_'+window.target_input+']').value = NIK

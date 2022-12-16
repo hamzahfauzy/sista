@@ -1,5 +1,6 @@
 <?php load_templates('layouts/top') ?>
 <?php require '_modal-anak.php' ?>
+<?php require '_modal-jenis-vaksin.php' ?>
     <div class="content">
         <div class="panel-header <?=config('theme')['panel_color']?>">
             <div class="page-inner py-5">
@@ -28,7 +29,7 @@
                             <?php if($success_msg): ?>
                             <div class="alert alert-success"><?=$success_msg?></div>
                             <?php endif ?>
-                            <div class="table-responsive table-hover table-sales">
+                            <div class="table-responsive table-sales">
                                 <table class="table datatable">
                                     <thead>
                                         <tr>
@@ -51,9 +52,7 @@
                                     <tbody>
                                         <?php foreach($datas as $index => $data): ?>
                                         <tr>
-                                            <td>
-                                                <?=$index+1?>
-                                            </td>
+                                            <td><?=$index+1?></td>
                                             <?php 
                                             foreach($fields as $key => $field): 
                                                 $label = $field;
@@ -82,6 +81,7 @@
                                             </td>
                                             <?php endforeach ?>
                                             <td>
+                                            <button class="btn btn-primary btn-sm" onclick='loadJenisVaksin(<?=json_encode($data->jenis_imunisasi)?>)'>Detail Vaksin</button>
                                             <?php foreach($actions as $action): ?>
                                             <?php if(is_allowed(get_route_path($action['route'],$action['param']),auth()->user->id)): ?>
                                                 <a href="<?=routeTo($action['route'],$action['param'])?>" class="<?=$action['class']?>"><?=$action['label']?></a>

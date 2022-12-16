@@ -21,19 +21,19 @@ $data = $db->all($table, $params, [
 
 $data = array_map(function($d) use ($db){
     $jenis_vaksin = $db->all('imunisasi_vaksin', ['penduduk_id'=>$d->penduduk_id]);
-    $_jenis_vaksin = [];
+    $vaksin_exists = [];
     foreach($jenis_vaksin as $jv)
     {
-        $_jenis_vaksin[] = $jv->nama . ' ('.$jv->jenis.')';
+        $vaksin_exists[$jv->nama][] = $jv->jenis;
     }
-    $d->jenis_imunisasi = implode("\n",$_jenis_vaksin);
+    $d->jenis_imunisasi = $vaksin_exists;
     return $d;
 }, $data);
 
-$fields['jenis_imunisasi'] = [
-    'label' => 'Jenis Imunisasi',
-    'type' => 'text'
-];
+// $fields['jenis_imunisasi'] = [
+//     'label' => 'Jenis Imunisasi',
+//     'type' => 'text'
+// ];
 
 return [
     'datas' => $data,
