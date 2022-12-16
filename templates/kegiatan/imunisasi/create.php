@@ -46,7 +46,7 @@
                                         "value"=>isset($old[$field])?$old[$field]:($penduduk->{$field}??''),
                                         'required' => 'required'
                                     ];
-                                    if(isset($penduduk->{$field}))
+                                    if(isset($penduduk->{$field}) && $field != 'usia')
                                     {
                                         $attr['readonly'] = 'readonly';
                                     }
@@ -68,9 +68,9 @@
                                         <tr>
                                             <td><?=$jenis?></td>
                                             <td>
-                                                <?php foreach($imunisasi as $index => $v): ?>
+                                                <?php foreach($imunisasi as $index => $v): $sudah = isset($vaksin_exists[$jenis][is_numeric($v) ? $v .' Bulan' : $v]); ?>
                                                 <label for="jenis-<?=array_search($imunisasi, $jenis_imunisasi)?>-<?=$index?>" class="mr-2">
-                                                    <input type="checkbox" id="jenis-<?=array_search($imunisasi, $jenis_imunisasi)?>-<?=$index?>" name="jenis_imunisasi[<?=$jenis?>][]" value="<?=is_numeric($v) ? $v .' Bulan' : $v?>" id=""> <?=is_numeric($v) ? $v .' Bulan' : $v?>
+                                                    <input type="checkbox" id="jenis-<?=array_search($imunisasi, $jenis_imunisasi)?>-<?=$index?>" name="jenis_imunisasi[<?=$jenis?>][]" value="<?=is_numeric($v) ? $v .' Bulan' : $v?>" id="" <?=$sudah?'checked disabled':''?>> <?=is_numeric($v) ? $v .' Bulan' : $v?>
                                                 </label>
                                                 <?php endforeach ?>
                                             </td>

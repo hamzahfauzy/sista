@@ -63,6 +63,13 @@ $jenis_imunisasi = [
     'DPT-HB-HiB' => [2,3,4,18],
 ];
 
+$vaksins = $db->all('imunisasi_vaksin', ['penduduk_id'=>$_GET['penduduk_id']]);
+$vaksin_exists = [];
+foreach($vaksins as $jv)
+{
+    $vaksin_exists[$jv->nama][$jv->jenis] = true;
+}
+
 // $available = [];
 // foreach($jenis_imunisasi as $jenis => $usia)
 // {
@@ -75,4 +82,4 @@ $jenis_imunisasi = [
 // $fields['jenis_imunisasi']['label'] = 'Jenis Imunisasi';
 // $fields['jenis_imunisasi']['type'] = 'options:'.implode('|',$available);
 
-return compact('table','error_msg','old','fields','penduduk','jenis_imunisasi');
+return compact('table','error_msg','old','fields','penduduk','jenis_imunisasi','vaksin_exists');
