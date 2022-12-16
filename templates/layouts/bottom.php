@@ -70,6 +70,12 @@
 	<script src="<?=asset('assets/js/plugin/datatables-pagingtype/full_numbers_no_ellipses.js')?>"></script>
 	<script src="https://cdn.tiny.cloud/1/rsb9a1wqmvtlmij61ssaqj3ttq18xdwmyt7jg23sg1ion6kn/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 	<script>
+		$('.select2-bulan').select2({
+			placeholder: {
+				id: 'Pilih', // the value of the option
+				text: 'Pilih'
+			}
+		});
 		window.anak = []
 		<?php if(isset($_GET['table']) && $_GET['table'] == 'penduduk'): ?>
 		$('.datatable').dataTable({

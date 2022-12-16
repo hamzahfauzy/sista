@@ -49,6 +49,11 @@
                                     {
                                         $attr['readonly'] = 'readonly';
                                     }
+
+                                    if($field == 'bulan')
+                                    {
+                                        $attr['class'] .= ' select2-bulan';
+                                    }
                                 ?>
                                 <div class="form-group">
                                     <label for=""><?=$label?></label>
