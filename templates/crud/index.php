@@ -91,7 +91,7 @@
                                             <?php endforeach ?>
                                             <td>
                                             <?php foreach($actions as $action): ?>
-                                            <?php if(is_allowed(get_route_path($action['route'],$action['param']),auth()->user->id)): ?>
+                                            <?php if(is_allowed(get_route_path($action['route'],[]),auth()->user->id)): ?>
                                                 <a href="<?=routeTo($action['route'],$action['param'])?>" class="<?=$action['class']?>"><?=$action['label']?></a>
                                             <?php endif ?>
                                             <?php endforeach ?>
