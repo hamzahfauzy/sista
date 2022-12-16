@@ -15,7 +15,9 @@ if(isset($_GET['posyandu_id']))
     $params['posyandu_id'] = $_GET['posyandu_id'];
 }
 
-$data = $db->all($table, $params);
+$data = $db->all($table, $params, [
+    'id' => 'DESC'
+]);
 
 return [
     'datas' => $data,
