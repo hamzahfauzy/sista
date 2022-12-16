@@ -214,10 +214,6 @@ return [
             'label' => 'Tinggi (Cm)',
             'type'  => 'number'
         ],
-        'jenis_imunisasi' => [
-            'label' => 'Jenis Imunisasi',
-            'type'  => 'text'
-        ],
     ],
     'ibu_hamil' => [
         'posyandu_id' => [

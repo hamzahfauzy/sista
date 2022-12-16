@@ -18,7 +18,6 @@ CREATE TABLE imunisasi (
     usia VARCHAR(50) NOT NULL,
     berat VARCHAR(50) NOT NULL,
     tinggi VARCHAR(50) NOT NULL,
-    jenis_imunisasi VARCHAR(50) NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 

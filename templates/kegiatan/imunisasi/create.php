@@ -44,6 +44,7 @@
                                         'class'=>($type == 'color' ? 'd-block' :'form-control'),
                                         "placeholder"=>$label,
                                         "value"=>isset($old[$field])?$old[$field]:($penduduk->{$field}??''),
+                                        'required' => 'required'
                                     ];
                                     if(isset($penduduk->{$field}))
                                     {
@@ -60,6 +61,23 @@
                                     <?= Form::input($type, $fieldname, $attr) ?>
                                 </div>
                                 <?php endforeach ?>
+                                <div class="form-group">
+                                    <label for="">Jenis Imunisasi</label>
+                                    <table class="table table-bordered">
+                                        <?php foreach($jenis_imunisasi as $jenis => $imunisasi): ?>
+                                        <tr>
+                                            <td><?=$jenis?></td>
+                                            <td>
+                                                <?php foreach($imunisasi as $index => $v): ?>
+                                                <label for="jenis-<?=array_search($imunisasi, $jenis_imunisasi)?>-<?=$index?>" class="mr-2">
+                                                    <input type="checkbox" id="jenis-<?=array_search($imunisasi, $jenis_imunisasi)?>-<?=$index?>" name="jenis_imunisasi[<?=$jenis?>][]" value="<?=is_numeric($v) ? $v .' Bulan' : $v?>" id=""> <?=is_numeric($v) ? $v .' Bulan' : $v?>
+                                                </label>
+                                                <?php endforeach ?>
+                                            </td>
+                                        </tr>
+                                        <?php endforeach ?>
+                                    </table>
+                                </div>
                                 <div class="form-group">
                                     <button class="btn btn-success">Submit</button>
                                 </div>
