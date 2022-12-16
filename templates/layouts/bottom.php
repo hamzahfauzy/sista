@@ -178,16 +178,16 @@
 		function loadAnak()
 		{
 			$('#exampleModal').modal('show')
+			if ($.fn.DataTable.isDataTable( '.datatable-anak' ) ) {
+				return
+			}
 			$('.datatable-anak').dataTable({
 				processing: true,
 				search: {
 					return: true
 				},
 				serverSide: true,
-				ajax: "<?=routeTo('api/imunisasi/load-anak',$_GET)?>",
-				drawCallback: function( settings ) {
-					var anak = window.anak
-				}
+				ajax: "<?=routeTo('api/imunisasi/load-anak',$_GET)?>"
 			})
 		}
 
