@@ -1,29 +1,44 @@
 <?php
 
 $table = 'kegiatan_kb';
-Page::set_title('Tambah '.ucwords($table));
+Page::set_title('Tambah Kegiatan KB');
 $error_msg = get_flash_msg('error');
 $old = get_flash_msg('old');
 $fields = config('fields')[$table];
+$conn = conn();
+$db   = new Database($conn);
 
-if(file_exists('../actions/'.$table.'/override-create-fields.php'))
-    $fields = require '../actions/'.$table.'/override-create-fields.php';
+if(isset($_GET['posyandu_id']))
+{
+    unset($fields['posyandu_id']);
+}
+
+$penduduk = $db->single('penduduk',['id'=>$_GET['penduduk_id']]);
+$sebagai = $penduduk->sebagai == 'Ibu' ? 'Ayah' : 'Ibu';
+$pasangan = $db->single('penduduk',['no_kk'=>$penduduk->no_kk,'sebagai'=>$sebagai]);
+$kelurahan = $db->single('kelurahan',['id'=>$penduduk->kelurahan_id]);
+$penduduk->nama_pasangan = $pasangan ? $pasangan->nama : '';
+$penduduk->kelurahan = $kelurahan->nama;
+
+$diff = abs(strtotime('now')-strtotime($penduduk->tanggal_lahir));
+$years = floor($diff / (365*60*60*24));
+$penduduk->usia = $years;
 
 if(request() == 'POST')
 {
-    $conn = conn();
-    $db   = new Database($conn);
 
-    if(file_exists('../actions/'.$table.'/before-insert.php'))
-        require '../actions/'.$table.'/before-insert.php';
+    $params = [];
+
+    if(isset($_GET['posyandu_id']))
+    {
+        $_POST[$table]['posyandu_id'] = $_GET['posyandu_id'];
+        $params = $_GET;
+    }
 
     $insert = $db->insert($table,$_POST[$table]);
 
-    if(file_exists('../actions/'.$table.'/after-insert.php'))
-        require '../actions/'.$table.'/after-insert.php';
-
-    set_flash_msg(['success'=>$table.' berhasil ditambahkan']);
-    header('location:'.routeTo('kegiatan/kb/index'));
+    set_flash_msg(['success'=>'Kegiatan KB berhasil ditambahkan']);
+    header('location:'.routeTo('kegiatan/kb/index',$params));
 }
 
-return compact('table','error_msg','old','fields');
+return compact('table','error_msg','old','fields','penduduk');

@@ -231,8 +231,42 @@ return [
             'label' => 'Posyandu',
             'type'  => 'options-obj:posyandu,id,nama'
         ],
-        'nama',
-        'jenis',
-        'kesehatan_akseptor'
+        'NIK' => [
+            'label' => 'NIK',
+            'type'  => 'text'
+        ],
+        'nama' => [
+            'label' => 'Nama Akseptor',
+            'type'  => 'text'
+        ],
+        'nama_pasangan' => [
+            'label' => 'Nama Suami/Istri',
+            'type'  => 'text'
+        ],
+        'usia' => [
+            'label' => 'Usia Akseptor',
+            'type'  => 'number'
+        ],
+        'alamat' => [
+            'label' => 'Alamat',
+            'type'  => 'text'
+        ],
+        'kelurahan' => [
+            'label' => 'Kelurahan',
+            'type'  => 'text'
+        ],
+        'jumlah_anak' => [
+            'label' => 'Jumlah Anak',
+            'type'  => 'options:1 Anak|2 Anak|3 Anak|4 Anak|5 Anak|6 Anak'
+        ],
+        'status' => [
+            'label' => 'Status',
+            'type'  => 'options:Akseptor Baru|Pernaj menjadi Akseptor|Berhenti menjadi Akseptor'
+        ],
+        'jenis' => [
+            'label' => 'Jenis Alat Kontrasepsi',
+            'type'  => 'options:IUD|Implan|Suntik KB|PIL KB|Kondom|Spermisida|Diafragma'
+        ],
+        'keterangan'
     ]
 ];

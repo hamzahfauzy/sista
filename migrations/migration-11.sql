@@ -35,8 +35,15 @@ CREATE TABLE ibu_hamil (
 CREATE TABLE kegiatan_kb (
     id INT AUTO_INCREMENT PRIMARY KEY,
     posyandu_id INT NOT NULL,
+    NIK VARCHAR(50) NULL,
     nama VARCHAR(100) NOT NULL,
+    nama_pasangan VARCHAR(100) NOT NULL,
+    usia VARCHAR(50) NOT NULL,
+    alamat TEXT NOT NULL,
+    kelurahan TEXT NOT NULL,
+    jumlah_anak INT NOT NULL,
+    status VARCHAR(50) NOT NULL,
     jenis VARCHAR(50) NOT NULL,
-    kesehatan_akseptor VARCHAR(50) NOT NULL,
+    keterangan TEXT NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
