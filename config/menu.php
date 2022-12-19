@@ -19,16 +19,16 @@ return [
     ],
     'posyandu'  => 'crud/index?table=posyandu',
     'kegiatan kesehatan' => [
-        'Posyandu' => [
+        // 'Posyandu' => [
             'Imunisasi Balita' => 'kegiatan/imunisasi/index',
-            'Ibu Hamil' => 'kegiatan/ibu-hamil/index',
-            'Gizi Balita' => 'kegiatan/pemantauan-gizi/index',
-            'KB'        => 'kegiatan/kb/index',
-        ],
-        'Posyandu Lansia' => [
-            'Pemeriksaan Kesehatan' => 'kegiatan/posyandu-lansia/index',
-            'Senam Prolanis' => 'kegiatan/senam-prolanis/index'
-        ],
+            'Pemeriksaan Ibu Hamil' => 'kegiatan/ibu-hamil/index',
+            'Pemantauan Gizi Balita' => 'kegiatan/pemantauan-gizi/index',
+            'Program Keluarga Berencana (KB)'        => 'kegiatan/kb/index',
+        // ],
+        // 'Posyandu Lansia' => [
+            'Pemeriksaan Kesehatan Lansia' => 'kegiatan/posyandu-lansia/index',
+            'Senam Prolanis Lansia' => 'kegiatan/senam-prolanis/index',
+        // ],
         'Bulan Imunisasi Anak Nasional (BIAN)' => 'kegiatan/bian/index',
         'Bulan Imunisasi Anak Sekolah (BIAS)' => 'kegiatan/bias/index',
         // 'Imunisasi' => 'kegiatan/imunisasi/index',

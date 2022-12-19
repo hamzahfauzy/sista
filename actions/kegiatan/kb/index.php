@@ -10,6 +10,13 @@ $actions = [];
 
 $params = [];
 
+unset($fields['nama_pasangan']);
+unset($fields['usia']);
+unset($fields['jumlah_anak']);
+unset($fields['status']);
+unset($fields['jenis']);
+unset($fields['keterangan']);
+
 if(isset($_GET['posyandu_id']))
 {
     $params['posyandu_id'] = $_GET['posyandu_id'];

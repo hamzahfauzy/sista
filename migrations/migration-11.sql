@@ -23,12 +23,13 @@ CREATE TABLE imunisasi (
 
 CREATE TABLE ibu_hamil (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    posyandu_id INT NOT NULL,
+    NIK VARCHAR(20) NOT NULL,
     nama VARCHAR(100) NOT NULL,
+    nama_suami VARCHAR(100) NOT NULL,
     alamat TEXT NOT NULL,
-    berat VARCHAR(50) NOT NULL,
-    usia VARCHAR(50) NOT NULL,
-    kondisi VARCHAR(50) NOT NULL,
+    kelurahan VARCHAR(100) NOT NULL,
+    status_peserta VARCHAR(50) NOT NULL,
+    hpht VARCHAR(50) NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 

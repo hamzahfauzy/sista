@@ -170,7 +170,10 @@ return [
         ]
     ],
     'posyandu' => [
-        'nama',
+        'nama' => [
+            'label' => 'Nama Posyandu',
+            'type'  => 'text'
+        ],
         'kecamatan_id' => [
             'label' => 'Kecamatan',
             'type'  => 'options-obj:kecamatan,id,nama'
@@ -180,12 +183,13 @@ return [
             'type'  => 'options-obj:kelurahan,id,nama'
         ],
         'lingkungan_id' => [
-            'label' => 'Dusun / Lingkungan',
+            'label' => 'Wilayah Cakupan Posyandu',
             'type'  => 'options-obj:lingkungan,id,nama'
         ],
+        'alamat',
         'strata' => [
             'label' => 'Strata',
-            'type'  => 'options:Pratma|Madya|Purnama|Mandiri'
+            'type'  => 'options:Pratama|Madya|Purnama|Mandiri'
         ],
         'file' => [
             'label' => 'Gambar Posyandu',
@@ -224,15 +228,19 @@ return [
         ],
     ],
     'ibu_hamil' => [
-        'posyandu_id' => [
-            'label' => 'Posyandu',
-            'type'  => 'options-obj:posyandu,id,nama'
-        ],
+        'NIK',
         'nama',
+        'nama_suami',
         'alamat',
-        'berat',
-        'usia',
-        'kondisi'
+        'kelurahan',
+        'status_peserta' => [
+            'label' => 'Status Peserta',
+            'type'  => 'options:Aktif|Tidak Aktif|Tidak Ikut'
+        ],
+        'hpht' => [
+            'label' => 'HPHT (Awal Kehamilan)',
+            'type'  => 'date'
+        ],
     ],
     'kegiatan_kb' => [
         'posyandu_id' => [
@@ -260,7 +268,7 @@ return [
             'type'  => 'text'
         ],
         'kelurahan' => [
-            'label' => 'Kelurahan',
+            'label' => 'Desa / Kelurahan',
             'type'  => 'text'
         ],
         'jumlah_anak' => [
@@ -275,7 +283,10 @@ return [
             'label' => 'Jenis Alat Kontrasepsi',
             'type'  => 'options:IUD|Implan|Suntik KB|PIL KB|Kondom|Spermisida|Diafragma'
         ],
-        'keterangan'
+        'keterangan' => [
+            'label' => 'Keterangan',
+            'type'  => 'text'
+        ]
     ],
     'pemantauan_gizi' => [
         'posyandu_id' => [

@@ -1,0 +1,1 @@
+ALTER TABLE `posyandu` ADD `alamat` TEXT DEFAULT NULL;

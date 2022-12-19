@@ -40,10 +40,18 @@
                                     {
                                         $fieldname = $field;
                                     }
+
+                                    $attr = ['class'=>($type == 'color' ? 'd-block' :'form-control'),"placeholder"=>$label,"value"=>$old[$field]??''];
+
+                                    if($table == 'posyandu' && $field == 'lingkungan_id')
+                                    {
+                                        $attr['multiple'] = 'multiple';
+                                        $attr['class'] .= ' select2-multiple';
+                                    }
                                 ?>
                                 <div class="form-group">
                                     <label for=""><?=$label?></label>
-                                    <?= Form::input($type, $fieldname, ['class'=>($type == 'color' ? 'd-block' :'form-control'),"placeholder"=>$label,"value"=>$old[$field]??'']) ?>
+                                    <?= Form::input($type, $fieldname, $attr) ?>
                                 </div>
                                 <?php endforeach ?>
                                 <div class="form-group">

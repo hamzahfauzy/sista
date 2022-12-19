@@ -5,12 +5,12 @@
             <div class="page-inner py-5">
                 <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
                     <div>
-                        <h2 class="text-white pb-2 fw-bold"><?=_ucwords($table)?></h2>
-                        <h5 class="text-white op-7 mb-2">Memanajemen data <?=_ucwords($table)?></h5>
+                        <h2 class="text-white pb-2 fw-bold">Kegiatan KB</h2>
+                        <h5 class="text-white op-7 mb-2">Memanajemen data Kegiatan KB</h5>
                     </div>
                     <div class="ml-md-auto py-2 py-md-0">
                         <?php if(is_allowed(get_route_path('kegiatan/kb/create',$_GET),auth()->user->id)): ?>
-                            <button class="btn btn-secondary btn-round" onclick="loadPendudukKb()">Buat <?=_ucwords($table)?></button>
+                            <button class="btn btn-secondary btn-round" onclick="loadPendudukKb()">Buat Kegiatan KB</button>
                         <?php endif ?>
                     </div>
                 </div>

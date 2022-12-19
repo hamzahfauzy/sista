@@ -76,6 +76,12 @@
 				text: 'Pilih'
 			}
 		});
+		$('.select2-multiple').select2({
+			placeholder: {
+				id: 'Pilih', // the value of the option
+				text: 'Pilih'
+			}
+		});
 		window.anak = []
 		<?php if(isset($_GET['table']) && $_GET['table'] == 'penduduk'): ?>
 		$('.datatable').dataTable({
