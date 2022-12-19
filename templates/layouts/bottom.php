@@ -197,6 +197,22 @@
 			})
 		}
 
+		function loadAnakPemantauan()
+		{
+			$('#exampleModal').modal('show')
+			if ($.fn.DataTable.isDataTable( '.datatable-anak' ) ) {
+				return
+			}
+			$('.datatable-anak').dataTable({
+				processing: true,
+				search: {
+					return: true
+				},
+				serverSide: true,
+				ajax: "<?=routeTo('api/pemantauan-gizi/load-anak',$_GET)?>"
+			})
+		}
+
 		function loadPendudukKb()
 		{
 			$('#exampleModal').modal('show')

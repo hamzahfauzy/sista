@@ -53,7 +53,7 @@ $penduduk = $db->single('penduduk',['id'=>$_GET['penduduk_id']]);
 $diff = abs(strtotime('now')-strtotime($penduduk->tanggal_lahir));
 $years = floor($diff / (365*60*60*24));
 $months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));
-$penduduk->usia = $months;
+$penduduk->usia = ($years*12) + $months;
 
 $jenis_imunisasi = [
     'Hepatitis B (HB-0)' => [2,3,4,18],

@@ -22,7 +22,7 @@ return [
         'Posyandu' => [
             'Imunisasi Balita' => 'kegiatan/imunisasi/index',
             'Ibu Hamil' => 'kegiatan/ibu-hamil/index',
-            'Gizi Balita' => 'kegiatan/ibu-hamil/index',
+            'Gizi Balita' => 'kegiatan/pemantauan-gizi/index',
             'KB'        => 'kegiatan/kb/index',
         ],
         'Posyandu Lansia' => [

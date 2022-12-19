@@ -214,6 +214,14 @@ return [
             'label' => 'Tinggi (Cm)',
             'type'  => 'number'
         ],
+        'keluhan' => [
+            'label' => 'Keluhan',
+            'type'  => 'options:Tidak ada|Tidak mau makan|Demam|Diare|Flu dan Batuk|ISPA|Sembelit|Kolik|Gigitan Serangga|Ruam Popok'
+        ],
+        'keterangan' => [
+            'label' => 'Keterangan',
+            'type'  => 'text'
+        ],
     ],
     'ibu_hamil' => [
         'posyandu_id' => [
@@ -268,5 +276,47 @@ return [
             'type'  => 'options:IUD|Implan|Suntik KB|PIL KB|Kondom|Spermisida|Diafragma'
         ],
         'keterangan'
+    ],
+    'pemantauan_gizi' => [
+        'posyandu_id' => [
+            'label' => 'Posyandu',
+            'type'  => 'options-obj:posyandu,id,nama'
+        ],
+        'nama',
+        'nama_orangtua',
+        'jenis_kelamin' => [
+            'label' => 'Jenis Kelamin',
+            'type'  => 'options:Laki-laki|Perempuan'
+        ],
+        'tanggal_lahir',
+        'usia' => [
+            'label' => 'Usia (Bulan)',
+            'type'  => 'number'
+        ],
+        'alamat',
+        'tanggal_pemeriksaan' => [
+            'label' => 'Tanggal Pemeriksaan',
+            'type'  => 'date'
+        ],
+        'status_pemantauan' => [
+            'label' => 'Status Mengikuti Pemantauan',
+            'type'  => 'options:Aktif Pemeriksaan|Tidak Aktif Pemeriksaan|Tidak Pernah Pemeriksaan'
+        ],
+        'berat' => [
+            'label' => 'Berat (Kg)',
+            'type'  => 'number'
+        ],
+        'tinggi' => [
+            'label' => 'Tinggi (Cm)',
+            'type'  => 'number'
+        ],
+        'status_gizi' => [
+            'label' => 'Status Gizi',
+            'type'  => 'options:Gizi Sehat|Gizi Cukup|Gizi Kurang|Gizi Buruk'
+        ],
+        'keterangan' => [
+            'label' => 'Keterangan',
+            'type'  => 'options:Balita Sehat|Balita Tidak Sehat|Balita Sakit|Perlu Mendapat Perhatian'
+        ],
     ]
 ];
