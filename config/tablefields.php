@@ -258,10 +258,13 @@ return [
             'type'  => 'number'
         ],
         'lila' => [
-            'label' => 'Lila (Cm)',
+            'label' => 'Ukuran LILA (Cm)',
             'type'  => 'number'
         ],
-        'hasil',
+        'hasil' => [
+            'label' => 'Hasil Pemeriksaan',
+            'type'  => 'text'
+        ],
     ],
     'kegiatan_kb' => [
         'posyandu_id' => [
