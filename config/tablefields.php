@@ -397,7 +397,7 @@ return [
         ],
         'tekanan_darah' => [
             'label' => 'Tekanan Darah (mm Hg)',
-            'type'  => 'number'
+            'type'  => 'text'
         ],
         'berat_badan' => [
             'label' => 'Berat Badan (Kg)',
@@ -405,11 +405,11 @@ return [
         ],
         'gula_darah' => [
             'label' => 'Gula Darah (mg/dL)',
-            'type'  => 'number'
+            'type'  => 'text'
         ],
         'kolesterol' => [
             'label' => 'Kolesterol (mg/dL)',
-            'type'  => 'number'
+            'type'  => 'text'
         ],
         'lingkar_perut' => [
             'label' => 'Lingkar Perut (Cm)',
