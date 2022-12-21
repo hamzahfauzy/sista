@@ -27,7 +27,7 @@ return [
         // ],
         // 'Posyandu Lansia' => [
             'Pemeriksaan Kesehatan Lansia' => 'kegiatan/posyandu-lansia/index',
-            'Senam Prolanis Lansia' => 'kegiatan/senam-prolanis/index',
+            // 'Senam Prolanis Lansia' => 'kegiatan/senam-prolanis/index',
         // ],
         'Bulan Imunisasi Anak Nasional (BIAN)' => 'kegiatan/bian/index',
         'Bulan Imunisasi Anak Sekolah (BIAS)' => 'kegiatan/bias/index',

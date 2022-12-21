@@ -235,6 +235,22 @@
 			})
 		}
 
+		function loadPendudukLansia()
+		{
+			$('#exampleModal').modal('show')
+			if ($.fn.DataTable.isDataTable( '.datatable-penduduk' ) ) {
+				return
+			}
+			$('.datatable-penduduk').dataTable({
+				processing: true,
+				search: {
+					return: true
+				},
+				serverSide: true,
+				ajax: "<?=routeTo('api/posyandu-lansia/load-penduduk',$_GET)?>"
+			})
+		}
+
 		function loadPendudukIbuHamil()
 		{
 			$('#exampleModal').modal('show')

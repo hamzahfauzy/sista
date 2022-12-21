@@ -353,5 +353,109 @@ return [
             'label' => 'Keterangan',
             'type'  => 'options:Balita Sehat|Balita Tidak Sehat|Balita Sakit|Perlu Mendapat Perhatian'
         ],
+    ],
+    'lansia' => [
+        'posyandu_id' => [
+            'label' => 'Posyandu',
+            'type'  => 'options-obj:posyandu,id,nama'
+        ],
+        'NIK' => [
+            'label' => 'NIK',
+            'type'  => 'text'
+        ],
+        'nama' => [
+            'label' => 'Nama Lansia',
+            'type'  => 'text'
+        ],
+        'nama_pasangan' => [
+            'label' => 'Nama Suami/Istri',
+            'type'  => 'text'
+        ],
+        'usia' => [
+            'label' => 'Usia',
+            'type'  => 'number'
+        ],
+        'alamat' => [
+            'label' => 'Alamat',
+            'type'  => 'text'
+        ],
+        'kelurahan' => [
+            'label' => 'Desa / Kelurahan',
+            'type'  => 'text'
+        ],
+        'jumlah_anak' => [
+            'label' => 'Jumlah Anak',
+            'type'  => 'options:1 Anak|2 Anak|3 Anak|4 Anak|5 Anak|6 Anak'
+        ],
+        'lokasi_cek' => [
+            'label' => 'Lokasi Cek Kesehatan',
+            'type'  => 'options:Posyandu|Puskesmas|Dokter Umum/Spesialis|Klinik Pratama|Rumah Sakit'
+        ],
+        'status_cek' => [
+            'label' => 'Status Cek Kesehatan',
+            'type'  => 'options:Rutin|Tidak Rutin|Tidak Pernah'
+        ],
+        'tekanan_darah' => [
+            'label' => 'Tekanan Darah (mm Hg)',
+            'type'  => 'number'
+        ],
+        'berat_badan' => [
+            'label' => 'Berat Badan (Kg)',
+            'type'  => 'number'
+        ],
+        'gula_darah' => [
+            'label' => 'Gula Darah (mg/dL)',
+            'type'  => 'number'
+        ],
+        'kolesterol' => [
+            'label' => 'Kolesterol (mg/dL)',
+            'type'  => 'number'
+        ],
+        'lingkar_perut' => [
+            'label' => 'Lingkar Perut (Cm)',
+            'type'  => 'number'
+        ],
+        'status_kesehatan' => [
+            'label' => 'Status Kesehatan',
+            'type'  => 'options:Sehat|Kurang Sehat|Sakit Biasa|Sakit Serius'
+        ],
+        'riwayat_penyakit' => [
+            'label' => 'Riwayat Penyakit',
+            'type'  => 'options:Tidak Ada|Jantung|Paru-Paru|Diabetes|Stroke|Hipertensi|Katarak|Kanker|Radan Sendi'
+        ],
+        'keterangan' => [
+            'label' => 'Keterangan',
+            'type'  => 'options:Rawat Inap|Rawat Inap Berkala|Rawat Jalan'
+        ],
+    ],
+    
+    'bian' => [
+        'posyandu_id',
+        'NIK',
+        'nama',
+        'tanggal_lahir',
+        'usia',
+        'nama_orangtua',
+        'alamat',
+        'kelurahan',
+        'sekolah',
+        'jenis_imunisasi',
+        'tanggal_pemeriksaan',
+        'alasan',
+    ],
+    
+    'bias' => [
+        'posyandu_id',
+        'NIK',
+        'nama',
+        'tanggal_lahir',
+        'usia',
+        'nama_orangtua',
+        'alamat',
+        'kelurahan',
+        'sekolah',
+        'jenis_imunisasi',
+        'tanggal_pemeriksaan',
+        'alasan',
     ]
 ];
