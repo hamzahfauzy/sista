@@ -235,6 +235,22 @@
 			})
 		}
 
+		function loadPendudukIbuHamil()
+		{
+			$('#exampleModal').modal('show')
+			if ($.fn.DataTable.isDataTable( '.datatable-penduduk' ) ) {
+				return
+			}
+			$('.datatable-penduduk').dataTable({
+				processing: true,
+				search: {
+					return: true
+				},
+				serverSide: true,
+				ajax: "<?=routeTo('api/ibu-hamil/load-penduduk',$_GET)?>"
+			})
+		}
+
 		function loadJenisVaksin(data)
 		{
 			$('#modalJenisVaksin').modal('show')
@@ -480,6 +496,44 @@
 				})
 			}
 		}
+
+		var DateDiff = {
+ 
+			inDays: function(d1, d2) {
+				var t2 = d2.getTime();
+				var t1 = d1.getTime();
+
+				return Math.floor((t2-t1)/(24*3600*1000));
+			},
+
+			inWeeks: function(d1, d2) {
+				var t2 = d2.getTime();
+				var t1 = d1.getTime();
+
+				return parseInt((t2-t1)/(24*3600*1000*7));
+			},
+
+			inMonths: function(d1, d2) {
+				var d1Y = d1.getFullYear();
+				var d2Y = d2.getFullYear();
+				var d1M = d1.getMonth();
+				var d2M = d2.getMonth();
+
+				return (d2M+12*d2Y)-(d1M+12*d1Y);
+			},
+
+			inYears: function(d1, d2) {
+				return d2.getFullYear()-d1.getFullYear();
+			}
+			}
+
+		$('[name="ibu_hamil[hpht]"]').change(e => {
+			var d1 = new Date(document.querySelector('[name="ibu_hamil[hpht]"]').value);
+			var d2 = new Date();
+
+			$('[name="ibu_hamil[usia_kandungan]"]').val(DateDiff.inDays(d1,d2) + ' Hari')
+		})
+
 	</script>
 </body>
 </html>

@@ -228,6 +228,10 @@ return [
         ],
     ],
     'ibu_hamil' => [
+        'posyandu_id' => [
+            'label' => 'Posyandu',
+            'type'  => 'options-obj:posyandu,id,nama'
+        ],
         'NIK',
         'nama',
         'nama_suami',
@@ -241,6 +245,23 @@ return [
             'label' => 'HPHT (Awal Kehamilan)',
             'type'  => 'date'
         ],
+        'usia_kandungan' => [
+            'label' => 'Usia Kandungan',
+            'type'  => 'text'
+        ],
+        'berat' => [
+            'label' => 'Berat (Kg)',
+            'type'  => 'number'
+        ],
+        'tinggi' => [
+            'label' => 'Tinggi (Cm)',
+            'type'  => 'number'
+        ],
+        'lila' => [
+            'label' => 'Lila (Cm)',
+            'type'  => 'number'
+        ],
+        'hasil',
     ],
     'kegiatan_kb' => [
         'posyandu_id' => [

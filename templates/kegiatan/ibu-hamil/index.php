@@ -1,4 +1,5 @@
 <?php load_templates('layouts/top') ?>
+<?php require '_modal-penduduk.php' ?>
     <div class="content">
         <div class="panel-header <?=config('theme')['panel_color']?>">
             <div class="page-inner py-5">
@@ -8,8 +9,8 @@
                         <h5 class="text-white op-7 mb-2">Memanajemen data <?=_ucwords($table)?></h5>
                     </div>
                     <div class="ml-md-auto py-2 py-md-0">
-                        <?php if(is_allowed(get_route_path('crud/create',['table'=>$table]),auth()->user->id)): ?>
-                            <a href="<?=routeTo('crud/create',['table'=>$table])?>" class="btn btn-secondary btn-round">Buat <?=_ucwords($table)?></a>
+                        <?php if(is_allowed(get_route_path('kegiatan/ibu-hamil/create',$_GET),auth()->user->id)): ?>
+                            <button class="btn btn-secondary btn-round" onclick="loadPendudukIbuHamil()">Buat Data Ibu Hamil</button>
                         <?php endif ?>
                     </div>
                 </div>
@@ -82,11 +83,11 @@
                                                 <a href="<?=routeTo($action['route'],$action['param'])?>" class="<?=$action['class']?>"><?=$action['label']?></a>
                                             <?php endif ?>
                                             <?php endforeach ?>
-                                            <?php if(is_allowed(get_route_path('crud/edit',['table'=>$table]),auth()->user->id)): ?>
+                                            <?php /* if(is_allowed(get_route_path('crud/edit',['table'=>$table]),auth()->user->id)): ?>
                                                 <a href="<?=routeTo('crud/edit',['table'=>$table,'id'=>$data->id])?>" class="btn btn-sm btn-warning"><i class="fas fa-pencil-alt"></i> Edit</a>
-                                            <?php endif ?>
-                                            <?php if(is_allowed(get_route_path('crud/delete',['table'=>$table]),auth()->user->id)): ?>
-                                                <a href="<?=routeTo('crud/delete',['table'=>$table,'id'=>$data->id])?>" onclick="if(confirm('apakah anda yakin akan menghapus data ini ?')){return true}else{return false}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Hapus</a>
+                                            <?php endif */ ?>
+                                            <?php if(is_allowed(get_route_path('kegiatan/ibu-hamil/delete',[]),auth()->user->id)): ?>
+                                                <a href="<?=routeTo('kegiatan/ibu-hamil/delete',['id'=>$data->id])?>" onclick="if(confirm('apakah anda yakin akan menghapus data ini ?')){return true}else{return false}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Hapus</a>
                                             <?php endif ?>
                                             </td>
                                         </tr>

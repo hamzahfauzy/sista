@@ -4,7 +4,7 @@
             <div class="page-inner py-5">
                 <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
                     <div>
-                        <h2 class="text-white pb-2 fw-bold">Buat <?=_ucwords($table)?> Baru</h2>
+                        <h2 class="text-white pb-2 fw-bold">Tambah Data <?=_ucwords($table)?> Baru</h2>
                         <h5 class="text-white op-7 mb-2">Memanajemen data <?=_ucwords($table)?></h5>
                     </div>
                     <div class="ml-md-auto py-2 py-md-0">
@@ -40,10 +40,21 @@
                                     {
                                         $fieldname = $field;
                                     }
+                                    
+                                    $attr = [
+                                        'class'=>($type == 'color' ? 'd-block' :'form-control'),
+                                        "placeholder"=>$label,
+                                        "value"=>isset($old[$field])?$old[$field]:($penduduk->{$field}??''),
+                                        'required' => 'required'
+                                    ];
+                                    if(isset($penduduk->{$field}))
+                                    {
+                                        $attr['readonly'] = 'readonly';
+                                    }
                                 ?>
                                 <div class="form-group">
                                     <label for=""><?=$label?></label>
-                                    <?= Form::input($type, $fieldname, ['class'=>($type == 'color' ? 'd-block' :'form-control'),"placeholder"=>$label,"value"=>$old[$field]??'']) ?>
+                                    <?= Form::input($type, $fieldname, $attr) ?>
                                 </div>
                                 <?php endforeach ?>
                                 <div class="form-group">

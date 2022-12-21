@@ -1,7 +1,7 @@
 <?php
 
 $table = 'ibu_hamil';
-Page::set_title(ucwords($table));
+Page::set_title('Pemeriksaan Ibu Hamil');
 $conn = conn();
 $db   = new Database($conn);
 $success_msg = get_flash_msg('success');
