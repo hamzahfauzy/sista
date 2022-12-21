@@ -430,32 +430,68 @@ return [
     ],
     
     'bian' => [
-        'posyandu_id',
+        'posyandu_id' => [
+            'label' => 'Posyandu',
+            'type'  => 'options-obj:posyandu,id,nama'
+        ],
         'NIK',
         'nama',
         'tanggal_lahir',
-        'usia',
+        'usia' => [
+            'label' => 'Usian (Tahun)',
+            'type'  => 'text'
+        ],
         'nama_orangtua',
         'alamat',
         'kelurahan',
-        'sekolah',
-        'jenis_imunisasi',
-        'tanggal_pemeriksaan',
-        'alasan',
+        'sekolah' => [
+            'label' => 'Sekolah',
+            'type'  => 'text'
+        ],
+        'jenis_imunisasi' => [
+            'label' => 'Jenis Imunisasi',
+            'type'  => 'options:Vaksin Campak Rubella|Vaksin Folio (OPV/IPV)|Vaksin Pentavalent (DPT-HB-Hib)'
+        ],
+        'tanggal_pemeriksaan' => [
+            'label' => 'Tanggal Pemeriksaan',
+            'type'  => 'date'
+        ],
+        'alasan' => [
+            'label' => 'Alasan Tidak Ikut Imunisasi',
+            'type'  => 'options:Ikut Imunisasi|Sakit|Tidak diizinkan Orang Tua|Takut|Alergi Vaksin'
+        ],
     ],
     
     'bias' => [
-        'posyandu_id',
+        'posyandu_id' => [
+            'label' => 'Posyandu',
+            'type'  => 'options-obj:posyandu,id,nama'
+        ],
         'NIK',
         'nama',
         'tanggal_lahir',
-        'usia',
+        'usia' => [
+            'label' => 'Usian (Tahun)',
+            'type'  => 'text'
+        ],
         'nama_orangtua',
         'alamat',
         'kelurahan',
-        'sekolah',
-        'jenis_imunisasi',
-        'tanggal_pemeriksaan',
-        'alasan',
+        'sekolah' => [
+            'label' => 'Sekolah',
+            'type'  => 'text'
+        ],
+        'jenis_imunisasi' => [
+            'label' => 'Jenis Imunisasi',
+            'type'  => 'options:Vaksin Campak|Difteri Tetanus (DT)|Tetanus Difteri (TD)|Rubella'
+        ],
+        'tanggal_pemeriksaan' => [
+            'label' => 'Tanggal Pemeriksaan',
+            'type'  => 'date'
+        ],
+        'alasan' => [
+            'label' => 'Alasan Tidak Ikut Imunisasi',
+            'type'  => 'options:Ikut Imunisasi|Sakit|Tidak diizinkan Orang Tua|Takut|Alergi Vaksin'
+        ],
     ]
 ];

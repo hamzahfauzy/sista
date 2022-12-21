@@ -1,6 +1,5 @@
 <?php load_templates('layouts/top') ?>
 <?php require '_modal-anak.php' ?>
-<?php require '_modal-jenis-vaksin.php' ?>
     <div class="content">
         <div class="panel-header <?=config('theme')['panel_color']?>">
             <div class="page-inner py-5">
@@ -10,8 +9,8 @@
                         <h5 class="text-white op-7 mb-2">Memanajemen data <?=_ucwords($table)?></h5>
                     </div>
                     <div class="ml-md-auto py-2 py-md-0">
-                        <?php if(is_allowed(get_route_path('kegiatan/imunisasi/create',$_GET),auth()->user->id)): ?>
-                            <button class="btn btn-secondary btn-round" onclick="loadAnak()">Buat <?=_ucwords($table)?></button>
+                        <?php if(is_allowed(get_route_path('kegiatan/bian/create',$_GET),auth()->user->id)): ?>
+                            <button class="btn btn-secondary btn-round" onclick="loadAnakBian()">Buat <?=_ucwords($table)?></button>
                             <?php 
                             /*
                             <a href="<?=routeTo('kegiatan/imunisasi/create',$_GET)?>" class="btn btn-secondary btn-round">Buat <?=_ucwords($table)?></a>
@@ -81,7 +80,6 @@
                                             </td>
                                             <?php endforeach ?>
                                             <td>
-                                            <button class="btn btn-primary btn-sm" onclick='loadJenisVaksin(<?=json_encode($data->jenis_imunisasi)?>)'>Detail Vaksin</button>
                                             <?php foreach($actions as $action): ?>
                                             <?php if(is_allowed(get_route_path($action['route'],$action['param']),auth()->user->id)): ?>
                                                 <a href="<?=routeTo($action['route'],$action['param'])?>" class="<?=$action['class']?>"><?=$action['label']?></a>
@@ -92,8 +90,8 @@
                                                 <a href="<?=routeTo('kegiatan/imunisasi/edit',isset($_GET['posyandu_id']) ? array_merge($params,['posyandu_id'=>$_GET['posyandu_id']]):$params)?>" class="btn btn-sm btn-warning"><i class="fas fa-pencil-alt"></i> Edit</a>
                                             <?php endif ?>
                                             */ ?>
-                                            <?php if(is_allowed(get_route_path('kegiatan/imunisasi/delete',[]),auth()->user->id)): ?>
-                                                <a href="<?=routeTo('kegiatan/imunisasi/delete',['id'=>$data->id])?>" onclick="if(confirm('apakah anda yakin akan menghapus data ini ?')){return true}else{return false}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Hapus</a>
+                                            <?php if(is_allowed(get_route_path('kegiatan/bian/delete',[]),auth()->user->id)): ?>
+                                                <a href="<?=routeTo('kegiatan/bian/delete',['id'=>$data->id])?>" onclick="if(confirm('apakah anda yakin akan menghapus data ini ?')){return true}else{return false}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Hapus</a>
                                             <?php endif ?>
                                             </td>
                                         </tr>

@@ -203,6 +203,38 @@
 			})
 		}
 
+		function loadAnakBian()
+		{
+			$('#exampleModal').modal('show')
+			if ($.fn.DataTable.isDataTable( '.datatable-anak' ) ) {
+				return
+			}
+			$('.datatable-anak').dataTable({
+				processing: true,
+				search: {
+					return: true
+				},
+				serverSide: true,
+				ajax: "<?=routeTo('api/bian/load-anak',$_GET)?>"
+			})
+		}
+		
+		function loadAnakBias()
+		{
+			$('#exampleModal').modal('show')
+			if ($.fn.DataTable.isDataTable( '.datatable-anak' ) ) {
+				return
+			}
+			$('.datatable-anak').dataTable({
+				processing: true,
+				search: {
+					return: true
+				},
+				serverSide: true,
+				ajax: "<?=routeTo('api/bias/load-anak',$_GET)?>"
+			})
+		}
+
 		function loadAnakPemantauan()
 		{
 			$('#exampleModal').modal('show')
