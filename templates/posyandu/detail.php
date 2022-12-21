@@ -23,6 +23,9 @@
                                 <a href="<?=routeTo('kegiatan/ibu-hamil/index',['posyandu_id'=>$data->id])?>" class="btn btn-primary">Pemeriksaan Ibu Hamil</a>
                                 <a href="<?=routeTo('kegiatan/pemantauan-gizi/index',['posyandu_id'=>$data->id])?>" class="btn btn-primary">Pemantauan Gizi Balita</a>
                                 <a href="<?=routeTo('kegiatan/kb/index',['posyandu_id'=>$data->id])?>" class="btn btn-primary">Keluarga Berencana</a>
+                                <a href="<?=routeTo('kegiatan/posyandu-lansia/index',['posyandu_id'=>$data->id])?>" class="btn btn-primary">Pemeriksaan Kesehatan Lansia</a>
+                                <a href="<?=routeTo('kegiatan/bian/index',['posyandu_id'=>$data->id])?>" class="btn btn-primary">BIAN</a>
+                                <a href="<?=routeTo('kegiatan/bias/index',['posyandu_id'=>$data->id])?>" class="btn btn-primary">BIAS</a>
                             </center>
                         </div>
                     </div>

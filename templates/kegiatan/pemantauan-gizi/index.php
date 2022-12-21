@@ -9,7 +9,7 @@
                         <h5 class="text-white op-7 mb-2">Memanajemen data <?=_ucwords($table)?></h5>
                     </div>
                     <div class="ml-md-auto py-2 py-md-0">
-                        <?php if(is_allowed(get_route_path('kegiatan/pemantauan-gizi/create',$_GET),auth()->user->id)): ?>
+                        <?php if(is_allowed(get_route_path('kegiatan/pemantauan-gizi/create',$_GET),auth()->user->id) && isset($_GET['posyandu_id'])): ?>
                             <button class="btn btn-secondary btn-round" onclick="loadAnakPemantauan()">Buat <?=_ucwords($table)?></button>
                             <?php 
                             /*
@@ -86,8 +86,8 @@
                                                 <a href="<?=routeTo($action['route'],$action['param'])?>" class="<?=$action['class']?>"><?=$action['label']?></a>
                                             <?php endif ?>
                                             <?php endforeach ?>
-                                            <?php if(is_allowed(get_route_path('kegiatan/pemantauan-gizi/delete',['table'=>$table]),auth()->user->id)): ?>
-                                                <a href="<?=routeTo('kegiatan/pemantauan-gizi/delete',['table'=>$table,'id'=>$data->id])?>" onclick="if(confirm('apakah anda yakin akan menghapus data ini ?')){return true}else{return false}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Hapus</a>
+                                            <?php if(is_allowed(get_route_path('kegiatan/pemantauan-gizi/delete',[]),auth()->user->id) && isset($_GET['posyandu_id'])): ?>
+                                                <a href="<?=routeTo('kegiatan/pemantauan-gizi/delete',['id'=>$data->id])?>" onclick="if(confirm('apakah anda yakin akan menghapus data ini ?')){return true}else{return false}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Hapus</a>
                                             <?php endif ?>
                                             </td>
                                         </tr>

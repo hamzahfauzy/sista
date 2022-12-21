@@ -60,7 +60,12 @@ class Form
                 $params = [];
                 if(isset($obj_array[3]) && isset($obj_array[4]))
                 {
-                    $params = [$obj_array[3] => $obj_array[4]];
+                    $params[$obj_array[3]] = $obj_array[4];
+                }
+                
+                if(isset($obj_array[5]) && isset($obj_array[6]))
+                {
+                    $params[$obj_array[5]] = $obj_array[6];
                 }
 
                 $conn = conn();

@@ -10,7 +10,7 @@
                         <h5 class="text-white op-7 mb-2">Memanajemen data <?=_ucwords($table)?></h5>
                     </div>
                     <div class="ml-md-auto py-2 py-md-0">
-                        <?php if(is_allowed(get_route_path('kegiatan/imunisasi/create',$_GET),auth()->user->id)): ?>
+                        <?php if(is_allowed(get_route_path('kegiatan/imunisasi/create',$_GET),auth()->user->id) && isset($_GET['posyandu_id'])): ?>
                             <button class="btn btn-secondary btn-round" onclick="loadAnak()">Buat <?=_ucwords($table)?></button>
                             <?php 
                             /*
@@ -92,7 +92,7 @@
                                                 <a href="<?=routeTo('kegiatan/imunisasi/edit',isset($_GET['posyandu_id']) ? array_merge($params,['posyandu_id'=>$_GET['posyandu_id']]):$params)?>" class="btn btn-sm btn-warning"><i class="fas fa-pencil-alt"></i> Edit</a>
                                             <?php endif ?>
                                             */ ?>
-                                            <?php if(is_allowed(get_route_path('kegiatan/imunisasi/delete',[]),auth()->user->id)): ?>
+                                            <?php if(is_allowed(get_route_path('kegiatan/imunisasi/delete',[]),auth()->user->id) && isset($_GET['posyandu_id'])): ?>
                                                 <a href="<?=routeTo('kegiatan/imunisasi/delete',['id'=>$data->id])?>" onclick="if(confirm('apakah anda yakin akan menghapus data ini ?')){return true}else{return false}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Hapus</a>
                                             <?php endif ?>
                                             </td>
