@@ -1,5 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/htdoffi1/sista.htd-official.com
+    - export DEPLOYPATH=/home/pastaasahankab/public_html
     - /bin/cp -a * $DEPLOYPATH
